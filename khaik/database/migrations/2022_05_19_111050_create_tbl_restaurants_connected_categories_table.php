@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('article_categories', function (Blueprint $table) {
-            $table->id('category_id');
-            $table->string('category_name',100);
+        Schema::create('tbl_restaurants_connected_categories', function (Blueprint $table) {
+            $table->id('restaurants_categories_relation_id');
+            $table->unsignedBigInteger('restaurant_id');
+            $table->unsignedBigInteger('restaurant_category_id');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('article_categories');
+        Schema::dropIfExists('tbl_restaurants_connected_categories');
     }
 };

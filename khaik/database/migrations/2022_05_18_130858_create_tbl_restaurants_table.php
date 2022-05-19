@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('restaurant_description');
             $table->string('restaurant_phonenumber',25);
             $table->string('restaurant_header_photo',100);
-            $table->string('restaurant_profile_photo',100);
             $table->string('restaurant_addres',128);
             $table->string('restaurant_place',100);
             $table->string('restaurant_country',100);

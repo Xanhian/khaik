@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class article_category extends Model
+class tbl_article_price extends Model
 {
     use HasFactory;
 }

@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prices', function (Blueprint $table) {
-            $table->id('article_price_id');
-            $table->integer('article_price_number');
-            $table->string('article_price_currency',100);
+        Schema::create('tbl_favorite_statuses', function (Blueprint $table) {
+            $table->id('favorite_status_id');
+            $table->string('favorite_status_description', 128   );
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prices');
+        Schema::dropIfExists('tbl_favorite_statuses');
     }
 };

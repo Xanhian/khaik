@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_articles', function (Blueprint $table) {
-            $table->id('article_id');
+        Schema::create('tbl_restaurants_deals', function (Blueprint $table) {
+            $table->id('restaurants_deals_id');
             $table->unsignedBigInteger('restaurant_id');
-            $table->unsignedBigInteger('article_category_id');
-            $table->string('article_name',100);
-            $table->string('article_description',128);
-            $table->string('article_img',128);
-            $table->string('article_option',128);
-            $table->string('article_item_relations',128);
+            $table->text('deal_name');
+            $table->text('deal_photo');
+            $table->text('deal_dscription');
+            $table->date('deal_date');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_articles');
+        Schema::dropIfExists('tbl_restaurants_deals');
     }
 };
