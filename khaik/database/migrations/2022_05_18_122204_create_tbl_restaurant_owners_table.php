@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_restaurant_owners', function (Blueprint $table) {
-            $table->id('owner_id');
-            $table->string('name',100);
-            $table->string('lastname',100);
+            $table->id();
+            $table->string('name', 100);
+            $table->string('lastname', 100);
             $table->string('password');
-            $table->string('phonenumber',25);
-            $table->string('email',100);
+            $table->string('phonenumber', 25);
+            $table->string('email', 100);
             $table->timestamps();
         });
     }

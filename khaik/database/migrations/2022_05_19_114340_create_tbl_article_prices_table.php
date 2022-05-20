@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_article_prices', function (Blueprint $table) {
-            $table->id('article_price_id');
+            $table->id();
             $table->unsignedBigInteger('article_id');
             $table->integer('article_price_number');
-            $table->string('article_price_currency',100);   
+            $table->string('article_price_currency', 100);
             $table->timestamps();
         });
     }

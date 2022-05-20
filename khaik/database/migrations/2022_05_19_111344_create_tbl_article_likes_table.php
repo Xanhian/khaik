@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_article_likes', function (Blueprint $table) {
-            $table->id('article_like_id');
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('article_id');
             $table->integer('like_status');

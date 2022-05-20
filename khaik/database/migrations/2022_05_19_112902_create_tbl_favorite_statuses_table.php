@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_favorite_statuses', function (Blueprint $table) {
-            $table->id('favorite_status_id');
-            $table->string('favorite_status_description', 128   );
+            $table->id();
+            $table->string('favorite_status_description', 128);
             $table->timestamps();
         });
     }

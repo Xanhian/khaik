@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_restaurants_deals', function (Blueprint $table) {
-            $table->id('restaurants_deals_id');
+            $table->id();
             $table->unsignedBigInteger('restaurant_id');
             $table->text('deal_name');
             $table->text('deal_photo');

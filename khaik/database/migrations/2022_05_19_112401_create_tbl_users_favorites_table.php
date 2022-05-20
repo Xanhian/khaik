@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_users_favorites', function (Blueprint $table) {
-            $table->id('favorite_status_id');
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('restaurant_id');
-            $table->unsignedBigInteger('favorite_status');
+            $table->unsignedBigInteger('favorite_status_id');
             $table->timestamps();
         });
     }

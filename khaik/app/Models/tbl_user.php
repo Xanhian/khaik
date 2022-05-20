@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class tbl_user extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name', 'lastname', 'password', 'phonenumber', 'email'
+    ];
 }

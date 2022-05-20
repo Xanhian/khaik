@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_restaurants_connected_categories', function (Blueprint $table) {
-            $table->id('restaurants_categories_relation_id');
+            $table->id();
             $table->unsignedBigInteger('restaurant_id');
             $table->unsignedBigInteger('restaurant_category_id');
             $table->timestamps();

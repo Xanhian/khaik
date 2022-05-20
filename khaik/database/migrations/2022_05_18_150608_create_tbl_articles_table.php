@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_articles', function (Blueprint $table) {
-            $table->id('article_id');
+            $table->id();
             $table->unsignedBigInteger('restaurant_id');
             $table->unsignedBigInteger('article_category_id');
-            $table->string('article_name',100);
-            $table->string('article_description',128);
-            $table->string('article_img',128);
-            $table->string('article_option',128);
-            $table->string('article_item_relations',128);
+            $table->string('article_name', 100);
+            $table->string('article_description', 128);
+            $table->string('article_img', 128);
+            $table->string('article_option', 128);
+            $table->string('article_item_relations', 128);
             $table->timestamps();
         });
     }
