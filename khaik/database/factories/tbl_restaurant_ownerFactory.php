@@ -21,6 +21,11 @@ class tbl_restaurant_ownerFactory extends Factory
     {
         return [
             //
+            'name' => $this->faker->firstName(),
+            'lastname' => $this->faker->lastname(),
+            'password' => $this->faker->text,
+            'phonenumber' => $this->faker->randomNumber(5, true),
+            'email' => $this->faker->safeEmail,
         ];
     }
 }
