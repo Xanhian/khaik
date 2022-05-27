@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\restaurant_owner_controller;
+use App\Http\Controllers\restaurants_controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+
+Route::get('/', [restaurant_owner_controller::class, 'getOwnerInfo']);
+Route::get('/restaurant', [restaurants_controller::class, 'index']);
+Route::post('', [restaurants_controller::class, 'store'])->name('save_restaurant');

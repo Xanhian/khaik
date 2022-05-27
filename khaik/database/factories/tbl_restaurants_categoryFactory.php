@@ -18,6 +18,7 @@ class tbl_restaurants_categoryFactory extends Factory
     {
         return [
             //
+            'category_name' => $this->faker->word()
         ];
     }
 }
