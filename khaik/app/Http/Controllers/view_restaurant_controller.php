@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class view_restaurant_controller extends Controller
 {
-    public function index(Request $request, $restaurant_id, $restaurant_name)
+    public function index(Request $request, $restaurant_id)
     {
         $restaurant_info = DB::table('tbl_restaurants')->where('id', '=', $restaurant_id)->get();
 

@@ -22,6 +22,6 @@ use App\Http\Controllers\articles_controller;
 Route::get('/', [restaurant_owner_controller::class, 'getOwnerInfo']);
 Route::get('/addrestaurant', [restaurants_controller::class, 'index']);
 Route::get('/addmenu', [articles_controller::class, 'index']);
-Route::get('/restaurant/{restaurant_id}/{restaurant_name}', [view_restaurant_controller::class, 'index']);
+Route::get('/restaurant/{restaurant_id}', [view_restaurant_controller::class, 'index']);
 
 Route::post('', [restaurants_controller::class, 'store'])->name('save_restaurant');

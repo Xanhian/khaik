@@ -342,12 +342,13 @@
                   <div class="collapse multi-collapse show" id="category">
                     @foreach($restaurants_category as $category)
                     <div class="row p-2">
-                      <input type="checkbox" name="restaurant_category[]" value="{{$category->restaurant_category_name}}">
+                      <input type="checkbox" name="restaurant_category[]" value="{{$category->id}}">
                       <p class="pl-2">{{$category->restaurant_category_name}}</p>
                     </div>
                     @endforeach
                     @error('restaurant_category')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                    <div class=" alert alert-danger mt-1 mb-1">{{ $message }}
+                    </div>
                     @enderror
 
                   </div>

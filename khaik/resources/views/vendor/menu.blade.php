@@ -178,105 +178,126 @@
         </div>
     </div>
     <!-- Menu -->
-    <div class=" position-relative">
+
+    <div class="container position-relative">
         <div class="row">
 
-            <div class="col-md-7 pt-3">
+
+
+            <div class=" col-md-7 pt-3">
                 <div class="shadow-sm rounded bg-white mb-3 overflow-hidden">
                     <div class="d-flex item-aligns-center">
                         <p class="font-weight-bold h6 p-3 border-bottom mb-0 w-100">Menu</p>
                         <!-- <a class="small text-primary font-weight-bold ml-auto" href="#">View all <i class="feather-chevrons-right"></i></a> -->
                     </div>
                     <div class="row m-0">
-
-
-                        <a class="p-3 m-0 bg-light w-100" data-toggle="collapse" aria-expanded="true" href="#multiCollapseExample1">
+                        <a class="p-3 m-0 bg-light border-bottom w-100" data-toggle="collapse" aria-expanded="true" href="#multiCollapseExample1">
                             <h6>Quick Bites <small class="text-black-50">3 ITEMS</small></h6>
                         </a>
-                        <div class=" px-0 border-top collapse show" id="multiCollapseExample1">
+                    </div>
+                    <div class="row border-bottom px-0 collapse  show" id="multiCollapseExample1">
 
-                            <div class="p-3  border-bottom gold-members d-flex flex-row">
+                        <div class=" col-5 p-3 gold-members d-flex flex-row">
+
+                            <div class="col align-self-center">
                                 <a href="#" data-toggle="modal" data-target="#extras">
-                                    <div class="col align-self-center">
-                                        <div class="media">
-                                            <img alt="#" src="img/starter1.jpg" alt="askbootstrap" class="mr-3 rounded-pill ">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Chicken Tikka Sub </h6>
-                                                <p class="text-muted mb-0">$250</p>
-                                            </div>
+                                    <div class="media">
+                                        <img alt="#" src="img/starter1.jpg" alt="askbootstrap" class="mr-3 rounded-pill ">
+                                        <div class="media-body ">
+                                            <h6 class="mb-1">Chicken Tikka Sub </h6>
+                                            <p class="text-muted mb-0">$250</p>
                                         </div>
+                                    </div>
+                                    <div class="media border-bottom collapse multi-collapse" id="option1">
+                                        <div class="media-body mt-2">
+                                            <h7 class="mb-1 ">-large </h7>
+                                            <p class="text-muted mb-2">$250</p>
+                                        </div>
+                                    </div>
+                                    <div class="media border-bottom collapse multi-collapse" id="option2">
+                                        <div class="media-body">
+                                            <h7 class="mb-1">-medium </h7>
+                                            <p class="text-muted mb-2">$250</p>
+                                        </div>
+                                    </div>
+                                    <div class="media border-bottom collapse multi-collapse" id="option3">
+                                        <div class="media-body">
+                                            <h7 class="mb-1">-small </h7>
+                                            <p class="text-muted mb-2">$250</p>
+                                        </div>
+                                    </div>
                                 </a>
-                                <div class="media border-bottom collapse multi-collapse" id="option1">
-                                    <div class="media-body mt-2">
-                                        <h7 class="mb-1 ">-large </h7>
-                                        <p class="text-muted mb-2">$250</p>
-                                    </div>
-                                </div>
-                                <div class="media border-bottom collapse multi-collapse" id="option2">
-                                    <div class="media-body">
-                                        <h7 class="mb-1">-medium </h7>
-                                        <p class="text-muted mb-2">$250</p>
-                                    </div>
-                                </div>
-                                <div class="media border-bottom collapse multi-collapse" id="option3">
-                                    <div class="media-body">
-                                        <h7 class="mb-1">-small </h7>
-                                        <p class="text-muted mb-2">$250</p>
-                                    </div>
-                                </div>
                             </div>
 
 
-                            <div class="col-5">
-                                <div class="row">
-                                    <div class="col-6 align-self-center">
-                                        <span class="mr-5  align-self-center"><a href="#" class="btn btn-outline-secondary btn-sm " data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3">Options</a></span>
-                                    </div>
-                                    <div class="col-6  align-self-center">
-                                        <a href="#" class="h1 text-center ml-3 mt-2" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3"><i class="fa fa-heart custom-fa"></i></a>
-                                    </div>
+                        </div>
+
+
+                        <div class=" col-6 p-3">
+                            <div class="row d-flex flex-row justify-content-end">
+                                <div class=" align-self-center ">
+                                    <span><a href="#" class="btn btn-outline-secondary btn-sm " data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3">Options</a></span>
+                                </div>
+                                <div class="mr-3 align-self-center">
+                                    <a href="#" class="h1 text-center ml-3 mt-2" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3"><i class="fa fa-heart custom-fa"></i></a>
                                 </div>
                             </div>
                         </div>
 
-
-
-
                     </div>
-
-
-
-
-
-
                 </div>
             </div>
 
-
-            <div class="col-md-5 bg-white">
+            <div class="col-md-5 pt-3">
                 <div class="shadow-sm rounded bg-white mb-3 overflow-hidden">
-                    <h1>Article Name</h1>
-                    <input type="text" name="" id="">
-                    <h1>Article Price</h1>
-                    <input type="text" name="" id="">
-                    <h1>Artile Photo</h1>
-                    <input type="text" name="" id="">
-                    <h1>Options</h1>
-                    <input type="text" name="" id="">
-                    <h1>Hello world</h1>
-                    <input type="text" name="" id="">
-                    <h1>Hello world</h1>
-                    <input type="text" name="" id="">
-
+                    <div class="d-flex item-aligns-center">
+                        <p class="font-weight-bold h6 p-3 border-bottom mb-0 w-100">Add Item</p>
+                        <!-- <a class="small text-primary font-weight-bold ml-auto" href="#">View all <i class="feather-chevrons-right"></i></a> -->
+                    </div>
+                    <div class="row">
+                        <div class="col-8 m-4">
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Article Name</label>
+                                    <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Article Description</label>
+                                    <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Article Options</label>
+                                    <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Article Photo</label>
+                                    <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Article Price</label>
+                                    <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Article Category</label>
+                                    <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
+
+
+
+
+
+
+
+            </div>
 
 
 
         </div>
-
-    </div>
 
 
 
@@ -290,7 +311,7 @@
     <!-- footer -->
 
     <!-- extras modal -->
-    <div class="modal fade" id="extras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class=" modal fade" id="extras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 

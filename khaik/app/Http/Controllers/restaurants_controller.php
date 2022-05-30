@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\tbl_restaurant;
+use App\Models\tbl_restaurants_connected_category;
 use LaravelQRCode\Facades\QRCode;
 
 class restaurants_controller extends Controller
@@ -178,8 +179,10 @@ class restaurants_controller extends Controller
         $create_restaurant->restaurant_addres = $request->restaurant_addres;
         $create_restaurant->restaurant_place = $request->restaurant_place;
         $create_restaurant->restaurant_country = $request->restaurant_country;
-        $create_restaurant->restaurant_longitude = $request->longitude;
-        $create_restaurant->restaurant_latitude = $request->latitude;
+        // $create_restaurant->restaurant_longitude = $request->longitude;
+        // $create_restaurant->restaurant_latitude = $request->latitude;
+        $create_restaurant->restaurant_longitude = 111;
+        $create_restaurant->restaurant_latitude = 111;
         $create_restaurant->restaurant_opening_time = $json_opening_data;
         $create_restaurant->restaurant_closing_time = $json_closing_data;
         $create_restaurant->restaurant_facebook_link = $request->facebook_link;
@@ -187,7 +190,20 @@ class restaurants_controller extends Controller
         $create_restaurant->save();
 
 
+
         $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', '=', '3')->where('restaurant_name', '=', $request->restaurant_name)->get('id');
+
+        foreach ($request->restaurant_category as $restaurant_category) {
+
+            $restaurants_categories = new tbl_restaurants_connected_category;
+            $restaurants_categories->restaurant_id = $restaurant_id[0]->id;
+            $restaurants_categories->restaurant_category_id =
+                $restaurant_category;
+            $restaurants_categories->save();
+        }
+
+
+
 
         $restaurant_link = str_replace(' ', '_', $request->restaurant_name);
         $restaurant_qr = QRCode::url('khaik.com/restaurant/' . $restaurant_id[0]->id . '/' .  $restaurant_link)->setSize(10)->setMargin(2)->setErrorCorrectionLevel('H')->setOutfile($restaurant_qr_path)->png();
