@@ -65,6 +65,11 @@
             <div id="edit_profile">
               <form method="POST" enctype="multipart/form-data" action="{{ route('save_restaurant') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                @if(session('status'))
+                <div class="alert alert-success">
+                  {{ session('status') }}
+                </div>
+                @endif
                 <div class="form-group">
                   <label for="exampleInputName1">Restaurant Name</label>
                   <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control">
@@ -128,14 +133,14 @@
                       <div class="row">
                         <div class="col-6">
                           <p class="text-muted mb-2">Opening Time</p>
-                          <input class="form-control" type="time" name='sunday[open]' value="{{old('sunday_opening_time')}}">
+                          <input class="form-control" type="time" name='sunday[open]' value="{{old('sunday.open')}}">
                           @error('sunday.open')
                           <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                           @enderror
                         </div>
                         <div class="col-6">
                           <p class="text-muted mb-2">Closing Time</p>
-                          <input type="time" class="form-control" name='sunday[close]' value="{{old('sunday_closing_time')}}">
+                          <input type="time" class="form-control" name='sunday[close]' value="{{old('sunday.close')}}">
                           @error('sunday.close')
                           <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                           @enderror
@@ -369,6 +374,8 @@
 
                 <div class=" text-center">
                   <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+
+
 
                 </div>
               </form>

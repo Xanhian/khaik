@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('restaurant_latitude', 128);
             $table->text('restaurant_opening_time');
             $table->text('restaurant_closing_time');
-            $table->unsignedBigInteger('restaurant_category_id');
             $table->string('restaurant_facebook_link', 128);
             $table->text('restaurant_qr');
             $table->timestamps();

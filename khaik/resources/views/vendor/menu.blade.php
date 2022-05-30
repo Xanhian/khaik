@@ -8,17 +8,17 @@
     <link rel="icon" type="image/png" href="img/fav.png">
     <title>Khaik</title>
     <!-- Slick Slider -->
-    <link rel="stylesheet" type="text/css" href="{{asset('vendor/slick/slick.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('endor/slick/slick-theme.min.css')}}v" />
+    <link rel="stylesheet" type="text/css" href="vendor/slick/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/slick/slick-theme.min.css" />
     <!-- Feather Icon-->
-    <link href="{{asset('vendor/icons/feather.css')}}" rel="stylesheet" type="text/css">
+    <link href="vendor/icons/feather.css" rel="stylesheet" type="text/css">
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <!-- Sidebar CSS -->
-    <link href="{{asset('vendor/sidebar/demo.css')}}" rel="stylesheet">
-    <link href="{{asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="vendor/sidebar/demo.css" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
 
 
@@ -42,7 +42,7 @@
 
     <div class="offer-section ">
 
-        <img alt="#" src="{{asset($restaurant_info[0]->restaurant_header_photo)}}" class="restaurant-header">
+        <img alt="#" src="https://images.squarespace-cdn.com/content/v1/5efb1ee0737b1548b9331bb9/1593521441104-DZT0KDCZ29UWQOFTOOMU/BRIGHT-26.jpg" class="restaurant-header">
 
     </div>
 
@@ -51,14 +51,12 @@
         <div class="p-4 bg-primary bg-primary rounded position-relative restaurant-profile-container">
             <div class=" text-white">
                 <div class="row">
-                    <div class="pl-1 col-6 align-self-center text-wrap">
-                        <h1 class="font-weight-bold p-0 text-wrap  ">{{$restaurant_info[0]->restaurant_name}}</h1>
-                        <p class="text-white text-wrap  pr-2">{{$restaurant_info[0]->restaurant_description}}</p>
+                    <div class="pl-1 col align-self-center text-wrap">
+                        <h1 class="font-weight-bold p-0 text-wrap  ">Dragonville Restaurant</h1>
+                        <p class="text-white text-wrap  pr-2">Come here for all your specials and delicous food that is cover in chocalote with truffel saus itog askbootstrap hasde</p>
 
                     </div>
-                    <div class="p-3 col-6 text-center">
-                        <img alt="#" src="{{asset($restaurant_info[0]->restaurant_header_photo)}}" class="restaurant-pic">
-                    </div>
+
                 </div>
 
 
@@ -79,7 +77,7 @@
                         <p class="text-white-50 font-weight-bold m-0 small">Open time</p>
                         <p class="text-white mt-1">8:00 AM</p>
                         <p class="text-white-50 font-weight-bold m-0 small">Phone number</p>
-                        <p class="text-white m-0">{{$restaurant_info[0]->restaurant_phonenumber}}</p>
+                        <p class="text-white m-0">+597 564-1123</p>
 
                     </div>
 
@@ -87,7 +85,7 @@
                         <p class="text-white-50 font-weight-bold m-0 small">Close time</p>
                         <p class="text-white mt-1">8:00 AM</p>
                         <p class="text-white-50 font-weight-bold m-0 small">Locaiton</p>
-                        <p class="text-white m-0">{{$restaurant_info[0]->restaurant_addres}}, {{$restaurant_info[0]->restaurant_place}} Suriname</p>
+                        <p class="text-white m-0">Munderwer #30, Paramaribo Suriname</p>
                     </div>
                 </div>
             </div>
@@ -180,9 +178,10 @@
         </div>
     </div>
     <!-- Menu -->
-    <div class="container position-relative">
+    <div class=" position-relative">
         <div class="row">
-            <div class="col-md-8 pt-3">
+
+            <div class="col-md-7 pt-3">
                 <div class="shadow-sm rounded bg-white mb-3 overflow-hidden">
                     <div class="d-flex item-aligns-center">
                         <p class="font-weight-bold h6 p-3 border-bottom mb-0 w-100">Menu</p>
@@ -190,15 +189,13 @@
                     </div>
                     <div class="row m-0">
 
-                        <a class="p-3 m-0 bg-light w-100" data-toggle="collapse" aria-expanded="true" href="#multiCollapseExample1">
 
+                        <a class="p-3 m-0 bg-light w-100" data-toggle="collapse" aria-expanded="true" href="#multiCollapseExample1">
                             <h6>Quick Bites <small class="text-black-50">3 ITEMS</small></h6>
                         </a>
-                        <div class="col-md-12 px-0 border-top collapse show" id="multiCollapseExample1">
+                        <div class=" px-0 border-top collapse show" id="multiCollapseExample1">
 
-                            <div class="p-3 border-bottom gold-members d-flex flex-row">
-
-
+                            <div class="p-3  border-bottom gold-members d-flex flex-row">
                                 <a href="#" data-toggle="modal" data-target="#extras">
                                     <div class="col align-self-center">
                                         <div class="media">
@@ -230,133 +227,17 @@
                             </div>
 
 
-                            <div class="col-4 ">
+                            <div class="col-5">
                                 <div class="row">
                                     <div class="col-6 align-self-center">
                                         <span class="mr-5  align-self-center"><a href="#" class="btn btn-outline-secondary btn-sm " data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3">Options</a></span>
                                     </div>
-
                                     <div class="col-6  align-self-center">
                                         <a href="#" class="h1 text-center ml-3 mt-2" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3"><i class="fa fa-heart custom-fa"></i></a>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-12 px-0 border-top collapse show" id="multiCollapseExample1">
-
-                            <div class="p-3 border-bottom gold-members d-flex flex-row">
-
-
-                                <a href="#" data-toggle="modal" data-target="#extras">
-                                    <div class="col align-self-center">
-                                        <div class="media">
-                                            <img alt="#" src="img/starter1.jpg" alt="askbootstrap" class="mr-3 rounded-pill ">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Chicken Tikka Sub </h6>
-                                                <p class="text-muted mb-0">$250</p>
-                                            </div>
-                                        </div>
-                                </a>
-                                <div class="media border-bottom collapse multi-collapse" id="option1">
-                                    <div class="media-body mt-2">
-                                        <h7 class="mb-1 ">-large </h7>
-                                        <p class="text-muted mb-2">$250</p>
-                                    </div>
-                                </div>
-                                <div class="media border-bottom collapse multi-collapse" id="option2">
-                                    <div class="media-body">
-                                        <h7 class="mb-1">-medium </h7>
-                                        <p class="text-muted mb-2">$250</p>
-                                    </div>
-                                </div>
-                                <div class="media border-bottom collapse multi-collapse" id="option3">
-                                    <div class="media-body">
-                                        <h7 class="mb-1">-small </h7>
-                                        <p class="text-muted mb-2">$250</p>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-4 ">
-                                <div class="row">
-                                    <div class="col-6 align-self-center">
-                                        <span class="mr-5  align-self-center"><a href="#" class="btn btn-outline-secondary btn-sm " data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3">Options</a></span>
-                                    </div>
-
-                                    <div class="col-6  align-self-center">
-                                        <a href="#" class="h1 text-center ml-3 mt-2" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3"><i class="fa fa-heart custom-fa"></i></a>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 px-0 border-top collapse show" id="multiCollapseExample1">
-
-                            <div class="p-3 border-bottom gold-members d-flex flex-row">
-
-
-                                <a href="#" data-toggle="modal" data-target="#extras">
-                                    <div class="col align-self-center">
-                                        <div class="media">
-                                            <img alt="#" src="img/starter1.jpg" alt="askbootstrap" class="mr-3 rounded-pill ">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Chicken Tikka Sub </h6>
-                                                <p class="text-muted mb-0">$250</p>
-                                            </div>
-                                        </div>
-                                </a>
-                                <div class="media border-bottom collapse multi-collapse" id="option1">
-                                    <div class="media-body mt-2">
-                                        <h7 class="mb-1 ">-large </h7>
-                                        <p class="text-muted mb-2">$250</p>
-                                    </div>
-                                </div>
-                                <div class="media border-bottom collapse multi-collapse" id="option2">
-                                    <div class="media-body">
-                                        <h7 class="mb-1">-medium </h7>
-                                        <p class="text-muted mb-2">$250</p>
-                                    </div>
-                                </div>
-                                <div class="media border-bottom collapse multi-collapse" id="option3">
-                                    <div class="media-body">
-                                        <h7 class="mb-1">-small </h7>
-                                        <p class="text-muted mb-2">$250</p>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-4 ">
-                                <div class="row">
-                                    <div class="col-6 align-self-center">
-                                        <span class="mr-5  align-self-center"><a href="#" class="btn btn-outline-secondary btn-sm " data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3">Options</a></span>
-                                    </div>
-
-                                    <div class="col-6  align-self-center">
-                                        <a href="#" class="h1 text-center ml-3 mt-2" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3"><i class="fa fa-heart custom-fa"></i></a>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -372,9 +253,33 @@
             </div>
 
 
+            <div class="col-md-5 bg-white">
+                <div class="shadow-sm rounded bg-white mb-3 overflow-hidden">
+                    <h1>Article Name</h1>
+                    <input type="text" name="" id="">
+                    <h1>Article Price</h1>
+                    <input type="text" name="" id="">
+                    <h1>Artile Photo</h1>
+                    <input type="text" name="" id="">
+                    <h1>Options</h1>
+                    <input type="text" name="" id="">
+                    <h1>Hello world</h1>
+                    <input type="text" name="" id="">
+                    <h1>Hello world</h1>
+                    <input type="text" name="" id="">
+
+                </div>
+            </div>
+
+
+
+
         </div>
 
     </div>
+
+
+
 
     </div>
     </div>
@@ -426,14 +331,14 @@
         </div>
     </div>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- slick Slider JS-->
-    <script type="text/javascript" src="{{asset('vendor/slick/slick.min.js')}}"></script>
+    <script type="text/javascript" src="vendor/slick/slick.min.js"></script>
     <!-- Sidebar JS-->
-    <script type="text/javascript" src="{{asset('vendor/sidebar/hc-offcanvas-nav.js')}}"></script>
+    <script type="text/javascript" src="vendor/sidebar/hc-offcanvas-nav.js"></script>
     <!-- Custom scripts for all pages-->
-    <script type="text/javascript" src="{{asset('js/osahan.js')}}"></script>
+    <script type="text/javascript" src="js/osahan.js"></script>
 </body>
 
 </html>

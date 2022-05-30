@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\tbl_restaurant;
-use Illuminate\Contracts\Validation\Rule;
 use LaravelQRCode\Facades\QRCode;
 
 class restaurants_controller extends Controller
@@ -28,43 +27,43 @@ class restaurants_controller extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            // 'restaurant_name' => 'required|max:100',
-            // 'restaurant_description' => 'required|max:255',
-            // 'restaurant_phonenumber' => 'required|numeric',
-            // 'restaurant_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            // 'restaurant_addres' => 'required|max:100',
-            // 'restaurant_place' => 'required|max:100',
-            // 'restaurant_country' => 'required|max:100',
+            'restaurant_name' => 'required|max:100',
+            'restaurant_description' => 'required|max:255',
+            'restaurant_phonenumber' => 'required|numeric',
+            'restaurant_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'restaurant_addres' => 'required|max:100',
+            'restaurant_place' => 'required|max:100',
+            'restaurant_country' => 'required|max:100',
 
 
-            // 'sunday.*' => 'required',
-            // 'sunday.open' => 'required_without_all:sunday.default,closed|exclude_if:sunday.default,closed',
-            // 'sunday.close' => 'required_without_all:sunday.default,closed|exclude_if:sunday.default,closed',
+            'sunday.*' => 'required',
+            'sunday.open' => 'required_without_all:sunday.default,closed|exclude_if:sunday.default,closed',
+            'sunday.close' => 'required_without_all:sunday.default,closed|exclude_if:sunday.default,closed',
 
-            // 'monday.*' => 'required',
-            // 'monday.open' => 'required_without_all:monday.default,closed|exclude_if:monday.default,closed',
-            // 'monday.close' => 'required_without_all:monday.default,closed|exclude_if:monday.default,closed',
+            'monday.*' => 'required',
+            'monday.open' => 'required_without_all:monday.default,closed|exclude_if:monday.default,closed',
+            'monday.close' => 'required_without_all:monday.default,closed|exclude_if:monday.default,closed',
 
-            // 'tuesday.*' => 'required',
-            // 'tuesday.open' => 'required_without_all:tuesday.default,closed|exclude_if:tuesday.default,closed',
-            // 'tuesday.close' => 'required_without_all:tuesday.default,closed|exclude_if:tuesday.default,closed',
+            'tuesday.*' => 'required',
+            'tuesday.open' => 'required_without_all:tuesday.default,closed|exclude_if:tuesday.default,closed',
+            'tuesday.close' => 'required_without_all:tuesday.default,closed|exclude_if:tuesday.default,closed',
 
-            // 'wednesday.*' => 'required',
-            // 'wednesday.open' => 'required_without_all:wednesday.default,closed|exclude_if:wednesday.default,closed',
-            // 'wednesday.close' => 'required_without_all:wednesday.default,closed|exclude_if:wednesday.default,closed',
-            // 'thursday.*' => 'required',
-            // 'thursday.open' => 'required_without_all:thursday.default,closed|exclude_if:thursday.default,closed',
-            // 'thursday.close' => 'required_without_all:thursday.default,closed|exclude_if:thursday.default,closed',
-            // 'friday.*' => 'required',
-            // 'friday.open' => 'required_without_all:friday.default,closed|exclude_if:friday.default,closed',
-            // 'friday.close' => 'required_without_all:friday.default,closed|exclude_if:friday.default,closed',
-            // 'saturday.*' => 'required',
-            // 'saturday.open' => 'required_without_all:saturday.default,closed|exclude_if:saturday.default,closed',
-            // 'saturday.close' => 'required_without_all:saturday.default,closed|exclude_if:saturday.default,closed',
+            'wednesday.*' => 'required',
+            'wednesday.open' => 'required_without_all:wednesday.default,closed|exclude_if:wednesday.default,closed',
+            'wednesday.close' => 'required_without_all:wednesday.default,closed|exclude_if:wednesday.default,closed',
+            'thursday.*' => 'required',
+            'thursday.open' => 'required_without_all:thursday.default,closed|exclude_if:thursday.default,closed',
+            'thursday.close' => 'required_without_all:thursday.default,closed|exclude_if:thursday.default,closed',
+            'friday.*' => 'required',
+            'friday.open' => 'required_without_all:friday.default,closed|exclude_if:friday.default,closed',
+            'friday.close' => 'required_without_all:friday.default,closed|exclude_if:friday.default,closed',
+            'saturday.*' => 'required',
+            'saturday.open' => 'required_without_all:saturday.default,closed|exclude_if:saturday.default,closed',
+            'saturday.close' => 'required_without_all:saturday.default,closed|exclude_if:saturday.default,closed',
 
 
-            // 'restaurant_category' => 'required',
-            // 'facebook_link' => 'required|url'
+            'restaurant_category' => 'required',
+            'facebook_link' => 'required|url'
 
 
 
@@ -87,15 +86,12 @@ class restaurants_controller extends Controller
 
         ]);
 
-        //Restaurant header photo storing
-
-
 
         $restaurant_header_photo_name_convert = str_replace(' ', '', $request->file('restaurant_image')->getClientOriginalName());
         $restaurant_header_photo_name = time() . '_' .  date('YmdHi') . $restaurant_header_photo_name_convert;
         $restaurant_header_photo_path = "storage/" . $request->file('restaurant_image')->storeAs('images', $restaurant_header_photo_name, 'public');
 
-        //Restaurant opening and closing times
+
         if (isset($validated['sunday']['default'])) {
             $sunday_open = $validated['sunday']['default'];
             $sunday_close = $validated['sunday']['default'];
@@ -146,7 +142,6 @@ class restaurants_controller extends Controller
             $saturday_close = $request->saturday['close'];
         }
 
-
         $opening_data = [
             'sunday' => $sunday_open,
             'monday' => $monday_open,
@@ -155,7 +150,6 @@ class restaurants_controller extends Controller
             'thursday' => $thursday_open,
             'friday' => $friday_open,
             'saturday' => $saturday_open,
-
         ];
 
         $closing_data = [
@@ -166,43 +160,38 @@ class restaurants_controller extends Controller
             'thursday' => $thursday_close,
             'friday' => $friday_close,
             'saturday' => $saturday_close,
-
         ];
 
         $json_opening_data = json_encode($opening_data);
         $json_closing_data = json_encode($closing_data);
 
-        //QR code
-
-
         $restaurant_qr_path = 'storage/restaurants_qr/' . time() . '.png';
-        $restaurant_qr = QRCode::url('facebook.com')->setSize(10)->setMargin(2)->setErrorCorrectionLevel('H')->setOutfile($restaurant_qr_path)->png();
 
 
 
-        // $create_restaurant = new tbl_restaurant;
-
-        // $create_restaurant->restaurant_name = $request->restaurant_name;
-        // $create_restaurant->restaurant_description = $request->restaurant_description;
-        // $create_restaurant->restaurant_phonenumber = $request->restaurant_phonenumber;
-        // //$create_restaurant->restaurant_header_photo = $restaurant_header_photo_path;
-        // $create_restaurant->restaurant_addres = $request->restaurant_addres;
-        // $create_restaurant->restaurant_place = $request->restaurant_place;
-        // $create_restaurant->restaurant_country = $request->restaurant_country;
-        // $create_restaurant->restaurant_longitude = $request->longitude;
-        // $create_restaurant->restaurant_latitude = $request->latitude;
-        // $create_restaurant->restaurant_opening_time = $json_opening_data;
-        // $create_restaurant->restaurant_opening_time = $json_closing_data;
-        // $create_restaurant->restaurant_facebook_link = $request->facebook_link;
-
-
-
-
+        $create_restaurant = new tbl_restaurant;
+        $create_restaurant->owner_id = $request->owners_id;
+        $create_restaurant->restaurant_name = $request->restaurant_name;
+        $create_restaurant->restaurant_description = $request->restaurant_description;
+        $create_restaurant->restaurant_phonenumber = $request->restaurant_phonenumber;
+        $create_restaurant->restaurant_header_photo = $restaurant_header_photo_path;
+        $create_restaurant->restaurant_addres = $request->restaurant_addres;
+        $create_restaurant->restaurant_place = $request->restaurant_place;
+        $create_restaurant->restaurant_country = $request->restaurant_country;
+        $create_restaurant->restaurant_longitude = $request->longitude;
+        $create_restaurant->restaurant_latitude = $request->latitude;
+        $create_restaurant->restaurant_opening_time = $json_opening_data;
+        $create_restaurant->restaurant_closing_time = $json_closing_data;
+        $create_restaurant->restaurant_facebook_link = $request->facebook_link;
+        $create_restaurant->restaurant_Qr = $restaurant_qr_path;
+        $create_restaurant->save();
 
 
+        $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', '=', '3')->where('restaurant_name', '=', $request->restaurant_name)->get('id');
 
-        echo "<img src='$restaurant_header_photo_path'>";
+        $restaurant_link = str_replace(' ', '_', $request->restaurant_name);
+        $restaurant_qr = QRCode::url('khaik.com/restaurant/' . $restaurant_id[0]->id . '/' .  $restaurant_link)->setSize(10)->setMargin(2)->setErrorCorrectionLevel('H')->setOutfile($restaurant_qr_path)->png();
 
-        // return $create_restaurant;
+        return redirect('addrestaurant')->with('status', 'Your restaurant has been created succesfully!');
     }
 }
