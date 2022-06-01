@@ -18,10 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('restaurant_id');
             $table->unsignedBigInteger('article_category_id');
             $table->string('article_name', 100);
-            $table->string('article_description', 128);
-            $table->string('article_img', 128);
-            $table->string('article_option', 128);
-            $table->string('article_item_relations', 128);
+            $table->string('article_description', 128)->nullable();
+            $table->string('article_img', 128)->nullable();
+            $table->string('article_item_relations', 128)->nullable();
             $table->timestamps();
         });
     }

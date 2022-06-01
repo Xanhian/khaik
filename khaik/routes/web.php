@@ -21,7 +21,10 @@ use App\Http\Controllers\articles_controller;
 
 Route::get('/', [restaurant_owner_controller::class, 'getOwnerInfo']);
 Route::get('/addrestaurant', [restaurants_controller::class, 'index']);
-Route::get('/addmenu', [articles_controller::class, 'index']);
+Route::get('/addmenu', [articles_controller::class, 'index'])->name('menu');
 Route::get('/restaurant/{restaurant_id}', [view_restaurant_controller::class, 'index']);
 
 Route::post('', [restaurants_controller::class, 'store'])->name('save_restaurant');
+Route::post('/addmenu', [articles_controller::class, 'store'])->name('add_article');
+
+Route::patch('/editmenu', [articles_controller::class, 'edit'])->name('edit_article');

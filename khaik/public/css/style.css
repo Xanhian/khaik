@@ -39,6 +39,12 @@ body {
     background: #f5f5f5;
 }
 
+.menu-image-display{
+    height: 4em;
+    width: 4em;
+    object-fit: cover;
+}
+
 .slick-slider {
     margin: 0 -8px;
 }
@@ -1092,6 +1098,7 @@ p {
     width: 10em;
     height: 10em;
     background: #0091bc;
+    object-fit: cover;
 }
 
 .restaurant-pic-container-mobile{

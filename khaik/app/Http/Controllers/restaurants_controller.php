@@ -192,6 +192,8 @@ class restaurants_controller extends Controller
 
 
         $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', '=', '3')->where('restaurant_name', '=', $request->restaurant_name)->get('id');
+        session(['owners_restaurant' => $restaurant_id[0]->id]);
+
 
         foreach ($request->restaurant_category as $restaurant_category) {
 
