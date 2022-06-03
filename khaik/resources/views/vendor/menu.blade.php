@@ -342,7 +342,9 @@
 
 
 
-                                                        <div class="form-group"><label>Article Name</label><input type="text" name="article_option_name[]" value="{{$option_item->article_name}}" class="form-control"></div>
+                                                        <div class="form-group"><label>Article Name</label><input type="text" name="article_option_name[]" value="{{$option_item->article_name}}" class="form-control">
+                                                            <input type="hidden" name="article_option_id" value="{{$option_item->article_id}}">
+                                                        </div>
                                                         <div class="form-group"><label>Article Price</label>
                                                             <div class="row">
                                                                 <div class="col-5"><select class="form-control" name="article_option_currency[]">

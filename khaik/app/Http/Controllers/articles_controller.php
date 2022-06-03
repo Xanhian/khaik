@@ -14,7 +14,7 @@ class articles_controller extends Controller
     public function index()
     {
         $article_category = DB::table('tbl_article_categories')->get();
-        $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', '=', '3')->where('restaurant_name', '=', 'FastFood Chicken')->get('id');
+        $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', '=', '3')->where('restaurant_name', '=', 'Warung kyle')->get('id');
         session(['owners_restaurant' => $restaurant_id[0]->id]);
 
 
@@ -37,7 +37,7 @@ class articles_controller extends Controller
 
 
         foreach ($menu_head_items as $menu_head_item) {
-            $menu_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $menu_head_item->id)->get(['article_name', 'article_price_number', 'article_price_currency']);
+            $menu_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $menu_head_item->id)->get(['article_id', 'article_name', 'article_price_number', 'article_price_currency']);
             $menu_option_data[$menu_head_item->id] = $menu_option_items;
         }
 
@@ -155,34 +155,37 @@ class articles_controller extends Controller
 
     public function edit(Request $request)
     {
+
         if (isset($request->article_photo)) {
-            $article_photo_name_convert = str_replace(' ', '', $request->file('article_photo')->getClientOriginalName());
-            $article_photo_name = time() . '_' .  date('YmdHi') . $article_photo_name_convert;
-            $article_photo_path = "storage/" . $request->file('article_photo')->storeAs('articles', $article_photo_name, 'public');
+            // $article_photo_name_convert = str_replace(' ', '', $request->file('article_photo')->getClientOriginalName());
+            // $article_photo_name = time() . '_' .  date('YmdHi') . $article_photo_name_convert;
+            // $article_photo_path = "storage/" . $request->file('article_photo')->storeAs('articles', $article_photo_name, 'public');
 
-            $article = tbl_article::find($request->article_id);
-            $article->restaurant_id = $request->restaurant_id;
-            $article->article_category_id = $request->article_category;
-            $article->article_name = $request->article_name;
-            $article->article_description = $request->article_description;
-            $article->article_img =
-                $article_photo_path;
-            $article->article_option = $request->menu_category;
+            // $article = tbl_article::find($request->article_id);
+            // $article->restaurant_id = $request->restaurant_id;
+            // $article->article_category_id = $request->article_category;
+            // $article->article_name = $request->article_name;
+            // $article->article_description = $request->article_description;
+            // $article->article_img =
+            //     $article_photo_path;
+            // $article->article_option = $request->menu_category;
 
-            $article->save();
-            $article_items = DB::table('tbl_articles')->rightJoin('tbl_article_prices', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $request->restaurant_id)->where('article_option', 'Head')->where('article_item_relations', NULL)->get();
-
-
+            // $article->save();
+            // $article_items = DB::table('tbl_articles')->rightJoin('tbl_article_prices', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $request->restaurant_id)->where('article_option', 'Head')->where('article_item_relations', NULL)->get();
 
 
-            $article_price = tbl_article_price::find($article_items[0]->id);
 
-            $article_price->article_id =
-                $request->article_id;
-            $article_price->article_price_number
-                = $request->article_price;
-            $article_price->article_price_currency = $request->article_currency;
-            $article_price->save();
+
+
+
+            // $article_price = tbl_article_price::find($article_items[0]->id);
+
+            // $article_price->article_id =
+            //     $request->article_id;
+            // $article_price->article_price_number
+            //     = $request->article_price;
+            // $article_price->article_price_currency = $request->article_currency;
+            // $article_price->save();
 
 
 
@@ -194,14 +197,22 @@ class articles_controller extends Controller
 
 
 
-                    // $article = tbl_article::updateOrCreate(
-                    //     [
-                    //         'article_name' => 'Kip met patat',
-                    //     ],
-                    //     [
-                    //         'article_name' => 'Kip met rijst',
-                    //     ]
-                    // );
+
+
+                    $article = tbl_article::updateOrCreate(
+                        [
+                            'id' =>  $request->article_option_id,
+                            'article_name' => $request->article_name
+                        ],
+                        [
+                            'article_name' => $option_name,
+                        ]
+                    );
+
+
+                    return $article;
+
+
 
 
 
@@ -236,7 +247,7 @@ class articles_controller extends Controller
                 }
             }
 
-            return redirect('addmenu')->with('status', 'Food updated succesfully!');
+            // return redirect('addmenu')->with('status', 'Food updated succesfully!');
         }
 
 

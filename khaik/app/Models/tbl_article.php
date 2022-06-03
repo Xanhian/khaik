@@ -9,6 +9,6 @@ class tbl_article extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'options->enabled',
+        'article_name',
     ];
 }
