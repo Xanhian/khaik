@@ -45,6 +45,16 @@ body {
     object-fit: cover;
 }
 
+.feature-img{
+    height: 200px;
+    object-fit: contain;
+}
+
+.discover-img {
+    height: 30em;
+   
+}
+
 .slick-slider {
     margin: 0 -8px;
 }
@@ -65,6 +75,11 @@ small {
 div,
 a {
     outline: none !important;
+}
+
+.restaurant-img {
+    height: 10em;
+
 }
 
 .border-primary {
@@ -684,6 +699,7 @@ p {
 
 .list-card.d-flex .list-card-image .item-img {
     height: 140px;
+
     object-fit: cover;
 }
 
@@ -1315,6 +1331,14 @@ footer .text-muted {
     h1{
         font-size: x-large;
     }
+.discover-img {
+height: 10em;
+
+}
+.restaurant-img {
+    height: 10em;
+
+}
     .container,
     .container-md,
     .container-sm {

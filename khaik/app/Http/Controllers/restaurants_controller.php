@@ -15,7 +15,7 @@ class restaurants_controller extends Controller
     public function index()
     {
         $restaurants_category = DB::table('tbl_restaurants_categories')->get();
-        $owners_info_script = DB::table('tbl_restaurant_owners')->where('name', '=', 'Fanny')->get();
+        $owners_info_script = DB::table('tbl_restaurant_owners')->where('name', '=', 'Uriel')->get();
 
         session(['owners_id' => $owners_info_script[0]->id]);
         session(['owners_name' => $owners_info_script[0]->name]);

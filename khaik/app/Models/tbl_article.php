@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class tbl_article extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'options->enabled',
+    ];
 }

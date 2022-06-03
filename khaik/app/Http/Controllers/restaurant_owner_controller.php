@@ -17,7 +17,9 @@ class restaurant_owner_controller extends Controller
         // session(['owners_id' => $owners_info_script[0]->pluck('id')]);
         // session(['owners_name' => $owners_info_script[0]->name]);
 
+        $restaurants_info = DB::table('tbl_restaurants')->get();
 
-        return view('restaurant');
+
+        return view('home', ['restaurants_info' => $restaurants_info]);
     }
 }
