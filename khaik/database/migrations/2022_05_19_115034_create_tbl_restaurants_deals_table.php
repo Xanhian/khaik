@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('deal_photo');
             $table->text('deal_dscription');
             $table->date('deal_date');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

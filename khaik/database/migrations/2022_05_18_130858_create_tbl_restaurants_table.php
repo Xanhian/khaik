@@ -25,9 +25,9 @@ return new class extends Migration
             $table->string('restaurant_country', 100);
             $table->string('restaurant_longitude', 128)->nullable();
             $table->string('restaurant_latitude', 128)->nullable();
-            $table->text('restaurant_opening_time');
-            $table->text('restaurant_closing_time');
-            $table->string('restaurant_facebook_link', 128);
+            $table->text('restaurant_opening_time')->nullable();
+            $table->text('restaurant_closing_time')->nullable();
+            $table->string('restaurant_facebook_link', 128)->nullable();
             $table->text('restaurant_qr');
             $table->timestamps();
         });
