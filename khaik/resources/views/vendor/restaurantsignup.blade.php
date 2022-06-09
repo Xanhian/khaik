@@ -55,12 +55,30 @@
 
                                         <h3 class="text-dark my-3">Account Information</h3>
                                         <input type="text" name="firstname" id="firstname" placeholder="First Name" />
+                                        @error('firstname')
+                                        <div class="mt-n3 mb-1">*{{ $message }}</div>
+                                        @enderror
                                         <input type="text" name="lastname" placeholder="Last Name" />
-                                        <input type="number" name="phonenumber" placeholder="1234567" />
 
+                                        @error('lastname')
+                                        <div class="mt-n3 mb-1">*{{ $message }}</div>
+                                        @enderror
+                                        <input type="number" name="phonenumber" placeholder="1234567" />
+                                        @error('phonenumber')
+                                        <div class="mt-n3 mb-1">*{{ $message }}</div>
+                                        @enderror
                                         <input type="email" name="email" placeholder="Email" />
+                                        @error('email')
+                                        <div class="mt-n3 mb-1">*{{ $message }}</div>
+                                        @enderror
                                         <input type="password" name="password" placeholder="Password" />
+                                        @error('password')
+                                        <div class="mt-n3 mb-1">*{{ $message }}</div>
+                                        @enderror
                                         <input type="password" name="repassword" placeholder="Confirm Password" />
+                                        @error('repassword')
+                                        <div class="mt-n3 mb-1">*{{ $message }}</div>
+                                        @enderror
 
                                         <input type="button" name="next" class="next text-center action-button" value="Next Step" />
 
@@ -108,9 +126,12 @@
                                         <p>Restaurant Categories</p>
                                         <div class="d-flex flex-row flex-wrap">
                                             @foreach($restaurants_category as $category)
-                                            <div class="col-4 text-left d-flex ">
-                                                <input type="checkbox" name="restaurant_category[]" value="{{$category->id}}">
-                                                <p class="pl-2">{{$category->restaurant_category_name}}</p>
+                                            <div class="col-4 ">
+                                                <div class="row">
+                                                    <input type="checkbox" class="w-25" name="restaurant_category[]" value="{{$category->id}}">
+                                                    <p class="pl-2">{{$category->restaurant_category_name}}</p>
+                                                </div>
+
                                             </div>
                                             @endforeach
 

@@ -10,7 +10,7 @@ use Illuminate\Contracts\Session\Session;
 class restaurant_owner_controller extends Controller
 {
     //
-    public function getOwnerinfo()
+    public function index()
     {
         // $owners_info_script = DB::table('tbl_restaurant_owners')->where('name', '=', 'Haley')->get();
 
@@ -20,6 +20,7 @@ class restaurant_owner_controller extends Controller
         $restaurants_info = DB::table('tbl_restaurants')->get();
 
 
-        return view('home', ['restaurants_info' => $restaurants_info]);
+
+        return view('main', ['restaurants_info' => $restaurants_info]);
     }
 }

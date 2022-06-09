@@ -29,6 +29,7 @@ return new class extends Migration
             $table->text('restaurant_closing_time')->nullable();
             $table->string('restaurant_facebook_link', 128)->nullable();
             $table->text('restaurant_qr');
+            $table->unsignedBigInteger('restaurant_complete_status')->nullable();
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
       <div class="container">
           <div class="row align-items-center">
               <div class="col-1">
-                  <a href="{{route('home')}}" class="brand-wrap mb-0">
+                  <a href="{{route('main')}}" class="brand-wrap mb-0">
                       <img alt="#" class="img-fluid" src="{{asset('img/logo_web.png')}}">
                   </a>
                   <!-- brand-wrap.// -->

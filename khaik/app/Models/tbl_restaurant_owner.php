@@ -2,10 +2,18 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class tbl_restaurant_owner extends Model
+class tbl_restaurant_owner extends Authenticatable
+
 {
     use HasFactory;
+    protected $guard = 'vendors';
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
 }

@@ -12,8 +12,6 @@
                 <h6 class="mb-1 p-0"><a href="restaurant/{{$restaurant_info->id}}" class="text-black"> {{$restaurant_info->restaurant_name}}
                     </a>
                 </h6>
-
-
             </div>
         </div>
     </div>

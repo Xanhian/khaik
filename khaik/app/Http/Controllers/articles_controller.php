@@ -13,20 +13,17 @@ class articles_controller extends Controller
 
     public function index()
     {
+
+        $restaurant_id = session()->get('owners_restaurant');
+
         $article_category = DB::table('tbl_article_categories')->get();
-        $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', '=', '3')->where('restaurant_name', '=', 'Warung kyle')->get('id');
-        session(['owners_restaurant' => $restaurant_id[0]->id]);
-
-
-        $menu_head_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id[0]->id)->where('article_option', 'Head')->where('article_item_relations', NULL)->get();
 
 
 
 
+        $menu_head_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', 'Head')->where('article_item_relations', NULL)->get();
 
-
-
-        $menu_snack_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id[0]->id)->where('article_option', 'Snacks')->where('article_item_relations', NULL)->get();
+        $menu_snack_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', 'Snacks')->where('article_item_relations', NULL)->get();
 
 
         // $menu_drink_items = DB::table('tbl_articles')->where('restaurant_id', $restaurant_id[0]->id)->where('article_option', 'Drinks')->where('article_item_relations', NULL)->get();
@@ -46,10 +43,10 @@ class articles_controller extends Controller
             $menu_snack_option_data[$menu_snack_item->id] = $menu_snack_option_items;
         }
 
-        // foreach ($menu_snack_items as $menu_snack_item) {
-        //     $menu_snack_option_items = DB::table('tbl_articles')->where('article_item_relations', $menu_snack_item->id)->pluck('article_name');
-        //     $menu_snack_option_data[$menu_snack_item->id] = $menu_snack_option_items;
-        // }
+        foreach ($menu_snack_items as $menu_snack_item) {
+            $menu_snack_option_items = DB::table('tbl_articles')->where('article_item_relations', $menu_snack_item->id)->pluck('article_name');
+            $menu_snack_option_data[$menu_snack_item->id] = $menu_snack_option_items;
+        }
 
 
 
@@ -148,9 +145,7 @@ class articles_controller extends Controller
             }
         }
 
-
-
-        return redirect('addmenu')->with('status', 'Food added succesfully!');
+        return redirect('/menu')->with('status', 'Food added succesfully!');
     }
 
     public function edit(Request $request)
