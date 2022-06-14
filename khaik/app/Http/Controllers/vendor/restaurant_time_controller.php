@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+
+namespace App\Http\Controllers\vendor;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\tbl_restaurant;
 use Illuminate\Http\Request;

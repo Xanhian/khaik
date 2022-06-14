@@ -9,9 +9,10 @@
         </div>
         <div class="p-3 position-relative">
             <div class="list-card-body">
-                <h6 class="mb-1 p-0"><a href="restaurant/{{$restaurant_info->id}}" class="text-black"> {{$restaurant_info->restaurant_name}}
-                    </a>
+                <h6 class="mb-1 p-0">
+                    <a href="restaurant/{{$restaurant_info->id}}" class="text-black"> {{$restaurant_info->restaurant_name}}</a>
                 </h6>
+                <p>{{$restaurant_info->restaurant_addres}}</p>
             </div>
         </div>
     </div>

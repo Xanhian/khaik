@@ -38,7 +38,7 @@
                         <p class="text-white font-weight-bold mb-1 ">Opening time</p>
                         <div class="mb-4 d-flex flex-row justify-content-between ">
 
-                            <div class="box-day sunday d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">S</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_open_time->sunday}}</p>
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
 
-                            <div class="box-day friday d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">F</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_open_time->friday}}</p>
@@ -192,7 +192,7 @@
 
 
 
-    @include('layouts.navigation')
+    @include('vendor.layout.navigation')
 
 
     @include('layouts.scripts')

@@ -7,7 +7,7 @@
 
     <div class="container p-0 login-page">
         <div class="d-flex align-items-center justify-content-center flex-column">
-            <img src="https://ychef.files.bbci.co.uk/976x549/p04tx3m6.jpg" alt="" srcset="" class="w-100 h-100 mx-auto" />
+            <img src="{{asset('img/register-bg.png')}}" alt="" srcset="" class="w-100 h-100 mx-auto" />
             <div class="mt-3 w-75 h-100 mx-auto">
                 <h2 id="headtitle" class="text-dark text-center my-0">Welcome to khaik</h2>
 
@@ -25,7 +25,7 @@
 
                                     <ul id="progressbar" class="col text-center mb-0 mx-auto">
                                         <li class="active" id="account">
-                                            <div class="progress-box">
+                                            <div class="progress-box ">
                                                 <i class="feather-gift"></i>
                                             </div>
                                             <strong>Personal</strong>

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\vendor;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\tbl_restaurant;
 use Illuminate\Support\Facades\DB;
 
-class view_restaurant_controller extends Controller
+
+class restaurant_view_controller extends Controller
 {
     public function index(Request $request, $restaurant_id)
     {
@@ -50,7 +51,7 @@ class view_restaurant_controller extends Controller
 
 
         return view(
-            'restaurant',
+            'vendor.restaurantview',
             [
                 'restaurant_info' => $restaurant_info,
                 'menu_items' => $menu_head_items,

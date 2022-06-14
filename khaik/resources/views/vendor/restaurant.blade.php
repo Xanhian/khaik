@@ -250,7 +250,7 @@
 
 
 
-                <div class=" text-center">
+                <div class="text-center">
                   <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
 
 
@@ -263,7 +263,7 @@
       </div>
     </div>
 
-    @include('layouts.navigation')
+    @include('vendor.layout.navigation')
     @include('layouts.scripts')
 
 

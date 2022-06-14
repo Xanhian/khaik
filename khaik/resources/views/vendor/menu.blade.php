@@ -19,11 +19,24 @@
 
     <div class="container position-relative">
         <div class="row">
-            <div class=" col-md-7 pt-3">
+
+
+            <div class="col-md-7 pt-3">
+
                 <div class="shadow-sm rounded bg-white mb-3 overflow-hidden">
-                    <div class="d-flex item-aligns-center">
-                        <p class="font-weight-bold h6 p-3 border-bottom mb-0 w-100">Menu</p>
+                    @if(session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
                     </div>
+                    @endif
+                    <div class="d-flex  border-bottom ">
+                        <p class="col-8 font-weight-bold h6 my-auto p-3 mb-0 w-100">Menu</p>
+                        <button data-toggle="modal" data-target="#add_item" class=" col-3 btn btn-primary btn-block m-3"><i class="fa-solid fa-plus "></i> Add Item</button>
+
+                    </div>
+                    @error('article_option_price')
+                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                    @enderror
                     <div class="row m-0">
                         <a class="p-3 m-0 bg-light border-bottom w-100" data-toggle="collapse" aria-expanded="true" href="#multiCollapseExample1">
                             <h6>Main courses </h6>
@@ -34,7 +47,22 @@
                     @foreach($menu_items as $menu_item)
 
                     <div class="row border-bottom px-0 collapse  show" id="multiCollapseExample1">
-                        <div class=" col-5 p-3 gold-members d-flex flex-row">
+                        <div class="col-2 align-self-center mx-auto text-center ">
+                            <form class="article_delete_form" action="{{route('delete_article')}}" method="post">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                <input type="hidden" name="article_id" value="{{$menu_item->id}}" />
+
+
+
+
+                                <button type="submit" class="delete-item-box"> <i class="fa-solid fa-xmark fa-2xl p-3"></i></button>
+
+                            </form>
+                        </div>
+
+
+
+                        <div class=" col-6 py-3 gold-members d-flex flex-row">
                             <div class="col align-self-center">
                                 <a href="#" data-toggle="modal" data-target="#modal{{$menu_item->id}}  ">
                                     <div class="media">
@@ -48,8 +76,8 @@
                                     @foreach($menu_option_items[$menu_item->id] as $option_item)
                                     <div class="media col border-bottom collapse " id="collapse{{$menu_item->id}}">
                                         <div class="media-body mt-2">
-                                            <h7 class="mb-1 "></h7>
-                                            <p class="text-muted mb-2">{{$option_item->article_name}}
+                                            <h7 class="mb-1">{{$option_item->article_name}}</h7>
+                                            <p class="text-muted mb-2">
                                                 {{$option_item->article_price_currency}}{{$option_item->article_price_number}}
                                             </p>
                                         </div>
@@ -61,18 +89,16 @@
                         </div>
 
 
-                        <div class=" col-7 p-3">
-                            <div class="row d-flex flex-row justify-content-around">
-                                <div class=" align-self-center ">
-                                    <span><a class="btn btn-outline-secondary btn-sm " data-toggle="collapse" href="#collapse{{$menu_item->id}}" role="button">Options</a></span>
-                                </div>
-                                <div class=" align-self-center ">
-                                    <span><a data-toggle="collapse" href="#" role="button" class="btn btn-outline-secondary btn-sm ">Delete</a></span>
-                                </div>
-                                <div class=" align-self-center ">
-                                    <span><a data-toggle="modal" data-target="#edit{{$menu_item->id}}  " role="button" class="btn btn-outline-secondary btn-sm ">Edit</a></span>
+                        <div class=" col-4 p-2 align-self-center text-center">
+                            <div class="row d-flex flex-row ">
+
+                                <div class="align-self-center pl-3 ">
+                                    <span><a data-toggle="modal" data-target="#edit{{$menu_item->id}}" role="button" class="m-3"><i class="fa-solid fa-pen fa-xl "></i></a></span>
                                 </div>
 
+                                <div class=" my-auto align-self-center ">
+                                    <span><a class=" " data-toggle="collapse" href="#collapse{{$menu_item->id}}" role="button"><i class="fa-solid fa-angle-down fa-2xl"></i></a></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -184,20 +210,22 @@
                                                 <div class="form-group ">
                                                     <a data-toggle="collapse" href="#article_options" aria-expanded="false">
                                                         <label for="exampleInputName1">Food Options</label>
-
                                                     </a>
-                                                    <a id="add_article_option" class="btn bg-success">+</a>
-                                                    <a id="remove_article_option" class="btn bg-danger">-</a>
+                                                    <div id="article_options_edit{{$menu_item->id}}">
+                                                        <a class=" add_article_option_edit btn bg-success">+</a>
+                                                        <a class="remove_article_option_edit btn bg-danger">-</a>
+                                                        @error('article_option_price.*')
+                                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                                        @enderror
 
 
-                                                    <div id="article_options">
+
 
                                                         @foreach($menu_option_items[$menu_item->id] as $option_item)
 
 
-
-                                                        <div class="form-group"><label>Article Name</label><input type="text" name="article_option_name[]" value="{{$option_item->article_name}}" class="form-control">
-                                                            <input type="hidden" name="article_option_id" value="{{$option_item->article_id}}">
+                                                        <div class="form-group"><label> {{$option_item->article_id}}</label><input type="text" name="article_option_name[]" value="{{$option_item->article_name}}" class="form-control">
+                                                            <input type="hidden" name="article_option_id[]" value="{{$option_item->article_id}}">
                                                         </div>
                                                         <div class="form-group"><label>Article Price</label>
                                                             <div class="row">
@@ -315,23 +343,43 @@
 
                     @foreach($menu_snack_items as $menu_snack_item)
 
-                    <div class="row border-bottom px-0 collapse  show" id="Snacks">
-                        <div class=" col-5 p-3 gold-members d-flex flex-row">
+                    <div class="row w-100 m-0 border-bottom px-0 collapse  show" id="Snacks">
+
+                        <div class="col-2 mx-auto  align-self-center text-center ">
+
+                            <form class="article_delete_form" action="{{route('delete_article')}}" method="post">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                <input type="hidden" name="article_id" value="{{$menu_snack_item->id}}" />
+
+
+                                <a class="delete_article" role="button">
+                                    <div class="delete-item-box">
+                                        <i class="fa-solid fa-xmark fa-2xl p-3"></i>
+                                    </div>
+                                </a>
+
+                            </form>
+                        </div>
+
+                        <div class=" col-6 py-3  gold-members d-flex flex-row">
                             <div class="col align-self-center">
+
                                 <a href="#" data-toggle="modal" data-target="#modal{{$menu_snack_item->article_name}}">
                                     <div class="media">
-                                        <img alt="#" src="img/starter1.jpg" alt="askbootstrap" class="mr-3 rounded-pill ">
+                                        <img alt="#" src="{{asset($menu_snack_item->article_img)}}" alt="askbootstrap" class="mr-3  menu-image-display rounded-pill">
                                         <div class="media-body ">
                                             <h6 class="mb-1">{{$menu_snack_item->article_name}}</h6>
-                                            <p class="text-muted mb-0">$250</p>
+                                            <p class="text-muted mb-0">{{$menu_snack_item->article_price_currency}} {{$menu_snack_item->article_price_number}}</p>
                                         </div>
                                     </div>
 
+
+
                                     @foreach($menu_snack_option_items[$menu_snack_item->id] as $option_snack_item)
-                                    <div class="media border-bottom collapse " id="{{$menu_snack_item->article_name}}">
+                                    <div class="media border-bottom collapse " id="collapse{{$menu_snack_item->article_name}}">
                                         <div class="media-body mt-2">
-                                            <h7 class="mb-1 "></h7>
-                                            <p class="text-muted mb-2">{{$option_snack_item}}</p>
+                                            <h7 class="mb-1 ">{{$option_snack_item->article_name}}</h7>
+                                            <p class="text-muted mb-2"> {{$option_snack_item->article_price_currency}}{{$option_snack_item->article_price_number}}</p>
                                         </div>
                                     </div>
                                     @endforeach
@@ -341,22 +389,17 @@
                         </div>
 
 
-                        <div class=" col-6 p-3">
-                            <div class="row d-flex flex-row justify-content-end">
-                                <div class=" align-self-center ">
-                                    <span><a data-toggle="collapse" href="#{{$menu_snack_item->article_name}}" role="button" class="btn btn-outline-secondary btn-sm ">Options</a></span>
+
+                        <div class=" col-4 p-2 align-self-center text-center">
+                            <div class="row d-flex flex-row ">
+
+                                <div class="align-self-center pl-3 ">
+                                    <span><a data-toggle="modal" data-target="#edit{{$menu_snack_item->article_name}}" role="button" class="m-3"><i class="fa-solid fa-pen fa-xl "></i></a></span>
                                 </div>
 
-                                <div class=" align-self-center ">
-                                    <span><a data-toggle="collapse" href="#{{$menu_snack_item->article_name}}" role="button" class="btn btn-outline-secondary btn-sm ">Delete</a></span>
+                                <div class=" my-auto align-self-center ">
+                                    <span><a class=" " data-toggle="collapse" href="#collapse{{$menu_snack_item->article_name}}" role="button"><i class="fa-solid fa-angle-down fa-2xl"></i></a></span>
                                 </div>
-
-
-                                <div class=" align-self-center ">
-                                    <span><a data-toggle="modal" data-target="#edit{{$menu_snack_item->article_name}}  " role="button" class="btn btn-outline-secondary btn-sm ">Edit</a></span>
-                                </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -393,14 +436,14 @@
                                                 {{ method_field('PATCH') }}
                                                 <div class="form-group">
                                                     <label for="exampleInputName1">Food Name</label>
-                                                    <input type="text" name="article_name" id="article_name" value="{{$menu_item->article_name}}" class="form-control">
+                                                    <input type="text" name="article_name" id="article_name" value="{{$menu_snack_item->article_name}}" class="form-control">
                                                     @error('article_name')
                                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputName1">Food Description</label>
-                                                    <input type="text" name="article_description" id="article_description" value="{{$menu_item->article_description}}" class="form-control">
+                                                    <input type="text" name="article_description" id="article_description" value="{{$menu_snack_item->article_description}}" class="form-control">
                                                     @error('article_description')
                                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                                     @enderror
@@ -423,7 +466,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-7">
-                                                            <input type="number" name="article_price" value="{{$menu_item->article_price_number}}" class="form-control" placeholder="00.00">
+                                                            <input type="number" name="article_price" value="{{$menu_snack_item->article_price_number}}" class="form-control" placeholder="00.00">
                                                         </div>
 
                                                     </div>
@@ -465,7 +508,7 @@
                                                     </select>
                                                 </div>
 
-                                                @foreach($menu_option_items[$menu_item->id] as $option_item)
+                                                @foreach($menu_snack_option_items[$menu_snack_item->id] as $option_item)
 
 
                                                 <p class="text-muted mb-2">{{$option_item->article_name}}
@@ -550,7 +593,7 @@
                                     </div>
                                     <div class="row mx-auto">
                                         <div class="box mx-auto">
-                                            <img alt="#" src="{{asset($menu_item->article_img)}}" alt="askbootstrap" class=" box  ">
+                                            <img alt="#" src="{{asset($menu_snack_item->article_img)}}" alt="askbootstrap" class=" box  ">
 
 
                                         </div>
@@ -558,13 +601,13 @@
                                 </div>
                                 <div class="row text-center">
                                     <div class="col">
-                                        <h1>{{$menu_item->article_name}}</h1>
+                                        <h1>{{$menu_snack_item->article_name}}</h1>
 
                                     </div>
                                 </div>
                                 <div class="row text-center">
                                     <div class="col">
-                                        {{$menu_item->article_description}}
+                                        {{$menu_snack_item->article_description}}
                                     </div>
                                 </div>
 
@@ -583,124 +626,134 @@
             </div>
 
 
-            <div class="col-md-5  pt-3">
-                <div class="shadow-sm rounded bg-white mb-3 overflow-hidden">
+
+        </div>
+    </div>
+
+    <div class=" modal fade" id="add_item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+
+
+                <div class="shadow-sm rounded bg-white p-4 overflow-hidden">
                     <div class="d-flex item-aligns-center">
-
-                        <p class="font-weight-bold h6 p-3 border-bottom mb-0 w-100">Add Item</p>
-
+                        <h2 class="font-weight-bold h4 pb-2 text-dark border-bottom mb-0 w-100">Add Food</h2>
                     </div>
-                    <div class="row">
-                        <div class="col-8 m-4 mx-auto">
-                            @if(session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
+
+                    <div class="col-11 mx-auto">
+
+                        <form method='post' enctype="multipart/form-data" action="{{ route('add_article')}}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            <div class="form-group pt-3">
+                                <label for="exampleInputName1">Food Name</label>
+                                <input type="text" name="article_name" id="article_name" value="{{old('article_name')}}" class="form-control">
+                                @error('article_name')
+                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @endif
-                            <form method='post' enctype="multipart/form-data" action="{{ route('add_article')}}">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Food Name</label>
-                                    <input type="text" name="article_name" id="article_name" value="{{old('article_name')}}" class="form-control">
-                                    @error('article_name')
+                            <div class="form-group">
+                                <label for="exampleInputName1">Food Description</label>
+                                <input type="text" name="article_description" id="article_description" value="{{old('article_description')}}" class="form-control">
+                                @error('article_description')
+                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputName1">Food Pic</label>
+                                <input type="file" name="article_photo" class="form-control">
+                                @error('article_photo')
+                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+
+                                <label for="exampleInputName1">Food Price</label>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <select class="form-control" name="article_currency">
+                                            <option value="SRD">SRD</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-7">
+                                        <input type="number" name="article_price" value="{{old('article_price')}}" class="form-control" placeholder="00.00">
+                                    </div>
+
+                                </div>
+                                @error('article_price')
+                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Menu Category</label>
+                                <select name="menu_category" class="form-control" id="">
+                                    <option value="Head">Main course </option>
+                                    <option value="Snacks">Snacks</option>
+                                    <option value="Drinks">Drinks</option>
+
+
+                                </select>
+                            </div>
+
+
+
+                            <div class="form-group ">
+                                <a data-toggle="collapse" href="#article_options" aria-expanded="false">
+                                    <label for="exampleInputName1">Food Options</label>
+
+                                </a>
+                                <a id="add_article_option" class="btn bg-success">+</a>
+                                <a id="remove_article_option" class="btn bg-danger">-</a>
+
+
+                                <div id="article_options">
+                                    @error('article_option.*')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                     @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Food Description</label>
-                                    <input type="text" name="article_description" id="article_description" value="{{old('article_description')}}" class="form-control">
-                                    @error('article_description')
+                                    @error('article_option_price.*')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                     @enderror
+
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Food Pic</label>
-                                    <input type="file" name="article_photo" class="form-control">
-                                    @error('article_photo')
-                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-
-                                    <label for="exampleInputName1">Food Price</label>
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <select class="form-control" name="article_currency">
-                                                <option value="SRD">SRD</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-7">
-                                            <input type="number" name="article_price" value="{{old('article_price')}}" class="form-control" placeholder="00.00">
-                                        </div>
-
+                            <div class="form-group">
+                                <a data-toggle="collapse" href="#category" aria-expanded="false">
+                                    <label for="exampleInputName1">Food Category</label>
+                                </a>
+                                <div class="collapse multi-collapse show" id="category">
+                                    @foreach($article_category as $category)
+                                    <div class="row p-2">
+                                        <input type="radio" name="article_category" class="my-auto" value="{{$category->id}}">
+                                        <p class="pl-2 my-auto">{{$category->category_name}}</p>
                                     </div>
-                                    @error('article_price')
-                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="">Menu Category</label>
-                                    <select name="menu_category" class="form-control" id="">
-                                        <option value="Head">Main course </option>
-                                        <option value="Snacks">Snacks</option>
-                                        <option value="Drinks">Drinks</option>
-
-
-                                    </select>
-                                </div>
-
-
-
-                                <div class="form-group ">
-                                    <a data-toggle="collapse" href="#article_options" aria-expanded="false">
-                                        <label for="exampleInputName1">Food Options</label>
-
-                                    </a>
-                                    <a id="add_article_option" class="btn bg-success">+</a>
-                                    <a id="remove_article_option" class="btn bg-danger">-</a>
-
-
-                                    <div id="article_options">
-                                        @error('article_option.*')
-                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                        @enderror
-
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <a data-toggle="collapse" href="#category" aria-expanded="false">
-                                        <label for="exampleInputName1">Food Category</label>
-                                    </a>
-                                    <div class="collapse multi-collapse show" id="category">
-                                        @foreach($article_category as $category)
-                                        <div class="row p-2">
-                                            <input type="radio" name="article_category" class="my-auto" value="{{$category->id}}">
-                                            <p class="pl-2 my-auto">{{$category->category_name}}</p>
-                                        </div>
-                                        @endforeach
-
-                                    </div>
-                                    @error('article_category')
-                                    <div class=" alert alert-danger mt-1 mb-1">{{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <input type="hidden" name="restaurant_id" value="{{Session::get('owners_restaurant')}}">
-                                <div class=" text-center">
-                                    <button id="article_submit" type="submit" class="btn btn-primary btn-block">Save Changes</button>
-
+                                    @endforeach
 
                                 </div>
+                                @error('article_category')
+                                <div class=" alert alert-danger mt-1 mb-1">{{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <input type="hidden" name="restaurant_id" value="{{Session::get('owners_restaurant')}}">
+                            <div class=" text-center">
+                                <button id="article_submit" type="submit" class="btn btn-primary btn-block">Add food</button>
+                            </div>
 
 
-
-                            </form>
-                        </div>
+                        </form>
                     </div>
+
+                </div>
+
+
+                <div class="modal-footer p-0 border-0">
+
+                    <button type="button" class="btn border-top  m-0 btn-block" data-dismiss="modal">Close</button>
+
                 </div>
             </div>
         </div>
@@ -708,11 +761,15 @@
 
 
 
-    @include('layouts.navigation')
+
+
+    @include('vendor.layout.navigation')
+    @include('layouts.scripts')
     </div>
 
 
-    @include('layouts.scripts')
 </body>
+
+
 
 </html>

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\vendor;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class vendor_views_controller extends Controller

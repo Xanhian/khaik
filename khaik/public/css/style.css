@@ -39,10 +39,101 @@ body {
     background: #f0f6f7;
 }
 
+.deal-img{
+    width: 100%;
+
+ 
+    background-color: #0091bc;
+}
+
+.deal-img-preview{
+    width: 100%;
+
+    object-fit: cover;
+    background-color: #0091bc;
+}
+
+#splashscreen { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 120vh;
+    width: 100%;
+    z-index: 10;
+    background-color: white;
+}
+
+.splash-img{
+    width: 65%;
+}
+
 .menu-image-display{
     height: 4em;
     width: 4em;
     object-fit: cover;
+}
+
+.vendor-btn{
+    height: 10em;
+    color: white;
+
+}
+
+.vendor-btn-text{
+    font-size: 2.5em;
+}
+
+.vendor-icon{
+    font-size: 1.2em;
+    
+}
+
+.box-day{
+    width: 1.5em;
+    height: 3em;
+    border-radius: 25px 25px;
+   
+    color: #000;
+
+}
+
+.cat-item-box{
+    height: 60px;
+}
+
+.box-day-value{
+    width: 50px;
+    background: white;
+    font-weight: 900;
+    border-radius: 5px;
+    opacity: 0;
+}
+
+.delete-item-box{
+ background: rgba(0, 0, 0, 0);
+ border: none;
+
+ color: #e23844 ;
+
+}
+
+.delete-item-box:focus{
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    outline: none;
+        box-shadow: none;
+
+}
+
+.box-day-active{
+    opacity: 0;
+    background: white;
+}
+
+
+.vendor-menu-btn{
+    background: #e23844 ;
 }
 
 .feature-img{
@@ -151,7 +242,7 @@ body {
 /*Blue Buttons*/
 #msform .action-button {
     width: 100px;
-    background: rgb(235, 135, 222);
+    background: #e23844;
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -163,7 +254,7 @@ body {
 
 #msform .action-button:hover,
 #msform .action-button:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px rgb(235, 135, 220);
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #e23844;
 }
 
 /*Previous Buttons*/
@@ -210,7 +301,7 @@ select.list-dt:focus {
 }
 
 #progressbar .active {
-    color: #000000;
+    color: #d92662;
 }
 
 #progressbar li {
@@ -253,7 +344,7 @@ select.list-dt:focus {
 /*Color number of the step and the connector before it*/
 #progressbar li.active .progress-box,
 #progressbar li.active:after {
-    background: rgb(0, 0, 0);
+    background: #d92662;
 }
 
 
@@ -388,6 +479,9 @@ a {
 
 .osahan-menu-fotter {
     padding: 0px !important;
+    z-index: 1;
+
+
 }
 
 .osahan-menu-fotter .row {

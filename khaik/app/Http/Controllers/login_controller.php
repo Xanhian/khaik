@@ -26,15 +26,23 @@ class login_controller extends Controller
 
 
             $id = Auth::id();
-            session(['owners_id' => $id]);
-            $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', $id)->get('id');
+            $owner_info = DB::table('tbl_restaurant_owners')->where('id', $id)->get();
+            $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', $id)->get();
 
-            session(['owners_restaurant' => $restaurant_id[0]->id]);
+            session([
+                'owners_id' => $id,
+                'owners_name' => $owner_info[0]->name,
+                'owners_lastname' => $owner_info[0]->lastname,
+                'owners_phonenumber' => $owner_info[0]->phonenumber,
+                'owners_email' => $owner_info[0]->email,
+                'owners_restaurant' => $restaurant_id[0]->id,
+                'owners_restaurant_name' => $restaurant_id[0]->restaurant_name,
+            ]);
 
 
             return redirect()->route('vendor_home');
         }
 
-        return redirect()->route('login_vendor');
+        return redirect()->route('login_vendor')->with("status", "Wrong credential");
     }
 }

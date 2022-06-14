@@ -18,8 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('restaurant_id');
             $table->text('deal_name');
             $table->text('deal_photo');
-            $table->text('deal_dscription');
-            $table->date('deal_date');
+            $table->text('deal_description');
             $table->softDeletes();
             $table->timestamps();
         });
