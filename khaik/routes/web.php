@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\vendor\articles_controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\restaurant_owner_controller;
@@ -7,13 +8,14 @@ use App\Http\Controllers\vendor\restaurants_controller;
 use App\Http\Controllers\view_restaurant_controller;
 
 use App\Http\Controllers\favorite_controller;
-use App\Http\Controllers\login_controller;
+use App\Http\Controllers\vendor\login_controller;
 use App\Http\Controllers\profile_controller;
 use App\Http\Controllers\vendor\deal_controller;
 use App\Http\Controllers\vendor\vendor_views_controller;
 use App\Http\Controllers\vendor\restaurant_time_controller;
 use App\Http\Controllers\vendor\restaurant_view_controller;
 use App\Http\Controllers\vendor\vendor_profile_controller;
+use App\Http\Controllers\view_deal_controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +52,12 @@ Route::prefix('vendor')->group(function () {
     Route::post('/menu/delete', [articles_controller::class, 'delete'])->name('delete_article');
     Route::post('/deals/add', [deal_controller::class, 'store'])->name('vendor_deals_add');
 
+    Route::patch('/profile/edit', [vendor_profile_controller::class, 'edit'])->name('vendor_profile_edit');
     Route::patch('/editmenu', [articles_controller::class, 'edit'])->name('edit_article');
+    Route::patch('/editdeal', [deal_controller::class, 'edit'])->name('edit_deal');
+    Route::patch('/editrestaurant', [restaurants_controller::class, 'edit'])->name('edit_restaurant');
+
+
 
     Route::post('/save_time', [restaurant_time_controller::class, 'save_time'])->name('save_time');
 });
@@ -66,6 +73,8 @@ Route::get('/favorite', [favorite_controller::class, 'index'])->name('favorite')
 Route::get('/profile', [profile_controller::class, 'index'])->name('profile');
 
 Route::get('/restaurant/{restaurant_id}', [view_restaurant_controller::class, 'index']);
+Route::get('/deals', [view_deal_controller::class, 'index'])->name('deals');
+
 
 
 Route::post('/save', [restaurants_controller::class, 'store'])->name('save_restaurant');

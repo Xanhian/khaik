@@ -45,8 +45,19 @@ class deal_controller extends Controller
         return $deal;
     }
 
-    public function edit()
+    public function edit(Request $request)
     {
-        $edit_deal = tbl_restaurants_deals::find();
+
+        $edit_deal = tbl_restaurants_deals::find($request->deal_id);
+        if ($edit_deal->deal_name !== $request->edit_deal_name) {
+            $edit_deal->deal_name = $request->edit_deal_name;
+        }
+        if ($edit_deal->deal_description !== $request->edit_description) {
+            $edit_deal->deal_description = $request->edit_description;
+        }
+
+        $edit_deal->save();
+
+        return $edit_deal;
     }
 }

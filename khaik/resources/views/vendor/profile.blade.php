@@ -38,7 +38,39 @@
         </div>
         <div class="col-md-8 mb-3">
           <div class="rounded shadow-sm p-4 bg-white">
-            <h5 class="mb-4">My account</h5>
+            <div class="row justify-content-between">
+              <h5 class="mb-4">My account</h5>
+              <a data-toggle="modal" data-target="#edit_account" class="text-decoration-none text-dark mr-3"><i class="p-2 bg-light btn-primary rounded-circle font-weight-bold fa-solid fa-pen"></i></a>
+            </div>
+
+            <div class=" modal fade" id="edit_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+
+                <div class="modal-content">
+                  <form action="{{route('vendor_profile_edit')}}" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    {{ method_field('PATCH') }}
+                    <p>userename</p>
+                    <input type="text" name="name" id="">
+                    <p>lastname</p>
+                    <input type="text" name="lastname" id="">
+                    <p>mobile number</p>
+                    <input type="text" name="mobilenumber" id="">
+                    <p>emaill</p>
+                    <input type="text" name="email" id="">
+
+                    <input type="submit" value="s">
+
+
+
+
+                  </form>
+
+
+                </div>
+              </div>
+            </div>
+
             <div id="edit_profile">
               <div>
                 <form action="my_account.html">

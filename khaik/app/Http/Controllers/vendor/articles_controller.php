@@ -8,6 +8,8 @@ use App\Models\tbl_article_price;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class articles_controller extends Controller
 {
@@ -22,31 +24,43 @@ class articles_controller extends Controller
 
 
 
-        $menu_head_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', 'Head')->where('article_item_relations', NULL)->get();
+        $menu_head_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_item_relations', NULL)->get();
 
-        $menu_snack_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', 'Snacks')->where('article_item_relations', NULL)->get();
+        // $menu_snack_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', 'Snacks')->where('article_item_relations', NULL)->get();
 
 
         // $menu_drink_items = DB::table('tbl_articles')->where('restaurant_id', $restaurant_id[0]->id)->where('article_option', 'Drinks')->where('article_item_relations', NULL)->get();
 
 
         $menu_option_data = array();
-        $menu_snack_option_data = array();
+        // $menu_snack_option_data = array();
 
+
+
+
+        // foreach ($menu_head_items as $menu_head_item) {
+        //     $menu_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $menu_head_item->id)->get(['article_id', 'article_name', 'article_price_number', 'article_price_currency']);
+        //     $menu_option_data[$menu_head_item->id] = $menu_option_items;
+        // }
 
         foreach ($menu_head_items as $menu_head_item) {
             $menu_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $menu_head_item->id)->get(['article_id', 'article_name', 'article_price_number', 'article_price_currency']);
             $menu_option_data[$menu_head_item->id] = $menu_option_items;
         }
 
-
-
-
-
-        foreach ($menu_snack_items as $menu_snack_item) {
-            $menu_snack_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $menu_snack_item->id)->get(['article_id', 'article_name', 'article_price_number', 'article_price_currency']);
-            $menu_snack_option_data[$menu_snack_item->id] = $menu_snack_option_items;
+        foreach ($menu_head_items as $menu_head_item) {
+            if ($menu_head_item->article_option == 'Snacks') {
+                $menu_option_data[$menu_head_item->id] = $menu_head_item;
+            }
         }
+
+        return $menu_option_data[$menu_head_item->id]->article_name;
+
+
+        // foreach ($menu_snack_items as $menu_snack_item) {
+        //     $menu_snack_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $menu_snack_item->id)->get(['article_id', 'article_name', 'article_price_number', 'article_price_currency']);
+        //     $menu_snack_option_data[$menu_snack_item->id] = $menu_snack_option_items;
+        // }
 
         // foreach ($menu_snack_items as $menu_snack_item) {
         //     $menu_snack_option_items = DB::table('tbl_articles')->where('article_item_relations', $menu_snack_item->id)->pluck('article_name');
@@ -57,19 +71,19 @@ class articles_controller extends Controller
 
 
 
-        return view(
-            'vendor.menu',
-            [
-                'article_category' => $article_category,
-                'menu_items' => $menu_head_items,
-                'menu_option_items' => $menu_option_data,
-                'menu_snack_items' => $menu_snack_items,
-                'menu_snack_option_items' => $menu_snack_option_data
+        // return view(
+        //     'vendor.menu',
+        //     [
+        //         'article_category' => $article_category,
+        //         'menu_items' => $menu_head_items,
+        //         'menu_option_items' => $menu_option_data,
+        //         'menu_snack_items' => $menu_snack_items,
+        //         'menu_snack_option_items' => $menu_snack_option_data
 
 
 
-            ]
-        );
+        //     ]
+        // );
     }
 
     public function store(Request $request)
@@ -157,9 +171,13 @@ class articles_controller extends Controller
 
         $article_price = tbl_article_price::firstWhere('article_id', $request->article_id);
 
-        if ($article->article_name !== $request->article_name) {
-            $article->article_name = $request->article_name;
+        if (isset($request->article_name)) {
+            if ($article->article_name !== $request->article_name) {
+                $article->article_name = $request->article_name;
+            }
         }
+
+
         if ($article->article_description !== $request->article_description) {
             $article->article_description = $request->article_description;
         }
@@ -182,58 +200,59 @@ class articles_controller extends Controller
 
 
         $i = 0;
+        if (isset($request->article_option_nam)) {
+            foreach ($request->article_option_name as $article_option_test) {
 
 
-        foreach ($request->article_option_name as $article_option_test) {
+                $validated = $request->validate([
+
+                    'article_option_price.*' => 'required',
+
+                ]);
 
 
-            $validated = $request->validate([
-
-                'article_option_price.*' => 'required',
-
-            ]);
-
-
-            if (isset($request->article_option_id[$i])) {
-                $article_options_test = tbl_article::updateOrCreate(
-                    ['id' => $request->article_option_id[$i]],
-                    ['article_name' => $article_option_test]
-                );
-                $article_options_currency = tbl_article_price::updateOrCreate(
-                    ['article_id' => $request->article_option_id[$i]],
-                    [
-                        'article_price_number' => $request->article_option_price[$i],
-                        'article_price_currency' => $request->article_option_currency[$i]
-                    ]
-                );
-            } elseif (!isset($request->article_option_id[$i])) {
+                if (isset($request->article_option_id[$i])) {
+                    $article_options_test = tbl_article::updateOrCreate(
+                        ['id' => $request->article_option_id[$i]],
+                        ['article_name' => $article_option_test]
+                    );
+                    $article_options_currency = tbl_article_price::updateOrCreate(
+                        ['article_id' => $request->article_option_id[$i]],
+                        [
+                            'article_price_number' => $request->article_option_price[$i],
+                            'article_price_currency' => $request->article_option_currency[$i]
+                        ]
+                    );
+                } elseif (!isset($request->article_option_id[$i])) {
 
 
 
 
-                $article = new tbl_article;
-                $article->restaurant_id = $request->restaurant_id;
-                $article->article_category_id = $request->article_category;
-                $article->article_name
-                    = $article_option_test;
-                $article->article_description = $request->article_description;
-                $article->article_img = "oa";
-                $article->article_option = $request->menu_category;
-                $article->article_item_relations =
-                    $request->article_id;
-                $article->save();
+                    $article = new tbl_article;
+                    $article->restaurant_id = $request->restaurant_id;
+                    $article->article_category_id = $request->article_category;
+                    $article->article_name
+                        = $article_option_test;
+                    $article->article_description = $request->article_description;
+                    $article->article_img = "oa";
+                    $article->article_option = $request->menu_category;
+                    $article->article_item_relations =
+                        $request->article_id;
+                    $article->save();
 
-                $article_option_id = DB::table('tbl_articles')->where('article_item_relations', '=', $request->article_id)->get('id');
+                    $article_option_id = DB::table('tbl_articles')->where('article_item_relations', '=', $request->article_id)->get('id');
 
-                $article_price = new tbl_article_price;
-                $article_price->article_id = $article_option_id[$i]->id;
-                $article_price->article_price_number = $request->article_option_price[$i];
-                $article_price->article_price_currency = $request->article_option_currency[$i];
-                $article_price->save();
+                    $article_price = new tbl_article_price;
+                    $article_price->article_id = $article_option_id[$i]->id;
+                    $article_price->article_price_number = $request->article_option_price[$i];
+                    $article_price->article_price_currency = $request->article_option_currency[$i];
+                    $article_price->save();
+                }
+
+                $i++;
             }
-
-            $i++;
         }
+
 
         return redirect()->route('vendor_menu')->with('status', 'Food changed succesfully!');
     }
@@ -241,6 +260,8 @@ class articles_controller extends Controller
     public function delete(Request $request)
     {
         $article = tbl_article::find($request->article_id);
+        File::delete($article->article_img);
+
         $article->delete();
 
         return redirect()->route('vendor_menu')->with('status', 'Food deleted succesfully!');

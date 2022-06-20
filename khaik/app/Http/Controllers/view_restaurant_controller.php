@@ -9,10 +9,14 @@ use Illuminate\Support\Facades\DB;
 class view_restaurant_controller extends Controller
 {
     public function index(Request $request, $restaurant_id)
+
     {
         $restaurant_info = DB::table('tbl_restaurants')->where('id', '=', $restaurant_id)->get();
 
         $menu_head_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', 'Head')->where('article_item_relations', NULL)->get();
+
+
+
 
 
 
@@ -45,6 +49,8 @@ class view_restaurant_controller extends Controller
         $open_time = json_decode($restaurant_info[0]->restaurant_opening_time);
         $close_time = json_decode($restaurant_info[0]->restaurant_closing_time);
 
+
+        $namea =   tbl_restaurant::find($restaurant_id)->increment('total_views', 1);
 
 
 

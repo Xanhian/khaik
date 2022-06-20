@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="col ">
-            <a href="{{route('main')}}" class="text-dark small font-weight-bold text-decoration-none">
+            <a href="{{route('deals')}}" class="text-dark small font-weight-bold text-decoration-none">
                 <p class="h4 m-0"><i class="feather-gift"></i></p>
                 Deals
             </a>

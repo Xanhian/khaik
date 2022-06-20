@@ -9,6 +9,7 @@
                     <p class="font-weight-bold h6 p-3 border-bottom mb-0 w-100">Menu</p>
                     <!-- <a class="small text-primary font-weight-bold ml-auto" href="#">View all <i class="feather-chevrons-right"></i></a> -->
                 </div>
+
                 <div class="row m-0">
                     <a class="p-3 m-0 bg-light border-bottom w-100" data-toggle="collapse" aria-expanded="true" href="#multiCollapseExample1">
                         <h6>Main courses</h6>
@@ -106,11 +107,15 @@
                 @endforeach
 
 
+
+                @if(count($menu_snack_items)!==0)
+
                 <div class="row m-0">
                     <a class="p-3 m-0 bg-light border-bottom w-100" data-toggle="collapse" aria-expanded="true" href="#Snacks">
                         <h6>Snack courses</h6>
                     </a>
                 </div>
+                @endif
 
 
                 @foreach($menu_snack_items as $menu_snack_item)
@@ -199,6 +204,8 @@
                 </div>
             </div>
             @endforeach
+
+
 
 
         </div>

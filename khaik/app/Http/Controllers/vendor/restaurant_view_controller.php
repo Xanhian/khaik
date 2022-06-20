@@ -50,6 +50,7 @@ class restaurant_view_controller extends Controller
 
 
 
+
         return view(
             'vendor.restaurantview',
             [

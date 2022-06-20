@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\tbl_article;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -86,6 +87,9 @@ class restaurants_controller extends Controller
         $create_restaurant->restaurant_country = $request->restaurant_country;
         $create_restaurant->restaurant_facebook_link = $request->facebook_link;
         $create_restaurant->restaurant_Qr = $restaurant_qr_path;
+        $create_restaurant->restaurant_complete_status = 1;
+        $create_restaurant->total_views = 0;
+
         $create_restaurant->save();
 
 
@@ -112,5 +116,48 @@ class restaurants_controller extends Controller
 
         auth('vendors')->login($owner);
         return view('vendor.home')->with('status', 'Your restaurant has been created succesfully!');
+    }
+
+    public function edit(Request $request)
+    {
+        $restaurant_id = session('owners_restaurant');
+        $edit_restaurant = tbl_restaurant::find($restaurant_id);
+
+
+
+        if ($edit_restaurant->restaurant_name !== $request->edit_restaurant_name) {
+            $edit_restaurant->restaurant_name = $request->edit_restaurant_name;
+        }
+
+        if ($edit_restaurant->restaurant_description !== $request->edit_restaurant_description) {
+
+            $edit_restaurant->restaurant_description = $request->edit_restaurant_description;
+        }
+
+        if (isset($request->edit_restaurant_phonenumber)) {
+            if ($edit_restaurant->restaurant_phonenumber !== $request->edit_restaurant_phonenumber) {
+                $edit_restaurant->restaurant_phonenumber = $request->edit_restaurant_phonenumber;
+            }
+        }
+
+
+        if ($edit_restaurant->restaurant_addres !== $request->edit_restaurant_addres) {
+            $edit_restaurant->restaurant_addres = $request->edit_restaurant_addres;
+        }
+        if ($edit_restaurant->restaurant_place !== $request->edit_restaurant_place) {
+            $edit_restaurant->restaurant_place = $request->edit_restaurant_place;
+        }
+
+        if (isset($request->edit_restaurant_country)) {
+            if ($edit_restaurant->restaurant_country !== $request->edit_restaurant_country) {
+                $edit_restaurant->restaurant_country = $request->edit_restaurant_country;
+            }
+        }
+
+
+
+
+
+        $edit_restaurant->save();
     }
 }
