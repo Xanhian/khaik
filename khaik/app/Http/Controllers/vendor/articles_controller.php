@@ -4,6 +4,7 @@ namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
 use App\Models\tbl_article;
+use App\Models\tbl_article_option;
 use App\Models\tbl_article_price;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
@@ -23,67 +24,58 @@ class articles_controller extends Controller
 
 
 
+        $menu_options = DB::table('tbl_article_options')->where('restaurant_id', $restaurant_id)->get();
 
-        $menu_head_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_item_relations', NULL)->get();
-
-        // $menu_snack_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', 'Snacks')->where('article_item_relations', NULL)->get();
-
-
-        // $menu_drink_items = DB::table('tbl_articles')->where('restaurant_id', $restaurant_id[0]->id)->where('article_option', 'Drinks')->where('article_item_relations', NULL)->get();
+        $menu_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->get();
 
 
-        $menu_option_data = array();
-        // $menu_snack_option_data = array();
+        $menu_articles_data = array();
+        $menu_articles_option_data = array();
 
 
 
 
-        // foreach ($menu_head_items as $menu_head_item) {
-        //     $menu_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $menu_head_item->id)->get(['article_id', 'article_name', 'article_price_number', 'article_price_currency']);
-        //     $menu_option_data[$menu_head_item->id] = $menu_option_items;
-        // }
+        foreach ($menu_options as $menu_option) {
+            $articles = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', $menu_option->option_name)->get();
+            $menu_articles_data[$menu_option->option_name] = $articles;
 
-        foreach ($menu_head_items as $menu_head_item) {
-            $menu_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $menu_head_item->id)->get(['article_id', 'article_name', 'article_price_number', 'article_price_currency']);
-            $menu_option_data[$menu_head_item->id] = $menu_option_items;
-        }
+            foreach ($articles as $article) {
 
-        foreach ($menu_head_items as $menu_head_item) {
-            if ($menu_head_item->article_option == 'Snacks') {
-                $menu_option_data[$menu_head_item->id] = $menu_head_item;
+                $menu_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $article->id)->get(['article_id', 'article_name', 'article_price_number', 'article_price_currency']);
+                $menu_articles_option_data[$article->id] = $menu_option_items;
             }
         }
 
-        return $menu_option_data[$menu_head_item->id]->article_name;
 
+        return view(
+            'vendor.menu',
+            [
+                'article_category' => $article_category,
 
-        // foreach ($menu_snack_items as $menu_snack_item) {
-        //     $menu_snack_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $menu_snack_item->id)->get(['article_id', 'article_name', 'article_price_number', 'article_price_currency']);
-        //     $menu_snack_option_data[$menu_snack_item->id] = $menu_snack_option_items;
-        // }
-
-        // foreach ($menu_snack_items as $menu_snack_item) {
-        //     $menu_snack_option_items = DB::table('tbl_articles')->where('article_item_relations', $menu_snack_item->id)->pluck('article_name');
-        //     $menu_snack_option_data[$menu_snack_item->id] = $menu_snack_option_items;
-        // }
+                'menu_main_options' => $menu_options,
+                'menu_articles' => $menu_articles_data,
+                'menu_articles_option' =>   $menu_articles_option_data
 
 
 
 
+            ]
+        );
+    }
 
-        // return view(
-        //     'vendor.menu',
-        //     [
-        //         'article_category' => $article_category,
-        //         'menu_items' => $menu_head_items,
-        //         'menu_option_items' => $menu_option_data,
-        //         'menu_snack_items' => $menu_snack_items,
-        //         'menu_snack_option_items' => $menu_snack_option_data
+    public function store_option(Request $request)
+    {
+        $restaurant_id = Session()->get('owners_restaurant');
 
+        $validated = $request->validate([
+            'option_name' => 'required',
+        ]);
 
-
-        //     ]
-        // );
+        $article_option = new tbl_article_option;
+        $article_option->restaurant_id = $restaurant_id;
+        $article_option->option_name = $request->option_name;
+        $article_option->save();
+        return redirect()->route('vendor_menu')->with('status', 'Food deleted succesfully!');
     }
 
     public function store(Request $request)
@@ -260,6 +252,16 @@ class articles_controller extends Controller
     public function delete(Request $request)
     {
         $article = tbl_article::find($request->article_id);
+        File::delete($article->article_img);
+
+        $article->delete();
+
+        return redirect()->route('vendor_menu')->with('status', 'Food deleted succesfully!');
+    }
+
+    public function delete_option(Request $request)
+    {
+        $article = tbl_article_option::find($request->article_id);
         File::delete($article->article_img);
 
         $article->delete();

@@ -49,6 +49,8 @@ Route::prefix('vendor')->group(function () {
 
 
     Route::post('/menu', [articles_controller::class, 'store'])->name('add_article');
+    Route::post('/menu/add_option', [articles_controller::class, 'store_option'])->name('add_article_option');
+
     Route::post('/menu/delete', [articles_controller::class, 'delete'])->name('delete_article');
     Route::post('/deals/add', [deal_controller::class, 'store'])->name('vendor_deals_add');
 

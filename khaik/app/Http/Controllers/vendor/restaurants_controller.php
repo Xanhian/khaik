@@ -4,6 +4,7 @@ namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
 use App\Models\tbl_article;
+use App\Models\tbl_article_option;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -19,7 +20,9 @@ class restaurants_controller extends Controller
 
     public function index()
     {
+
         $restaurants_category = DB::table('tbl_restaurants_categories')->get();
+
 
 
         return view('vendor.restaurantsignup', ['restaurants_category' => $restaurants_category]);
@@ -105,6 +108,15 @@ class restaurants_controller extends Controller
             $restaurants_categories->restaurant_category_id =
                 $restaurant_category;
             $restaurants_categories->save();
+        }
+
+        $default_menu_option = array('Main Course', 'Snacks', 'Drinks');
+        for ($i = 0; $i < 3; $i++) {
+
+            $restaurant_menu_option = new tbl_article_option;
+            $restaurant_menu_option->restaurant_id = $restaurant_id;
+            $restaurant_menu_option->option_name = $default_menu_option[$i];
+            $restaurant_menu_option->save();
         }
 
 

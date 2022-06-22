@@ -5,6 +5,7 @@
 
 <!-- Custom scripts for all pages-->
 <script type="text/javascript" src="{{asset('js/osahan.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/signupformrestaurant.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/article.js')}}"></script>
+
+<script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/ajax.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/article.js')}}"></script>
