@@ -47,25 +47,45 @@
               <div class="modal-dialog modal-dialog-centered">
 
                 <div class="modal-content">
-                  <form action="{{route('vendor_profile_edit')}}" method="post">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                    {{ method_field('PATCH') }}
-                    <p>userename</p>
-                    <input type="text" name="name" id="">
-                    <p>lastname</p>
-                    <input type="text" name="lastname" id="">
-                    <p>mobile number</p>
-                    <input type="text" name="mobilenumber" id="">
-                    <p>emaill</p>
-                    <input type="text" name="email" id="">
+                  <div class="shadow-sm rounded bg-white p-4 overflow-hidden">
+                    <div class="d-flex item-aligns-center">
+                      <h2 class="font-weight-bold h4 pb-2 text-dark border-bottom mb-0 w-100">Edit profile</h2>
+                    </div>
+                    <div class="col-11 mx-auto">
+                      <form action="{{route('vendor_profile_edit')}}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        {{ method_field('PATCH') }}
+                        <div class="form-group">
+                          <p>userename</p>
+                          <input type="text" class="form-control" name="name" id="">
+                        </div>
 
-                    <input type="submit" value="s">
+                        <div class="form-group">
+                          <p>lastname</p>
+                          <input type="text" name="lastname" class="form-control" id="">
+                        </div>
+
+                        <div class="form-group">
+                          <p>mobile number</p>
+                          <input type="text" name="mobilenumber" class="form-control" id="">
+
+                        </div>
+                        <div class="form-group">
+                          <p>emaill</p>
+                          <input type="text" class="form-control" name="email" id="">
+
+                        </div>
+
+
+                        <input type="submit" class="btn btn-primary" value="Change">
 
 
 
 
-                  </form>
+                      </form>
+                    </div>
 
+                  </div>
 
                 </div>
               </div>

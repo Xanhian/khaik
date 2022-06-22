@@ -42,7 +42,7 @@ class deal_controller extends Controller
         $deal->save();
 
 
-        return $deal;
+        return redirect()->route('vendor_deals');
     }
 
     public function edit(Request $request)
@@ -58,6 +58,6 @@ class deal_controller extends Controller
 
         $edit_deal->save();
 
-        return $edit_deal;
+        return redirect()->route('vendor_deals');
     }
 }

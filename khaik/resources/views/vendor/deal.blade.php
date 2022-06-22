@@ -14,7 +14,7 @@
     <div class="container">
         <button data-toggle="modal" data-target="#add_deal" class="btn btn-primary m-2">Add Deal</button>
         @foreach($deals as $deal)
-        <div class="card shadow-sm">
+        <div class="card mb-3 shadow-sm">
             <img src="{{asset($deal->deal_photo)}}" alt="">
             <div class="container m-3">
                 <div class="row">
@@ -29,8 +29,6 @@
                     <div class="col-2 align-content-center my-auto">
                         <a data-toggle="modal" data-target="#edit_deal" class="text-decoration-none text-dark mr-3"><i class="p-2 bg-light btn-primary rounded-circle font-weight-bold fa-solid fa-pen"></i></a>
                     </div>
-
-
                 </div>
 
             </div>

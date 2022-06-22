@@ -192,7 +192,8 @@ class articles_controller extends Controller
 
 
         $i = 0;
-        if (isset($request->article_option_nam)) {
+
+        if (isset($request->article_option_name)) {
             foreach ($request->article_option_name as $article_option_test) {
 
 

@@ -16,9 +16,12 @@
             <div class="card bg-white shadow-sm mt-3">
                 <div class="container text-dark  m-3">
 
-                    <h1 class="font-weight-bold">Total viewers:</h1>
+                    <h1 class="font-weight-bold">Total viewers: {{$restaurant_info[0]->total_views}}</h1>
                     <h1 class="font-weight-bold">Total Favorites:</h1>
                     <h1 class="font-weight-bold">Most liked food:</h1>
+
+
+
                 </div>
 
             </div>
