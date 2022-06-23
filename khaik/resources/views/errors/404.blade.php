@@ -8,7 +8,7 @@
     <div class="d-none">
         <div class="bg-primary border-bottom p-3 d-flex align-items-center mb-4">
             <a class="toggle togglew toggle-2" href="#"><span></span></a>
-            <h4 class="font-weight-bold m-0 text-white">Not Found</h4>
+            <h4 class="font-weight-bold m-0 text-white">Khaik</h4>
         </div>
     </div>
     <div class="container osahan-coming-soon py-5 d-flex justify-content-center align-items-center">
@@ -63,9 +63,9 @@
             </div>
             <h2 class="text-primary mb-3 font-weight-light">Page not <b>found</b></h2>
             <p class="lead small mb-0">Oops! Looks like you followed a bad link.</p>
-            <p class="mb-5">If you think this is a problem with us, please <a href="#">tell us</a>.</p>
-            <a href="home.html" class="btn btn-primary">Go Back</a>
-            <a href="faq.html" class="btn btn-light">Help</a>
+
+            <a href="{{route('main')}}" class="btn btn-primary">Go Back</a>
+
         </div>
     </div>
     <!-- footer -->

@@ -3,7 +3,7 @@
 
 use App\Http\Controllers\vendor\articles_controller;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\restaurant_owner_controller;
+use App\Http\Controllers\main_controller;
 use App\Http\Controllers\vendor\restaurants_controller;
 use App\Http\Controllers\view_restaurant_controller;
 
@@ -29,7 +29,7 @@ use App\Http\Controllers\view_deal_controller;
 |
 */
 
-Route::prefix('vendor')->middleware('auth')->group(function () {
+Route::prefix('vendor')->middleware('vendor')->group(function () {
 
 
 
@@ -73,9 +73,14 @@ Route::get('/vendor/login', [login_controller::class, 'index'])->name('login_ven
 Route::get('/vendor/register', [restaurants_controller::class, 'index'])->name('register_vendor');
 
 
-Route::get('/', [restaurant_owner_controller::class, 'index'])->name('main');
+
+Route::get('/', [main_controller::class, 'index'])->name('main');
 
 Route::get('/register', [user_controller::class, 'index'])->name('user_register');
+Route::get('/login', [user_controller::class, 'login_index'])->name('user_login');
+Route::get('/logout', [user_controller::class, 'logout'])->name('user_logout');
+
+
 
 Route::get('/favorite', [favorite_controller::class, 'index'])->name('favorite');
 Route::get('/profile', [profile_controller::class, 'index'])->name('profile');
@@ -88,3 +93,7 @@ Route::get('/deals', [view_deal_controller::class, 'index'])->name('deals');
 Route::post('/save', [restaurants_controller::class, 'store'])->name('save_restaurant');
 
 Route::post('/vendor/login', [login_controller::class, 'login'])->name('login_request');
+Route::post('/login/request', [user_controller::class, 'login_request'])->name('user_login_request');
+
+Route::post('/register/save', [user_controller::class, 'store'])->name('user_save');
+Route::patch('/profile/edit', [user_controller::class, 'edit'])->name('user_change');

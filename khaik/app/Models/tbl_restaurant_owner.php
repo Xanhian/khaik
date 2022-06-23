@@ -12,6 +12,7 @@ class tbl_restaurant_owner extends Authenticatable
 {
     use HasFactory;
     protected $guard = 'vendors';
+    protected $guarded = ['id'];
     public function getAuthPassword()
     {
         return $this->password;

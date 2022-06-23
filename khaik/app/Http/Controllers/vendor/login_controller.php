@@ -23,20 +23,22 @@ class login_controller extends Controller
         ]);
 
 
-        if (Auth::attempt($credentials)) {
+
+        if (Auth::guard('vendors')->attempt($credentials)) {
             $request->session()->regenerate();
 
 
-            $id = Auth::id();
-            $owner_info = DB::table('tbl_restaurant_owners')->where('id', $id)->get();
-            $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', $id)->get();
+            $owner = Auth::guard('vendors')->user();
+
+            $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', $owner->id)->get();
+
 
             session([
-                'owners_id' => $id,
-                'owners_name' => $owner_info[0]->name,
-                'owners_lastname' => $owner_info[0]->lastname,
-                'owners_phonenumber' => $owner_info[0]->phonenumber,
-                'owners_email' => $owner_info[0]->email,
+                'owners_id' => $owner->id,
+                'owners_name' => $owner->name,
+                'owners_lastname' => $owner->lastname,
+                'owners_phonenumber' => $owner->phonenumber,
+                'owners_email' => $owner->email,
                 'owners_restaurant' => $restaurant_id[0]->id,
                 'owners_restaurant_name' => $restaurant_id[0]->restaurant_name,
             ]);

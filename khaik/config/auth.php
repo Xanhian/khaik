@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'users' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
         'vendors' => [
             'driver' => 'session',
             'provider' => 'vendors',
@@ -67,8 +72,10 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\tbl_restaurant_owner::class,
-            'table' => 'tbl_restaurant_owners'
+            'model' => App\Models\tbl_user::class,
+
+
+
         ],
 
         'vendors' => [

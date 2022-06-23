@@ -17,7 +17,7 @@ class Vendor
 
     public function handle(Request $request, Closure $next)
     {
-        if (auth()) {
+        if (auth('vendors')) {
             return $next($request);
         }
         return redirect()->route('login_vendor');

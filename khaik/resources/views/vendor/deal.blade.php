@@ -36,7 +36,8 @@
                 <div class="modal-dialog modal-dialog-centered">
 
                     <div class="modal-content">
-                        <div class="container">
+                        <div class="container p-3">
+                            <h1>Edit</h1>
                             <form action="{{route('edit_deal')}}" method="POST">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                 {{ method_field('PATCH') }}

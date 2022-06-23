@@ -23,7 +23,7 @@ class deal_controller extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'deal_img' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'deal_img' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
             'deal_name' => 'required',
             'deal_description' => 'required'
         ]);

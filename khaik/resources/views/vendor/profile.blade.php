@@ -45,7 +45,6 @@
 
             <div class=" modal fade" id="edit_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
-
                 <div class="modal-content">
                   <div class="shadow-sm rounded bg-white p-4 overflow-hidden">
                     <div class="d-flex item-aligns-center">

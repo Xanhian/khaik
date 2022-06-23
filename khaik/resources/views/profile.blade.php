@@ -15,94 +15,108 @@
       </div>
     </div>
     <!-- profile -->
+
     <div class="container position-relative">
+      @auth('users')
+
       <div class="py-5 osahan-profile row">
         <div class="col-md-4 mb-3">
           <div class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
-            <a href="profile.html" class="">
-              <div class="d-flex align-items-center p-3">
-                <div class="left mr-3">
-                  <img alt="#" src="img/user1.jpg" class="rounded-circle" />
-                </div>
-                <div class="right">
-                  <h6 class="mb-1 font-weight-bold">
-                    Gurdeep Singh
-                    <i class="feather-check-circle text-success"></i>
-                  </h6>
-                  <p class="text-muted m-0 small">iamosahan@gmail.com</p>
-                </div>
-              </div>
-            </a>
 
-            <!-- profile-details -->
-            <div class="bg-white profile-details"></div>
+            <div class="d-flex align-items-center p-3">
+
+              <div class="right">
+                <h6 class="mb-1 font-weight-bold">
+                  {{Session('user_name')}} {{Session('user_lastname')}}
+
+                </h6>
+                <p class="text-muted m-0 small">{{Session('user_email')}}</p>
+              </div>
+            </div>
+
+
           </div>
         </div>
+
         <div class="col-md-8 mb-3">
           <div class="rounded shadow-sm p-4 bg-white">
-            <h5 class="mb-4">My account</h5>
+            <div class="row justify-content-between">
+              <h5 class="mb-4">My account</h5>
+              <a data-toggle="modal" data-target="#edit_account" class="text-decoration-none text-dark mr-3"><i class="p-2 bg-light btn-primary rounded-circle font-weight-bold fa-solid fa-pen"></i></a>
+            </div>
+            <div class=" modal fade" id="edit_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="shadow-sm rounded bg-white p-4 overflow-hidden">
+                    <div class="d-flex item-aligns-center">
+                      <h2 class="font-weight-bold h4 pb-2 text-dark border-bottom mb-0 w-100">Edit profile</h2>
+                    </div>
+                    <div class="col-11 mx-auto">
+                      <form action="{{route('user_change')}}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        {{ method_field('PATCH') }}
+                        <div class="form-group">
+                          <p>userename</p>
+                          <input type="text" class="form-control" name="name" id="">
+                        </div>
+
+                        <div class="form-group">
+                          <p>lastname</p>
+                          <input type="text" name="lastname" class="form-control" id="">
+                        </div>
+
+                        <div class="form-group">
+                          <p>mobile number</p>
+                          <input type="text" name="mobilenumber" class="form-control" id="">
+
+                        </div>
+                        <div class="form-group">
+                          <p>emaill</p>
+                          <input type="text" class="form-control" name="email" id="">
+
+                        </div>
+
+
+                        <input type="submit" class="btn btn-primary" value="Change">
+
+
+
+
+                      </form>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
             <div id="edit_profile">
-              <div>
-                <form action="my_account.html">
-                  <div class="form-group">
-                    <label for="exampleInputName1">First Name</label>
-                    <p>Kyle</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputName1">Last Name</label>
-                    <p>Tasmoredjo</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputNumber1">Mobile Number</label>
-                    <p>+597 899-4060</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
-                    <p>Kyletasmoredjo@gmail.com</p>
-
-
-                  </div>
+              <div class="form-group">
+                <label for="exampleInputName1">First Name</label>
+                <p>{{Session('user_name')}}</p>
               </div>
-            </div>
-          </div>
-        </div>
-        <!-- Footer -->
-        <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
-          <div class="row">
-            <div class="col">
-              <a href="home.html" class="text-dark small font-weight-bold text-decoration-none">
-                <p class="h4 m-0"><i class="feather-home text-dark"></i></p>
-                Home
-              </a>
-            </div>
-            <div class="col">
-              <a href="most_popular.html" class="text-dark small font-weight-bold text-decoration-none">
-                <p class="h4 m-0"><i class="feather-map-pin"></i></p>
-                Trending
-              </a>
-            </div>
-            <div class="col bg-white rounded-circle mt-n4 px-3 py-2">
-              <div class="bg-danger rounded-circle mt-n0 shadow">
-                <a href="checkout.html" class="text-white small font-weight-bold text-decoration-none">
-                  <i class="feather-shopping-cart"></i>
-                </a>
+              <div class="form-group">
+                <label for="exampleInputName1">Last Name</label>
+                <p>{{Session('user_lastname')}}</p>
               </div>
-            </div>
-            <div class="col">
-              <a href="favorites.html" class="text-dark small font-weight-bold text-decoration-none">
-                <p class="h4 m-0"><i class="feather-heart"></i></p>
-                Favorites
-              </a>
-            </div>
-            <div class="col selected">
-              <a href="profile.html" class="text-danger small font-weight-bold text-decoration-none">
-                <p class="h4 m-0"><i class="feather-user"></i></p>
-                Profile
-              </a>
+              <div class="form-group">
+                <label for="exampleInputNumber1">Mobile Number</label>
+                <p>{{Session('user_phonenumber')}}</p>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <p>{{Session('user_email')}}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      @endauth
+      @guest('users')
+      <h1>Please Log in or SignUp to use this feature</h1>
+      @endguest
+
       @include('layouts.navigation')
       @include('layouts.scripts')
 </body>

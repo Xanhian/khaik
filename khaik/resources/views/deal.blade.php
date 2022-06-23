@@ -11,7 +11,7 @@
         <h4 class="font-weight-bold m-0 text-white">Khaik</h4>
       </div>
     </div>
-
+    @auth('users')
     <div class="container">
       <div class="most_popular py-5">
         <div class="d-flex align-items-center mb-4">
@@ -46,9 +46,14 @@
 
 
       </div>
+      @endauth
+      @guest('users')
+      <h1>Please Log in or SignUp to use this feature</h1>
+      @endguest
 
-      @include('layouts.navigation')
-      @include('layouts.scripts')
+    </div>
+    @include('layouts.navigation')
+    @include('layouts.scripts')
 </body>
 
 </html>

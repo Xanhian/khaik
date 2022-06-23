@@ -63,7 +63,7 @@
                     @foreach($menu_articles[$menu_main_option->option_name] as $menu_item)
 
                     @if($menu_item->article_item_relations == NULL)
-                    <div class="row border-bottom px-0 collapse  show" id="{{$menu_main_option->option_name}}">
+                    <div class="row border-bottom px-0 collapse  show" id="{{$menu_item->article_option}}">
                         <div class="col-2 align-self-center mx-auto text-center ">
                             <form class="article_delete_form" action="{{route('delete_article')}}" method="post">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />

@@ -15,7 +15,7 @@
 
                     <h2 class="text-dark mt-3">Welcome Back</h2>
                     <p class="text-50">Sign in to continue</p>
-                    <form class="mt-5 mb-4" method="POST" action="{{ route('login_request') }}">
+                    <form class="mt-5 mb-4" method="POST" action="{{ route('user_login_request') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
                         <div class="form-group">
