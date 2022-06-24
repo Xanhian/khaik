@@ -16,8 +16,10 @@ class main_controller extends Controller
 
         $restaurants_info = DB::table('tbl_restaurants')->get();
 
-
-
         return view('main', ['restaurants_info' => $restaurants_info]);
+    }
+
+    public function filter(Request $request)
+    {
     }
 }

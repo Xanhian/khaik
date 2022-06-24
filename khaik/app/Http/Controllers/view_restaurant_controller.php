@@ -13,44 +13,33 @@ class view_restaurant_controller extends Controller
     {
         $restaurant_info = DB::table('tbl_restaurants')->where('id', '=', $restaurant_id)->get();
 
-        $menu_head_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', 'Head')->where('article_item_relations', NULL)->get();
+        $menu_options = DB::table('tbl_article_options')->where('restaurant_id', $restaurant_id)->get();
+
+        $menu_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->get();
+
+
+        $menu_articles_data = array();
+        $menu_articles_option_data = array();
 
 
 
 
+        foreach ($menu_options as $menu_option) {
+            $articles = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', $menu_option->option_name)->get();
+            $menu_articles_data[$menu_option->option_name] = $articles;
 
+            foreach ($articles as $article) {
 
-
-        $menu_snack_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', 'Snacks')->where('article_item_relations', NULL)->get();
-
-
-        // $menu_drink_items = DB::table('tbl_articles')->where('restaurant_id', $restaurant_id[0]->id)->where('article_option', 'Drinks')->where('article_item_relations', NULL)->get();
-
-
-        $menu_option_data = array();
-        $menu_snack_option_data = array();
-
-
-        foreach ($menu_head_items as $menu_head_item) {
-            $menu_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $menu_head_item->id)->get(['article_name', 'article_price_number', 'article_price_currency']);
-            $menu_option_data[$menu_head_item->id] = $menu_option_items;
+                $menu_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $article->id)->get(['article_id', 'article_name', 'article_price_number', 'article_price_currency']);
+                $menu_articles_option_data[$article->id] = $menu_option_items;
+            }
         }
-
-        foreach ($menu_snack_items as $menu_snack_item) {
-            $menu_snack_option_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('article_item_relations', $menu_snack_item->id)->get(['article_name', 'article_price_number', 'article_price_currency']);
-            $menu_snack_option_data[$menu_snack_item->id] = $menu_snack_option_items;
-        }
-
-        // foreach ($menu_snack_items as $menu_snack_item) {
-        //     $menu_snack_option_items = DB::table('tbl_articles')->where('article_item_relations', $menu_snack_item->id)->pluck('article_name');
-        //     $menu_snack_option_data[$menu_snack_item->id] = $menu_snack_option_items;
-        // }
 
         $open_time = json_decode($restaurant_info[0]->restaurant_opening_time);
         $close_time = json_decode($restaurant_info[0]->restaurant_closing_time);
 
 
-        $namea =   tbl_restaurant::find($restaurant_id)->increment('total_views', 1);
+        $name =   tbl_restaurant::find($restaurant_id)->increment('total_views', 1);
 
 
 
@@ -59,10 +48,10 @@ class view_restaurant_controller extends Controller
             'restaurant',
             [
                 'restaurant_info' => $restaurant_info,
-                'menu_items' => $menu_head_items,
-                'menu_option_items' => $menu_option_data,
-                'menu_snack_items' => $menu_snack_items,
-                'menu_snack_option_items' => $menu_snack_option_data,
+                'menu_main_options' => $menu_options,
+                'menu_articles' => $menu_articles_data,
+                'menu_articles_option' =>   $menu_articles_option_data,
+
                 'restaurant_open_time' => $open_time,
                 'restaurant_close_time' => $close_time
 

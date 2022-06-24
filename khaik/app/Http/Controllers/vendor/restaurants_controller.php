@@ -14,6 +14,7 @@ use App\Models\tbl_restaurant_owner;
 use Illuminate\Support\Facades\Hash;
 use LaravelQRCode\Facades\QRCode;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class restaurants_controller extends Controller
 {
@@ -97,14 +98,21 @@ class restaurants_controller extends Controller
 
 
 
-        $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', '=', $owners_info_script[0]->id)->where('restaurant_name', '=', $request->restaurant_name)->get('id');
-        session(['owners_restaurant' => $restaurant_id[0]->id]);
+        $restaurant_id_get = DB::table('tbl_restaurants')->where('owner_id', '=', $owners_info_script[0]->id)->where('restaurant_name', '=', $request->restaurant_name)
+            ->pluck('id');
+        $restaurant_id =
+            $restaurant_id_get[0];
+        session(['owners_restaurant' => $restaurant_id]);
+
+
+
+
 
 
         foreach ($request->restaurant_category as $restaurant_category) {
 
             $restaurants_categories = new tbl_restaurants_connected_category;
-            $restaurants_categories->restaurant_id = $restaurant_id[0]->id;
+            $restaurants_categories->restaurant_id = $restaurant_id;
             $restaurants_categories->restaurant_category_id =
                 $restaurant_category;
             $restaurants_categories->save();
@@ -121,13 +129,13 @@ class restaurants_controller extends Controller
 
 
 
-
+        $url = URL::to("/");
         $restaurant_link = str_replace(' ', '_', $request->restaurant_name);
-        $restaurant_qr = QRCode::url('khaik.com/restaurant/' . $restaurant_id[0]->id . '/' .  $restaurant_link)->setSize(10)->setMargin(2)->setErrorCorrectionLevel('H')->setOutfile($restaurant_qr_path)->png();
+        $restaurant_qr = QRCode::url($url . '/restaurant/' . $restaurant_id  . '/' .  $restaurant_link)->setSize(10)->setMargin(2)->setErrorCorrectionLevel('H')->setOutfile($restaurant_qr_path)->png();
 
 
         auth('vendors')->login($owner);
-        return view('vendor.home')->with('status', 'Your restaurant has been created succesfully!');
+        return redirect()->route('vendor_home')->with('status', 'Your restaurant has been created succesfully!');
     }
 
     public function edit(Request $request)

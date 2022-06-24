@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\users;
 
 use App\Http\Controllers\Controller;
+use App\Models\tbl_article_like;
 use App\Models\tbl_user;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -113,5 +115,16 @@ class user_controller extends Controller
 
         $edit_user->save();
         return redirect()->route('profile');
+    }
+
+
+    public function article_like()
+    {
+        $user_id = Session('user_id');
+
+        $article_like = new tbl_article_like;
+        $article_like->user_id = $user_id;
+        $article_like->article_id = $request->article_id;
+        $article_like->status_id = 1;
     }
 }

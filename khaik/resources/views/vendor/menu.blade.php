@@ -48,7 +48,7 @@
                     @foreach($menu_main_options as $menu_main_option)
                     <div class="row d-flex flex-row justify-content-between  bg-light border-bottom m-0">
 
-                        <a class="p-3 m-0 align-self-center flex-fill" data-toggle="collapse" aria-expanded="true" href="#{{$menu_main_option->option_name}}">
+                        <a class="p-3 m-0 align-self-center flex-fill" data-toggle="collapse" aria-expanded="true" href="#collapse{{$menu_main_option->id}}">
                             <h6>{{$menu_main_option->option_name}} </h6>
                         </a>
                         <div class=" align-self-center ">
@@ -63,7 +63,7 @@
                     @foreach($menu_articles[$menu_main_option->option_name] as $menu_item)
 
                     @if($menu_item->article_item_relations == NULL)
-                    <div class="row border-bottom px-0 collapse  show" id="{{$menu_item->article_option}}">
+                    <div class="row border-bottom px-0 collapse  show" id="collapse{{$menu_main_option->id}}">
                         <div class="col-2 align-self-center mx-auto text-center ">
                             <form class="article_delete_form" action="{{route('delete_article')}}" method="post">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -331,7 +331,7 @@
                     @endforeach
 
 
-                    <!-- Modals -->
+
 
 
                     @endforeach

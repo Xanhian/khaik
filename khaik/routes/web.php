@@ -96,4 +96,8 @@ Route::post('/vendor/login', [login_controller::class, 'login'])->name('login_re
 Route::post('/login/request', [user_controller::class, 'login_request'])->name('user_login_request');
 
 Route::post('/register/save', [user_controller::class, 'store'])->name('user_save');
+Route::post('/favorite/restaurant', [favorite_controller::class, 'favorite'])->name('favorite_save');
+Route::post('/favorite/delete', [favorite_controller::class, 'favorite_delete'])->name('favorite_delete');
+
+
 Route::patch('/profile/edit', [user_controller::class, 'edit'])->name('user_change');

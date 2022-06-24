@@ -14,7 +14,7 @@
     </div>
 
     <div class="offer-section ">
-        <img alt="#" src="{{asset($restaurant_info[0]->restaurant_header_photo)}}" class="restaurant-header">
+        <img alt="#" src="{{asset($restaurant_info[0]->restaurant_header_photo)}}" class="restaurant-header w-100">
     </div>
 
 
@@ -166,8 +166,15 @@
             <div class="col-6 d-flex justify-content-between align-items-center">
 
                 <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-facebook"></i></a>
-                <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-bookmark"></i></a>
-                <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold feather-map-pin"></i></a>
+
+                <form method="POST" action="{{route('favorite_save')}}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="restaurant_id" value="{{ $restaurant_info[0]->id}}" />
+
+                    <button type="submit" class="btn p-0 m-0 text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold font-solid  feather-bookmark"></i></button>
+                </form>
+                <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-map-pin"></i></a>
+
                 <a data-toggle="modal" data-target="#add_item" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold fa-solid fa-qrcode"></i></a>
 
 
@@ -184,10 +191,12 @@
         </div>
     </div>
 
-    @include('components.feature ')
 
+    <div class="container">
+        @include('components.menu')
 
-    @include('components.menu')
+    </div>
+
 
 
 

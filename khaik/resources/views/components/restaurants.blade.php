@@ -6,6 +6,8 @@
             <a href="restaurant/{{$restaurant_info->id}}">
                 <img alt="#" src="{{asset($restaurant_info->restaurant_header_photo)}}" class="img-fluid item-img restaurant-img w-100">
             </a>
+            <div class="star position-absolute"><span class="badge badge-success">Open</span></div>
+
         </div>
         <div class="p-3 position-relative">
             <div class="list-card-body">

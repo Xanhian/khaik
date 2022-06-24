@@ -62,7 +62,7 @@
                 </svg>
             </div>
             <h2 class="text-primary mb-3 font-weight-light">Page not <b>found</b></h2>
-            <p class="lead small mb-0">Oops! Looks like you followed a bad link.</p>
+            <p class="lead small mb-3">Oops! Looks like you followed a bad link.</p>
 
             <a href="{{route('main')}}" class="btn btn-primary">Go Back</a>
 
