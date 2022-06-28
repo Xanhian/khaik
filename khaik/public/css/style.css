@@ -39,6 +39,13 @@ body {
     background: #f0f6f7;
 }
 
+
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 .deal-img{
     width: 100%;
 
@@ -1493,13 +1500,21 @@ p {
     z-index: 2;
  top: -10vh;
 }
+.fa-heart{
+    color: #ff2d08;
+}
+.fa-test-like {
+    font-size: 3em;
+}
 
  .custom-fa {
+    font-size: 2em;
   
     color: #0f060300;
         -webkit-text-stroke-width: 2px;
         -webkit-text-stroke-color: #ff2d08;
 }
+
 
 
 

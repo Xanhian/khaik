@@ -29,7 +29,7 @@ class favorite_controller extends Controller
 
         if (isset($favorite_restaurant_check)) {
             if ($favorite_restaurant_check->favorite_status_id == 1) {
-                return redirect()->route('main');
+                return redirect()->route('favorite');
             }
         } else {
             $favorite_restaurant = new tbl_users_favorite;
@@ -41,7 +41,7 @@ class favorite_controller extends Controller
 
 
 
-        return redirect()->route('main');
+        return redirect()->route('favorite');
     }
 
     public function favorite_delete(Request $request)

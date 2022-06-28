@@ -31,7 +31,6 @@
                     <p class="label-rating text-white ml-2 small"> </p>
                 </div>
             </div>
-
             <div class="pb-4">
                 <div class="row">
                     <div class="col-6 pr-3">
@@ -40,47 +39,47 @@
 
                             <div class="box-day sunday d-flex flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">S</p>
-                                <div class="box-day-value m-0 pt-n1 ">
+                                <div class="box-day-value sunday m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_open_time->sunday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class=" box-day d-flex monday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">M</p>
-                                <div class="box-day-value m-0 pt-n1 ">
+                                <div class="box-day-value monday m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_open_time->monday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex tuesday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">T</p>
-                                <div class="box-day-value m-0 pt-n1 ">
+                                <div class="box-day-value tuesday m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_open_time->tuesday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex wednesday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">W</p>
-                                <div class="box-day-value m-0 pt-n1 ">
+                                <div class="box-day-value wednesday m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_open_time->wednesday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex thursday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">T</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_open_time->thursday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day friday d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex friday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">F</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_open_time->friday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex saturday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">S</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_open_time->saturday}}</p>
@@ -99,52 +98,52 @@
                     </div>
 
                     <div class="col-6 pl-3">
-                        <p class="text-white font-weight-bold m-0 ">Closing time</p>
+                        <p class="text-white font-weight-bold mb-1 ">Closing time</p>
                         <div class="mb-4 d-flex flex-row justify-content-between ">
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex sunday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">S</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_close_time->sunday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex monday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">M</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_close_time->monday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex tuesday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">T</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_close_time->tuesday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex wednesday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">W</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_close_time->wednesday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex thursday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">T</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_close_time->thursday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex friday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">F</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_close_time->friday}}</p>
                                 </div>
                             </div>
 
-                            <div class="box-day d-flex flex-column text-center position-relative m-0">
+                            <div class="box-day d-flex saturday flex-column text-center position-relative m-0">
                                 <p class="font-weight-bold m-0 pb-1">S</p>
                                 <div class="box-day-value m-0 pt-n1 ">
                                     <p class="text-dark m-0">{{$restaurant_close_time->saturday}}</p>
@@ -165,7 +164,7 @@
 
             <div class="col-6 d-flex justify-content-between align-items-center">
 
-                <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-facebook"></i></a>
+                <a target="_blank" href="{{$restaurant_info[0]->restaurant_facebook_link}}" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-facebook"></i></a>
 
                 <form method="POST" action="{{route('favorite_save')}}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />

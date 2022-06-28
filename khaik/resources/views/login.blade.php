@@ -46,7 +46,7 @@
                         <p class="text-center">Forgot your password?</p>
                     </a>
                     <div class="d-flex align-items-center justify-content-center">
-                        <a href="{{route('register_vendor')}}">
+                        <a href="{{route('user_register')}}">
                             <p class="text-center m-0">Don't have an account? Sign up</p>
                         </a>
                     </div>

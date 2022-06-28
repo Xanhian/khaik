@@ -8,7 +8,7 @@ use App\Models\tbl_user;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -24,8 +24,8 @@ class user_controller extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'lastname' => 'required',
-            'phonenumber' => 'required',
-            'email' => 'required|unique:tbl_restaurant_owners',
+            'phonenumber' => 'required|unique:tbl_users',
+            'email' => 'required|unique:tbl_users',
             'password' => 'required',
             'repassword' => 'required|same:password',
         ]);
@@ -39,8 +39,22 @@ class user_controller extends Controller
 
         $user->save();
 
+
+
         auth('users')->login($user);
-        return view('main');
+        $request->session()->regenerate();
+        $user = Auth::guard('users')->user();
+
+
+        session([
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'user_lastname' => $user->lastname,
+            'user_phonenumber' => $user->phonenumber,
+            'user_email' => $user->email,
+
+        ]);
+        return redirect()->route('main');
     }
 
     public function login_index()
@@ -118,13 +132,45 @@ class user_controller extends Controller
     }
 
 
-    public function article_like()
+    public function article_like(Request $request)
     {
         $user_id = Session('user_id');
 
-        $article_like = new tbl_article_like;
-        $article_like->user_id = $user_id;
-        $article_like->article_id = $request->article_id;
-        $article_like->status_id = 1;
+        $article_check = tbl_article_like::where('user_id', $user_id)->where('article_id', $request->article_id)->first();
+
+        if (isset($article_check)) {
+            if ($article_check->like_status == 1) {;
+                $article_check->like_status = 0;
+                $article_check->save();
+            } else {
+                $article_check->like_status = 1;
+                $article_check->save();
+            }
+        } else {
+            $article_like = new tbl_article_like;
+            $article_like->user_id = $user_id;
+            $article_like->article_id = $request->article_id;
+            $article_like->like_status = 1;
+            $article_like->save();
+        }
+
+
+        $article_count = DB::table('tbl_article_likes')->where('article_id', $request->article_id)->where('like_status', 1)->count();
+
+
+        return response()->json(['data' => $article_count]);
+    }
+
+    public function get_user_like()
+    {
+        if (null !== Session('user_id')) {
+            $user_id = Session('user_id');
+            $liked_items = DB::table('tbl_article_likes')->where('user_id', $user_id)->where('like_status', 1)->get();
+        }
+
+
+
+
+        return response()->json(['like_items' => $liked_items]);
     }
 }

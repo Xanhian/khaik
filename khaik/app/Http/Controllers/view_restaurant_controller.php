@@ -19,7 +19,30 @@ class view_restaurant_controller extends Controller
 
 
         $menu_articles_data = array();
+        $menu_articles_likes = array();
+        $user_liked_items = array();
+
         $menu_articles_option_data = array();
+
+
+
+        foreach ($menu_items as $menu_item) {
+            $likes =
+                DB::table('tbl_article_likes')->where('article_id', $menu_item->id)->where('like_status', 1)->count();
+            $menu_articles_likes[$menu_item->id] = $likes;
+
+            if (null !== Session('user_id')) {
+                $user_id = Session('user_id');
+                $liked_items = DB::table('tbl_article_likes')->where('user_id', $user_id)->where('article_id', $menu_item->id)->pluck('like_status');
+
+                if (count($liked_items) !== 0) {
+                    $user_liked_items[$menu_item->id] = $liked_items;
+                } else {
+                    $user_liked_items[$menu_item->id][0] = 0;
+                }
+            }
+        }
+
 
 
 
@@ -39,8 +62,11 @@ class view_restaurant_controller extends Controller
         $close_time = json_decode($restaurant_info[0]->restaurant_closing_time);
 
 
-        $name =   tbl_restaurant::find($restaurant_id)->increment('total_views', 1);
 
+
+
+
+        $counter =   tbl_restaurant::find($restaurant_id)->increment('total_views', 1);
 
 
 
@@ -51,7 +77,9 @@ class view_restaurant_controller extends Controller
                 'menu_main_options' => $menu_options,
                 'menu_articles' => $menu_articles_data,
                 'menu_articles_option' =>   $menu_articles_option_data,
+                'menu_item_likes' => $menu_articles_likes,
 
+                'user_liked_items' => $user_liked_items,
                 'restaurant_open_time' => $open_time,
                 'restaurant_close_time' => $close_time
 

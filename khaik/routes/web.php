@@ -94,6 +94,9 @@ Route::post('/save', [restaurants_controller::class, 'store'])->name('save_resta
 
 Route::post('/vendor/login', [login_controller::class, 'login'])->name('login_request');
 Route::post('/login/request', [user_controller::class, 'login_request'])->name('user_login_request');
+Route::get('/like', [user_controller::class, 'get_user_like']);
+Route::post('/like/get', [user_controller::class, 'article_like']);
+
 
 Route::post('/register/save', [user_controller::class, 'store'])->name('user_save');
 Route::post('/favorite/restaurant', [favorite_controller::class, 'favorite'])->name('favorite_save');

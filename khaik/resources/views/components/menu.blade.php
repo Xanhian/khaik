@@ -5,11 +5,13 @@
     <div class=" col-md-7 pt-3">
         <div class="shadow-sm rounded bg-white mb-3 overflow-hidden">
             <div class="d-flex item-aligns-center">
-                <p class="font-weight-bold h6 p-3 border-bottom mb-0 w-100">Menu</p>
+                <h6 class="font-weight-bold h6 p-3 border-bottom mb-0 w-100">Menu</h6>
                 <!-- <a class="small text-primary font-weight-bold ml-auto" href="#">View all <i class="feather-chevrons-right"></i></a> -->
             </div>
 
+
             @foreach($menu_main_options as $menu_main_option)
+
             @foreach($menu_articles[$menu_main_option->option_name] as $menu_item)
 
 
@@ -17,7 +19,7 @@
             <div class="row d-flex flex-row justify-content-between  bg-light border-bottom m-0">
 
                 <a class="p-3 m-0 align-self-center flex-fill" data-toggle="collapse" aria-expanded="true" href="#collapse{{$menu_main_option->id}}">
-                    <h6>{{$menu_main_option->option_name}} </h6>
+                    <h6 class="m-0">{{$menu_main_option->option_name}} </h6>
                 </a>
 
 
@@ -58,17 +60,34 @@
 
 
 
-                <div class=" col-4  align-self-center text-center">
-                    <div class="row d-flex flex-row">
-                        <div class=" my-auto mx-auto align-self-center ">
-                            <span>
-                                <button class="btn p-0 m-0" data-toggle="collapse" href="#collapse{{$menu_item->id}}" role="button"><i class="fa-solid fa-heart fa-2xl"></i></button>
-                            </span>
-                        </div>
-                        <div class=" my-auto mx-auto align-self-center ">
-                            <span><a class=" " data-toggle="collapse" href="#collapse{{$menu_item->id}}" role="button"><i class="fa-solid fa-angle-down fa-2xl"></i></a></span>
-                        </div>
+                <div class=" col-4  d-flex flex-row align-items-stretch">
+
+                    <div class=" my-auto text-center">
+                        @auth('users')
+                        <span>
+                            <form id="like_form{{$menu_item->id}}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                <input type="hidden" id="name" name="article_id" value="{{$menu_item->id}}">
+                            </form>
+                            <button id="like_submit" class="btn p-0 m-0 like_btn" role="button"><i id="{{$menu_item->id}}" class="mt-4 fa-solid fa-heart  custom-fa  {{$user_liked_items[$menu_item->id][0]}}"></i></button>
+                            <p id="like_counter{{$menu_item->id}}" class="m-0 pt-2 ">{{$menu_item_likes[$menu_item->id]}}</p>
+
+                        </span>
+                        @endauth
+                        @guest('users')
+
+                        <i id="{{$menu_item->id}}" class="mt-4 fa-solid fa-heart custom-fa fa-2xl"></i>
+
+                        <p class="m-0 pt-2 ">{{$menu_item_likes[$menu_item->id]}}</p>
+
+                        @endguest
+
                     </div>
+
+                    <div class=" my-auto mx-auto align-self-center ">
+                        <span><a class=" " data-toggle="collapse" href="#collapse{{$menu_item->id}}" role="button"><i class="fa-solid fa-angle-down fa-2xl"></i></a></span>
+                    </div>
+
                 </div>
             </div>
             @endif
