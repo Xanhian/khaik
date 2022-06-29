@@ -32,6 +32,9 @@ Version: 1.0
 /* Body */
 
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&display=swap');
+html{
+    scroll-behavior: smooth;
+}
 body {
     font-family: 'Mulish', sans-serif;
     font-size: 13px;
@@ -87,6 +90,8 @@ body {
 
 }
 
+
+
 .vendor-btn-text{
     font-size: 2.5em;
 }
@@ -100,7 +105,7 @@ body {
     width: 1.5em;
     height: 3em;
     border-radius: 25px 25px;
-   
+ 
     color: #000;
 
 }
@@ -110,10 +115,11 @@ body {
 }
 
 .box-day-value{
-    width: 50px;
+    width: 47px;
     background: white;
     font-weight: 900;
     border-radius: 5px;
+
     opacity: 0;
 }
 
@@ -148,10 +154,28 @@ body {
     object-fit: contain;
 }
 
+.discover-box{
+    height: 21em;
+    width: 20em;
+
+
+}
+
 .discover-img {
-    height: 30em;
+    height: 17em;
+    width: 20em;
+    z-index: -1;
    
 }
+
+.rest_name_place {
+  font-size: 1em;
+    bottom: 8px;
+    left: 10px;
+}   
+
+
+
 
 /* Signup*/
 #msform {
@@ -1649,10 +1673,8 @@ footer .text-muted {
     h1{
         font-size: x-large;
     }
-.discover-img {
-height: 10em;
 
-}
+
 .restaurant-img {
     height: 15em;
 

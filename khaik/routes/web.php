@@ -61,6 +61,8 @@ Route::prefix('vendor')->middleware('vendor')->group(function () {
     Route::patch('/editdeal', [deal_controller::class, 'edit'])->name('edit_deal');
     Route::patch('/editrestaurant', [restaurants_controller::class, 'edit'])->name('edit_restaurant');
     Route::post('/save_time', [restaurant_time_controller::class, 'save_time'])->name('save_time');
+    Route::post('/save_location', [restaurant_time_controller::class, 'get_location'])->name('save_location');
+    Route::post('/save_status', [restaurant_time_controller::class, 'set_status'])->name('set_status');
 });
 
 
@@ -75,6 +77,8 @@ Route::get('/vendor/register', [restaurants_controller::class, 'index'])->name('
 
 
 Route::get('/', [main_controller::class, 'index'])->name('main');
+Route::get('/test', [main_controller::class, 'test']);
+
 
 Route::get('/register', [user_controller::class, 'index'])->name('user_register');
 Route::get('/login', [user_controller::class, 'login_index'])->name('user_login');
@@ -87,6 +91,10 @@ Route::get('/profile', [profile_controller::class, 'index'])->name('profile');
 
 Route::get('/restaurant/{restaurant_id}', [view_restaurant_controller::class, 'index']);
 Route::get('/deals', [view_deal_controller::class, 'index'])->name('deals');
+Route::get('/filter', [main_controller::class, 'filter_index'])->name('filter');
+
+
+
 
 
 
@@ -102,5 +110,6 @@ Route::post('/register/save', [user_controller::class, 'store'])->name('user_sav
 Route::post('/favorite/restaurant', [favorite_controller::class, 'favorite'])->name('favorite_save');
 Route::post('/favorite/delete', [favorite_controller::class, 'favorite_delete'])->name('favorite_delete');
 
+Route::post('/filter/search', [main_controller::class, 'filter'])->name('filter_search');
 
 Route::patch('/profile/edit', [user_controller::class, 'edit'])->name('user_change');

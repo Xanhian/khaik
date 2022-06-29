@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('article_description', 128)->nullable();
             $table->string('article_img', 128)->nullable();
             $table->string('article_item_relations', 128)->nullable();
-            $table->string('article_option', 128)->nullable();
-
+            $table->unsignedBigInteger('article_option')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

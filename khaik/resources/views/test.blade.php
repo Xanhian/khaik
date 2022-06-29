@@ -1,25 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Askbootstrap">
-    <meta name="author" content="Askbootstrap">
-    <link rel="icon" type="image/png" href="img/fav.png">
-    <title>Swiggiweb - Online Food Ordering Website Template</title>
-    <!-- Slick Slider -->
-    <link rel="stylesheet" type="text/css" href="vendor/slick/slick.min.css" />
-    <link rel="stylesheet" type="text/css" href="vendor/slick/slick-theme.min.css" />
-    <!-- Feather Icon-->
-    <link href="vendor/icons/feather.css" rel="stylesheet" type="text/css">
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-    <!-- Sidebar CSS -->
-    <link href="vendor/sidebar/demo.css" rel="stylesheet">
-</head>
+@include('layouts.head')
 
 <body class="bg-white">
     <header class="section-header">
@@ -151,11 +133,7 @@
     <div class="location-page container">
         <div class="d-flex align-items-center justify-content-center flex-column py-5">
             <img alt="#" src="img/location.png" class="img-fluid" alt="Responsive image">
-            <div class="px-4 text-center mt-4">
-                <h5 class="text-dark">Hi, nice to meet you!</h5>
-                <p class="mb-5">Choose your location to start find restaurants around you.</p>
-                <a href="home.html" class="btn btn-lg btn-primary btn-block my-4"><i class="feather-navigation"></i> Use current location</a>
-            </div>
+
         </div>
     </div>
     <!-- footer -->
@@ -323,47 +301,47 @@
                 <a href="#"><i class="feather-alert-triangle mr-2"></i> Error</a>
                 <ul>
                     <li><a href="not-found.html">Not Found</a>
-                        <li><a href="maintence.html"> Maintence</a>
-                            <li><a href="coming-soon.html">Coming Soon</a>
+                    <li><a href="maintence.html"> Maintence</a>
+                    <li><a href="coming-soon.html">Coming Soon</a>
                 </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="feather-link mr-2"></i> Navigation Link Example</a>
-                    <ul>
-                        <li>
-                            <a href="#">Link Example 1</a>
-                            <ul>
-                                <li>
-                                    <a href="#">Link Example 1.1</a>
-                                    <ul>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Link Example 1.2</a>
-                                    <ul>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Link Example 2</a></li>
-                        <li><a href="#">Link Example 3</a></li>
-                        <li><a href="#">Link Example 4</a></li>
-                        <li data-nav-custom-content>
-                            <div class="custom-message">
-                                You can add any custom content to your navigation items. This text is just an example.
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+            </li>
+            <li>
+                <a href="#"><i class="feather-link mr-2"></i> Navigation Link Example</a>
+                <ul>
+                    <li>
+                        <a href="#">Link Example 1</a>
+                        <ul>
+                            <li>
+                                <a href="#">Link Example 1.1</a>
+                                <ul>
+                                    <li><a href="#">Link</a></li>
+                                    <li><a href="#">Link</a></li>
+                                    <li><a href="#">Link</a></li>
+                                    <li><a href="#">Link</a></li>
+                                    <li><a href="#">Link</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Link Example 1.2</a>
+                                <ul>
+                                    <li><a href="#">Link</a></li>
+                                    <li><a href="#">Link</a></li>
+                                    <li><a href="#">Link</a></li>
+                                    <li><a href="#">Link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Link Example 2</a></li>
+                    <li><a href="#">Link Example 3</a></li>
+                    <li><a href="#">Link Example 4</a></li>
+                    <li data-nav-custom-content>
+                        <div class="custom-message">
+                            You can add any custom content to your navigation items. This text is just an example.
+                        </div>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <ul class="bottom-nav">
             <li class="email">

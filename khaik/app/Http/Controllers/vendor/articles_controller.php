@@ -262,11 +262,9 @@ class articles_controller extends Controller
 
     public function delete_option(Request $request)
     {
-        $article = tbl_article_option::find($request->article_id);
-        File::delete($article->article_img);
+        $article_option = tbl_article_option::find($request->option_id);
+        $article_option->delete();
 
-        $article->delete();
-
-        return redirect()->route('vendor_menu')->with('status', 'Food deleted succesfully!');
+        return redirect()->route('vendor_menu')->with('status', 'Option deleted succesfully!');
     }
 }

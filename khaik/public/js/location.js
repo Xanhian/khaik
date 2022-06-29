@@ -1,5 +1,5 @@
     $(document).ready(function () {
-        getLocation();
+      
     });
 
 var x = document.getElementById("lat");

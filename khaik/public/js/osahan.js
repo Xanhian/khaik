@@ -88,17 +88,19 @@
 
     //discover
     $('.discover-slider').slick({
-       //  centerMode: true,
-       // centerPadding: '30px',
+        centerMode: true,
+     
+       lazyLoad: 'ondemand',
         slidesToShow: 1,
-        arrows: true,
+          autoplay: true,
+    autoplaySpeed: 3000,
+        
         responsive: [{
           
                 breakpoint: 768,
                 settings: {
                     arrows: false,
                
-                
                     slidesToShow: 1
                 }
             },

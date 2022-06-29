@@ -14,28 +14,73 @@
     <div class="d-none">
       <div class="bg-primary border-bottom p-3 d-flex align-items-center">
         <a class="toggle togglew toggle-2" href="#"><span></span></a>
-        <h4 class="font-weight-bold m-0 text-white">Profile</h4>
+        <h4 class="font-weight-bold m-0 text-white">Khaik</h4>
       </div>
     </div>
-    <!-- profile -->
+
+    <div class="container position-relative">
+      <div class="py-5 osahan-profile row">
+        <div class="col-md-8 mb-3">
+          <div class="rounded shadow-sm p-4 bg-white">
+            <a data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3">
+              <h5 class="mb-4">Status</h5>
+            </a>
+            <div id="edit_profile">
+              <form method="POST" action="{{ route('set_status') }}">
+                <div class="form-group">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                  <select class="form-control" name="status" id="">
+                    <option value="open">open</option>
+                    <option value="closed">closed</option>
+                    <option value="maintence">maintence</option>
+
+                  </select>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary btn-block"></i>Set status</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container position-relative">
+      <div class="py-5 osahan-profile row">
+        <div class="col-md-8 mb-3">
+          <div class="rounded shadow-sm p-4 bg-white">
+            <a data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3">
+              <h5 class="mb-4">Location</h5>
+            </a>
+            <div id="edit_profile">
+              <form method="POST" action="{{ route('save_location') }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input id="lat" type="hidden" name="latitude">
+                <input id="lon" type="hidden" name="longitude">
+                <div class="text-center">
+                  <button id="location" type="submit" class="btn btn-primary btn-block"><i class="feather-navigation"></i>Set location</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container position-relative">
       <div class="py-5 osahan-profile row">
 
         <div class="col-md-8 mb-3">
           <div class="rounded shadow-sm p-4 bg-white">
-            <h5 class="mb-4">Create Restaurant</h5>
+            <a data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3">
+              <h5 class="mb-4">Opening & Closing time</h5>
+            </a>
             <div id="edit_profile">
               <form method="POST" action="{{ route('save_time') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
-
-
-
                 <div class="form-group">
-                  <a data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3">
-                    <label for="exampleInputName1">Restaurant Opening & Closing time</label>
-                  </a>
-
                   <div class="media border-bottom collapse show multi-collapse" id="option2">
                     <div class="media-body  mt-3">
                       <p class="text-muted mb-2">Sunday</p>
@@ -239,21 +284,9 @@
                       </div>
                     </div>
                   </div>
-
-
-
                 </div>
-
-
-
-
-
-
-
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-
-
+                  <button type="submit" class="btn btn-primary btn-block">Set time</button>
 
                 </div>
               </form>

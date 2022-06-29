@@ -247,7 +247,7 @@
         </div>
     </div>
 
-    @include('components.feature ')
+
 
 
     @include('components.menu')

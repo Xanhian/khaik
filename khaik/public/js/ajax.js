@@ -12,13 +12,6 @@
 
         };
 
-
- 
-
-
-
-
-
       console.log( "Are you lost >.-" );
 
       var today = new Date();
@@ -278,9 +271,29 @@
         });
       });
 
+       var x = document.getElementById("lat");
+var y = document.getElementById("lon");
+     
 
+
+  getLocation();
+     function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
     
       
 
-      
+     
+function showPosition(position) {
+  x.value =  position.coords.latitude;
+ y.value = position.coords.longitude;
+};
+ 
+
+
   });
+

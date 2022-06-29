@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\tbl_restaurant;
 use App\Models\tbl_restaurant_owner;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -48,6 +49,7 @@ class vendor_profile_controller extends Controller
     public function logout()
     {
         Session::flush();
+
 
         Auth::logout();
 

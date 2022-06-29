@@ -4,15 +4,18 @@
 
     <div class=" col-md-7 pt-3">
         <div class="shadow-sm rounded bg-white mb-3 overflow-hidden">
-            <div class="d-flex item-aligns-center">
-                <h6 class="font-weight-bold h6 p-3 border-bottom mb-0 w-100">Menu</h6>
-                <!-- <a class="small text-primary font-weight-bold ml-auto" href="#">View all <i class="feather-chevrons-right"></i></a> -->
+            <div class="d-flex item-aligns-center border-bottom">
+                <h6 class="font-weight-bold h6 p-3  mb-0 w-75">Menu</h6>
+                @auth('vendors')
+
+                <a href="{{route('vendor_menu')}}" class="text-decoration-none text-dark my-auto mx-auto"><i class="p-2 bg-light rounded-circle font-weight-bold btn-primary  fa-solid fa-pen"></i></a>
+                @endauth
             </div>
 
 
             @foreach($menu_main_options as $menu_main_option)
 
-            @foreach($menu_articles[$menu_main_option->option_name] as $menu_item)
+
 
 
 
@@ -24,7 +27,7 @@
 
 
             </div>
-
+            @foreach($menu_articles[$menu_main_option->option_name] as $menu_item)
 
             @if($menu_item->article_item_relations == NULL)
             <div class="row border-bottom px-0 collapse  show" id="collapse{{$menu_main_option->id}}">

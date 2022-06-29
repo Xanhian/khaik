@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class restaurant_time_controller extends Controller
 {
+
     public function save_time(Request $request)
     {
         $validated = $request->validate([
@@ -135,6 +136,31 @@ class restaurant_time_controller extends Controller
         $restaurant->restaurant_closing_time = $json_closing_data;
         $restaurant->save();
 
-        return view('vendor.home');
+        return redirect()->route('vendor_home');
+    }
+
+    public function get_location(Request $request)
+    {
+
+        $restaurant_id = session("owners_restaurant");
+        $location = tbl_restaurant::find($restaurant_id);
+        $location->restaurant_longitude = $request->longitude;
+        $location->restaurant_latitude = $request->latitude;
+        $location->save();
+        return redirect()->route('vendor_home');
+    }
+
+
+    public function set_status(Request $request)
+    {
+        $restaurant_id = session("owners_restaurant");
+        $location = tbl_restaurant::find($restaurant_id);
+        $location->restaurant_custom_status = $request->status;
+        $location->save();
+
+
+
+
+        return redirect()->route('vendor_home');
     }
 }

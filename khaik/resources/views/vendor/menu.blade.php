@@ -54,7 +54,7 @@
                         <div class=" align-self-center ">
                             <form class="article_delete_form" action="{{route('delete_option')}}" method="post">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                <input type="hidden" name="article_id" value="{{$menu_main_option->id}}" />
+                                <input type="hidden" name="option_id" value="{{$menu_main_option->id}}" />
                                 <button type="submit" class="delete-item-box"> <i class="fa-solid fa-xmark fa-2xl p-3"></i></button>
                             </form>
                         </div>
@@ -481,24 +481,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <a data-toggle="collapse" href="#category" aria-expanded="false">
-                                    <label for="exampleInputName1">Food Category</label>
-                                </a>
-                                <div class="collapse multi-collapse show" id="category">
-                                    @foreach($article_category as $category)
-                                    <div class="row p-2">
-                                        <input type="radio" name="article_category" class="my-auto" value="{{$category->id}}">
-                                        <p class="pl-2 my-auto">{{$category->category_name}}</p>
-                                    </div>
-                                    @endforeach
 
-                                </div>
-                                @error('article_category')
-                                <div class=" alert alert-danger mt-1 mb-1">{{ $message }}
-                                </div>
-                                @enderror
-                            </div>
 
                             <input type="hidden" name="restaurant_id" value="{{Session::get('owners_restaurant')}}">
                             <div class=" text-center">
