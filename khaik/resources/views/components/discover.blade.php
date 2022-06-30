@@ -13,6 +13,7 @@
                     <div class="text-center">
                         <img alt="#" src="{{asset($discover_restaurant->restaurant_header_photo)}}" class="img-fluid rounded mx-auto item-img discover-img">
                         <div class="badge rest_name_place position-absolute bg-primary"><span class=" text-white  "> {{$discover_restaurant->restaurant_name}}</span></div>
+
                         @if($today_state[$discover_restaurant->id]=="open")
                         <div class="star position-absolute"><span class="badge badge-success">Open</span></div>
                         @else

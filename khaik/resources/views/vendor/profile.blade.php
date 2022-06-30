@@ -5,15 +5,8 @@
 <body class="fixed-bottom-bar">
 
   <div class="osahan-profile">
-    <div class="bg-primary p-3 d-none n">
-      <div class="text-white">
-        <div class="title d-flex align-items-center">
+    @include('components.logo')
 
-          <h4 class="font-weight-bold m-0 ">Khaik</h4>
-
-        </div>
-      </div>
-    </div>
     <!-- profile -->
     <div class="container position-relative">
       <div class="py-5 osahan-profile row">
@@ -25,7 +18,9 @@
                 <div class="right">
                   <h6 class="mb-1 font-weight-bold">
                     {{Session('owners_name')}} {{Session('owners_lastname')}}
+                    @if(Session('owners_verified_status')==4)
                     <i class="feather-check-circle text-success"></i>
+                    @endif
                   </h6>
                   <p class="text-muted m-0 small">{{Session('owners_email')}}</p>
                 </div>

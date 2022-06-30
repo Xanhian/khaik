@@ -7,18 +7,18 @@
 
 <body class="fixed-bottom-bar vh-100 d-flex flex-column justify-content-between ">
     <div class="row-fluid w-100">
-        <div class="bg-primary p-3 d-flex align-items-center">
-            <h4 class="font-weight-bold m-0 text-white">Khaik</h4>
-        </div>
+        @include('components.logo')
+
 
         <div class=" container">
+
 
             <div class="card bg-white shadow-sm mt-3">
                 <div class="container text-dark  m-3">
 
                     <h1 class="font-weight-bold">Total viewers: {{$restaurant_info[0]->total_views}}</h1>
-                    <h1 class="font-weight-bold">Total Favorites:</h1>
-                    <h1 class="font-weight-bold">Most liked food:</h1>
+                    <h1 class="font-weight-bold">Total Favorites: {{$favorite_count}}</h1>
+                    <h1 class="font-weight-bold">Most liked food: {{$like_article}}</h1>
 
 
 
@@ -27,7 +27,11 @@
             </div>
 
 
-
+            @if(session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+            @endif
         </div>
     </div>
 

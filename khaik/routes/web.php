@@ -89,7 +89,7 @@ Route::get('/logout', [user_controller::class, 'logout'])->name('user_logout');
 Route::get('/favorite', [favorite_controller::class, 'index'])->name('favorite');
 Route::get('/profile', [profile_controller::class, 'index'])->name('profile');
 
-Route::get('/restaurant/{restaurant_id}', [view_restaurant_controller::class, 'index']);
+Route::get('/restaurant/{restaurant_name}/{restaurant_id}', [view_restaurant_controller::class, 'index']);
 Route::get('/deals', [view_deal_controller::class, 'index'])->name('deals');
 Route::get('/filter', [main_controller::class, 'filter_index'])->name('filter');
 

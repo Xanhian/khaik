@@ -6,17 +6,14 @@
 <body class="fixed-bottom-bar">
 
     <div class="osahan-favorites">
-        <div class="bg-primary p-3 d-none n">
-            <div class="text-white">
-                <div class="title d-flex align-items-center">
+        @include('components.logo')
+        @guest('users')
+        @include('components.guest_btn')
+        @endguest
 
-                    <h4 class="font-weight-bold m-0 ">Khaik</h4>
 
-                </div>
-            </div>
-        </div>
-        <!-- Most popular -->
         <div class="container most_popular py-5">
+            @auth('users')
             <h3 class="font-weight-bold mb-3">Favorites</h3>
             <div class="row">
                 @foreach($favorite_restaurants as $favorite_restaurant)
@@ -59,7 +56,7 @@
 
                 @endforeach
             </div>
-
+            @endauth
 
         </div>
 

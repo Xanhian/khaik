@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\tbl_article;
 use App\Models\tbl_article_option;
 use App\Models\tbl_article_price;
+use App\Models\tbl_restaurant;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -82,6 +83,7 @@ class articles_controller extends Controller
     {
 
 
+
         $validated = $request->validate([
             'article_name' => 'required|max:100',
             'article_description' => 'required|max:255',
@@ -92,17 +94,17 @@ class articles_controller extends Controller
             'article_option.*' => 'required_without:article_option.*',
             'article_option_price.*' => 'required',
 
-            'article_category' => 'required'
+
         ]);
 
         $article_photo_name_convert = str_replace(' ', '', $request->file('article_photo')->getClientOriginalName());
         $article_photo_name = time() . '_' .  date('YmdHi') . $article_photo_name_convert;
         $article_photo_path = "storage/" . $request->file('article_photo')->storeAs('articles', $article_photo_name, 'public');
-
+        $restaurant_id = Session()->get('owners_restaurant');
 
         $article = new tbl_article;
-        $article->restaurant_id = $request->restaurant_id;
-        $article->article_category_id = $request->article_category;
+        $article->restaurant_id = $restaurant_id;
+
         $article->article_name = $request->article_name;
         $article->article_description = $request->article_description;
         $article->article_img =
@@ -110,7 +112,13 @@ class articles_controller extends Controller
         $article->article_option = $request->menu_category;
         $article->save();
 
+        $restaurant_id = Session()->get('owners_restaurant');
+        $restaurant = tbl_restaurant::find($restaurant_id);
+        if ($restaurant->restaurant_complete_status < 4) {
+            $restaurant->restaurant_complete_status = 3;
+        }
 
+        $restaurant->save();
 
         $article_id = DB::table('tbl_articles')->where('article_name', '=', $request->article_name)->where('restaurant_id', '=', $request->restaurant_id)->where('article_img', '=', $article_photo_path)->get('id');
 
@@ -147,8 +155,6 @@ class articles_controller extends Controller
                 $article_price->article_price_number = $request->article_option_price[$i];
                 $article_price->article_price_currency = $request->article_option_currency[$i];
                 $article_price->save();
-
-
 
                 $i++;
             }

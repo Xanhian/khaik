@@ -1,13 +1,13 @@
 <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
 
     <div class="row">
-        <div class="col">
+        <div id="home" data-active="false" class="col">
             <a href="{{route('main')}}" class="text-dark small font-weight-bold text-decoration-none">
-                <p class="h4 m-0"><i class="feather-home text-dark"></i></p>
+                <p class="h4 m-0"><i class="feather-home "></i></p>
                 Home
             </a>
         </div>
-        <div class="col ">
+        <div id="deals" class="col ">
             <a href="{{route('deals')}}" class="text-dark small font-weight-bold text-decoration-none">
                 <p class="h4 m-0"><i class="feather-gift"></i></p>
                 Deals
@@ -20,13 +20,13 @@
                 </a>
             </div>
         </div>
-        <div class="col">
+        <div id="favorite" class="col">
             <a href="{{route('favorite')}}" class="text-dark small font-weight-bold text-decoration-none">
                 <p class="h4 m-0"><i class="feather-heart"></i></p>
                 Favorites
             </a>
         </div>
-        <div class="col">
+        <div id="profile" class="col">
             <a href="{{route('profile')}}" class="text-dark small font-weight-bold text-decoration-none">
                 <p class="h4 m-0"><i class="feather-user"></i></p>
                 Profile

@@ -8,9 +8,8 @@
 
 
     <div class="d-none">
-        <div class="bg-primary p-3 d-flex align-items-center">
-            <h4 class="font-weight-bold m-0 text-white">Khaik</h4>
-        </div>
+        @include('components.logo')
+
     </div>
 
     <div class="offer-section ">

@@ -5,17 +5,12 @@
 <body class="fixed-bottom-bar">
 
   <div class="osahan-profile">
-    <div class="bg-primary p-3 d-none n">
-      <div class="text-white">
-        <div class="title d-flex align-items-center">
+    @include('components.logo')
 
-          <h4 class="font-weight-bold m-0 ">Khaik</h4>
-
-        </div>
-      </div>
-    </div>
     <!-- profile -->
-
+    @guest('users')
+    @include('components.guest_btn')
+    @endguest
     <div class="container position-relative">
       @auth('users')
 
@@ -113,9 +108,7 @@
         </div>
       </div>
       @endauth
-      @guest('users')
-      <h1>Please Log in or SignUp to use this feature</h1>
-      @endguest
+
 
       @include('layouts.navigation')
       @include('layouts.scripts')

@@ -1,4 +1,9 @@
   $( document ).ready(function() {
+ 
+
+
+
+
 
   var like_state= document.getElementsByClassName("custom-fa 1");
   
@@ -271,13 +276,13 @@
         });
       });
 
-       var x = document.getElementById("lat");
-var y = document.getElementById("lon");
-     
-
+      var location_check = $("#lat");
+var x =  $("#lat");
+var y =  $("#lon");
+  
 
   getLocation();
-     function getLocation() {
+   function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } else { 
@@ -285,12 +290,10 @@ var y = document.getElementById("lon");
   }
 }
     
-      
-
-     
 function showPosition(position) {
-  x.value =  position.coords.latitude;
- y.value = position.coords.longitude;
+  x.val(position.coords.latitude) ;
+  y.val(position.coords.longitude) ;
+
 };
  
 

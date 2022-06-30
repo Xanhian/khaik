@@ -1,45 +1,25 @@
-/*
-Template Name: Swiggiweb - Online Food Ordering Website Template
-Author: Askbootstrap
-Author URI: https://themeforest.net/user/askbootstrap
-Version: 1.0
-*/
 
 
-/*
--- Body
--- Fixed Bottom
--- Nav
--- Grid Card
--- Menu
--- Extra
--- Landing Page
--- List card
--- Login Page
--- Verification
--- Filter
--- Cart
--- Most Popular
--- Profile
--- Modal
--- Map Page
--- Restaurant
--- Footer
--- Mobile Media
-*/
-
-
-/* Body */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&display=swap');
 html{
     scroll-behavior: smooth;
 }
 body {
+    height: 100vh;
+    font-family: 'FredokaOne',cursive;
     font-family: 'Mulish', sans-serif;
     font-size: 13px;
     color: #ce0f0f;
-    background: #f0f6f7;
+background: rgb(253, 241, 243);
+
+   
+}
+
+.logo{
+    font-family: 'FredokaOne',cursive;
+    font-size: 3em;
 }
 
 
@@ -533,12 +513,12 @@ a {
 }
 
 .osahan-menu-fotter .col.selected a {
-    color: #dc3545;
-    background: #f8f9fa;
+    color: #ffffff!important;
+    background: #dc3545;
 }
 
 .osahan-menu-fotter .col.selected p {
-    color: #dc3545;
+    color: #ffffff;
 }
 
 .osahan-menu-fotter .col.bg-white.rounded-circle.mt-n4.px-3.py-2 {

@@ -17,7 +17,7 @@ class Vendor
 
     public function handle(Request $request, Closure $next)
     {
-        if (auth('vendors')) {
+        if (auth('vendors')->user()) {
 
             return $next($request);
         }

@@ -48,8 +48,12 @@ class vendor_profile_controller extends Controller
 
     public function logout()
     {
-        Session::flush();
+        $restaurant_id = session("owners_restaurant");
+        $location = tbl_restaurant::find($restaurant_id);
+        $location->restaurant_custom_status = null;
+        $location->save();
 
+        Session::flush();
 
         Auth::logout();
 

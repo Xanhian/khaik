@@ -37,15 +37,23 @@
   });
             
 
- 
-  
-            
-  deal_img.onchange = evt => {
+ var deal = $("#deal_img").length;
+
+
+ if (deal == 1) {
+deal_img.onchange = evt => {
   const [file] = deal_img.files
   if (file) {
     img_preview.src = URL.createObjectURL(file)
   }
-}
+  }
+   
+ }
+ 
+ 
+            
+
+
        
 
 

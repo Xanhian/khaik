@@ -134,6 +134,10 @@ class restaurant_time_controller extends Controller
         $restaurant = tbl_restaurant::find($restaurant_id);
         $restaurant->restaurant_opening_time = $json_opening_data;
         $restaurant->restaurant_closing_time = $json_closing_data;
+        if ($restaurant->restaurant_complete_status < 3) {
+            $restaurant->restaurant_complete_status = 2;
+        }
+
         $restaurant->save();
 
         return redirect()->route('vendor_home');
@@ -146,6 +150,10 @@ class restaurant_time_controller extends Controller
         $location = tbl_restaurant::find($restaurant_id);
         $location->restaurant_longitude = $request->longitude;
         $location->restaurant_latitude = $request->latitude;
+        if ($location->restaurant_complete_status < 3) {
+            $location->restaurant_complete_status = 2;
+        }
+
         $location->save();
         return redirect()->route('vendor_home');
     }

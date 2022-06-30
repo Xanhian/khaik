@@ -10,7 +10,7 @@ class view_deal_controller extends Controller
     public function index()
     {
 
-        $deals = DB::table('tbl_restaurants_deals')->get();
+        $deals = DB::table('tbl_restaurants_deals')->latest()->get();
         return view('deal', [
             'deals' => $deals
         ]);

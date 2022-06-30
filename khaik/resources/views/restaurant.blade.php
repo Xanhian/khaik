@@ -8,9 +8,8 @@
 
 
     <div class="d-none">
-        <div class="bg-primary p-3 d-flex align-items-center">
-            <h4 class="font-weight-bold m-0 text-white">Khaik</h4>
-        </div>
+        @include('components.logo')
+
     </div>
 
     <div class="offer-section ">
@@ -165,19 +164,20 @@
 
 
 
-            <div class="col-6 d-flex justify-content-between align-items-center">
+            <div class="col-6 d-flex align-items-center">
 
-                <a target="_blank" href="{{$restaurant_info[0]->restaurant_facebook_link}}" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-facebook"></i></a>
-
+                <a target="_blank" href="{{$restaurant_info[0]->restaurant_facebook_link}}" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-facebook"></i></a>
+                @auth("users")
                 <form method="POST" action="{{route('favorite_save')}}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <input type="hidden" name="restaurant_id" value="{{ $restaurant_info[0]->id}}" />
 
-                    <button type="submit" class="btn p-0 m-0 text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold font-solid  feather-bookmark"></i></button>
+                    <button type="submit" class="btn p-0 m-0 text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold font-solid  feather-bookmark"></i></button>
                 </form>
-                <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-map-pin"></i></a>
+                @endauth
+                <a href="#ratings-and-reviews" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-map-pin"></i></a>
 
-                <a data-toggle="modal" data-target="#add_item" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold fa-solid fa-qrcode"></i></a>
+                <a data-toggle="modal" data-target="#add_item" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold fa-solid fa-qrcode"></i></a>
 
 
             </div>

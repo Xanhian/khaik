@@ -20,6 +20,6 @@
 
     <link href="{{asset('vendor_code/font-awesome/css/all.min.css')}}" rel="stylesheet">
 
-
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 </head>

@@ -23,33 +23,34 @@ class favorite_controller extends Controller
 
     public function favorite(Request $request)
     {
+
         $user_id = Session('user_id');
-        $favorite_restaurant_check = tbl_users_favorite::where('restaurant_id', $request->restaurant_id)->orderBy('created_at', 'desc')->first();
+        $favorite_restaurant_check = tbl_users_favorite::where('restaurant_id', $request->restaurant_id)->where('user_id', $user_id)->orderBy('created_at', 'desc')->first();
+
 
 
         if (isset($favorite_restaurant_check)) {
             if ($favorite_restaurant_check->favorite_status_id == 1) {
                 return redirect()->route('favorite');
             }
-        } else {
-            $favorite_restaurant = new tbl_users_favorite;
-            $favorite_restaurant->user_id = $user_id;
-            $favorite_restaurant->restaurant_id = $request->restaurant_id;
-            $favorite_restaurant->favorite_status_id = 1;
-            $favorite_restaurant->save();
         }
 
-
-
+        $favorite_restaurant = new tbl_users_favorite;
+        $favorite_restaurant->user_id = $user_id;
+        $favorite_restaurant->restaurant_id = $request->restaurant_id;
+        $favorite_restaurant->favorite_status_id = 1;
+        $favorite_restaurant->save();
         return redirect()->route('favorite');
     }
 
     public function favorite_delete(Request $request)
     {
         $user_id = Session('user_id');
-        $favorite_restaurant = tbl_users_favorite::firstWhere('restaurant_id', $request->restaurant_id);
-        $favorite_restaurant->favorite_status_id = 2;
-        $favorite_restaurant->save();
+
+
+        $favorite_change = tbl_users_favorite::where('restaurant_id', $request->restaurant_id)->where('user_id', $user_id)->update(['favorite_status_id' => 2]);
+
+
 
         return redirect()->route('favorite');
     }

@@ -131,11 +131,11 @@ class restaurants_controller extends Controller
 
         $url = URL::to("/");
         $restaurant_link = str_replace(' ', '_', $request->restaurant_name);
-        $restaurant_qr = QRCode::url($url . '/restaurant/' . $restaurant_id  . '/' .  $restaurant_link)->setSize(10)->setMargin(2)->setErrorCorrectionLevel('H')->setOutfile($restaurant_qr_path)->png();
+        $restaurant_qr = QRCode::url($url . '/restaurant/' .  $restaurant_link . '/' .   $restaurant_id)->setSize(10)->setMargin(2)->setErrorCorrectionLevel('H')->setOutfile($restaurant_qr_path)->png();
 
 
         auth('vendors')->login($owner);
-        return redirect()->route('vendor_home')->with('status', 'Your restaurant has been created succesfully!');
+        return redirect()->route('vendor_home')->with('status', 'Your restaurant is almost done! Please go to quick change to set up location and opening time');
     }
 
     public function edit(Request $request)

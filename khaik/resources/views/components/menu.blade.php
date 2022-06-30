@@ -13,25 +13,24 @@
             </div>
 
 
+
             @foreach($menu_main_options as $menu_main_option)
-
-
-
-
-
+            @if(count($menu_articles[$menu_main_option->option_name])!==0)
             <div class="row d-flex flex-row justify-content-between  bg-light border-bottom m-0">
-
                 <a class="p-3 m-0 align-self-center flex-fill" data-toggle="collapse" aria-expanded="true" href="#collapse{{$menu_main_option->id}}">
                     <h6 class="m-0">{{$menu_main_option->option_name}} </h6>
                 </a>
-
-
             </div>
+
+            @endif
+
             @foreach($menu_articles[$menu_main_option->option_name] as $menu_item)
 
-            @if($menu_item->article_item_relations == NULL)
-            <div class="row border-bottom px-0 collapse  show" id="collapse{{$menu_main_option->id}}">
 
+            @if($menu_item->article_item_relations == NULL)
+
+
+            <div class="row border-bottom px-0 collapse  show" id="collapse{{$menu_main_option->id}}">
 
                 <div class=" col-8 py-3 gold-members d-flex flex-row">
                     <div class="col align-self-center">

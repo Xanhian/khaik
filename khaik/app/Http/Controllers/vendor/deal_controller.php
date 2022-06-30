@@ -14,7 +14,8 @@ class deal_controller extends Controller
     public function index()
     {
 
-        $deals = DB::table('tbl_restaurants_deals')->get();
+        $restaurant_id = Session()->get('owners_restaurant');
+        $deals = DB::table('tbl_restaurants_deals')->where('restaurant_id', $restaurant_id)->get();
         return view('vendor.deal', [
             'deals' => $deals
         ]);
