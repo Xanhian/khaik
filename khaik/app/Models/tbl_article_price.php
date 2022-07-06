@@ -10,5 +10,7 @@ class tbl_article_price extends Model
     use HasFactory;
     protected $fillable = [
         'article_price_number',
+        'article_price_currency',
+
     ];
 }

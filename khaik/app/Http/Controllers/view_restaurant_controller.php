@@ -49,7 +49,9 @@ class view_restaurant_controller extends Controller
 
 
         foreach ($menu_options as $menu_option) {
-            $articles = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', $menu_option->option_name)->get();
+            $articles = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', $menu_option->id)->get();
+
+
             $menu_articles_data[$menu_option->option_name] = $articles;
 
             foreach ($articles as $article) {

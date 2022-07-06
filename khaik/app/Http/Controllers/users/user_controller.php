@@ -83,7 +83,7 @@ class user_controller extends Controller
 
             ]);
 
-            return redirect()->route('profile');
+            return redirect()->route('main');
         }
 
 

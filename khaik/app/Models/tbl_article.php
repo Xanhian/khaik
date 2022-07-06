@@ -10,5 +10,8 @@ class tbl_article extends Model
     use HasFactory;
     protected $fillable = [
         'article_name',
+        'article_option',
+
+
     ];
 }

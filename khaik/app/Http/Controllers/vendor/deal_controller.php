@@ -7,6 +7,7 @@ use App\Models\tbl_restaurants_deals;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 class deal_controller extends Controller
@@ -58,6 +59,18 @@ class deal_controller extends Controller
         }
 
         $edit_deal->save();
+
+        return redirect()->route('vendor_deals');
+    }
+
+
+    public function delete(Request $request)
+    {
+
+        $deal = tbl_restaurants_deals::find($request->deal_id);
+        File::delete($deal->deal_photo);
+
+        $deal->delete();
 
         return redirect()->route('vendor_deals');
     }

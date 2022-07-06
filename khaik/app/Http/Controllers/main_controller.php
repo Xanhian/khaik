@@ -164,10 +164,15 @@ class main_controller extends Controller
                 $lat = $request->lat;
                 $lon = $request->lon;
 
+
                 $data = DB::table("tbl_restaurants")
                     ->select(
-                        "*",
-                        DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
+                        'id',
+                        'restaurant_name',
+                        'restaurant_header_photo',
+                        'restaurant_addres',
+                        'total_views',
+                        DB::raw("id as restaurant_id, 6371 * acos(cos(radians(" . $lat . ")) 
                 * cos(radians(tbl_restaurants.restaurant_latitude)) 
                 * cos(radians(tbl_restaurants.restaurant_longitude) - radians(" . $lon . ")) 
                 + sin(radians(" . $lat . ")) 
@@ -195,7 +200,7 @@ class main_controller extends Controller
                 break;
 
             case 'favorite':
-                $data = DB::table('tbl_users_favorites')->rightJoin('tbl_restaurants', 'tbl_users_favorites.restaurant_id', '=', 'tbl_restaurants.id')->select('restaurant_id', 'restaurant_name', 'restaurant_header_photo', DB::raw('count(*) as total'))->where('favorite_status_id', 1)->groupBy('restaurant_id', 'restaurant_name', 'restaurant_header_photo')->get();
+                $data = DB::table('tbl_users_favorites')->rightJoin('tbl_restaurants', 'tbl_users_favorites.restaurant_id', '=', 'tbl_restaurants.id')->select('restaurant_id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres', DB::raw('count(*) as total'))->where('favorite_status_id', 1)->groupBy('restaurant_id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres')->get();
 
                 return view('search', [
                     'results' => $data,
@@ -207,7 +212,10 @@ class main_controller extends Controller
 
 
             case 'visited':
-                $data = DB::table('tbl_restaurants')->orderBy('total_views', 'desc')->get();
+                $data = DB::table('tbl_restaurants')->orderBy('total_views', 'desc')->select('id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres', 'total_views', DB::raw('id as restaurant_id'))->get(['*']);
+
+
+
                 return view('search', [
                     'results' => $data,
                     'filter' => 'visit'
@@ -241,13 +249,6 @@ class main_controller extends Controller
 
     public function test()
     {
-
-
-
-
-
-
-
         return view('test');
     }
 }

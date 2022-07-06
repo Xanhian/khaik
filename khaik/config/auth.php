@@ -50,6 +50,11 @@ return [
             'driver' => 'session',
             'provider' => 'vendors',
         ],
+
+        'admins' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -82,6 +87,12 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\tbl_restaurant_owner::class,
         ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\tbl_admin::class,
+        ],
+
 
 
         // 'users' => [

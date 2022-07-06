@@ -53,6 +53,8 @@ Route::prefix('vendor')->middleware('vendor')->group(function () {
     Route::post('/menu/add_option', [articles_controller::class, 'store_option'])->name('add_article_option');
 
     Route::post('/menu/delete', [articles_controller::class, 'delete'])->name('delete_article');
+    Route::post('/menu/delete_deal', [deal_controller::class, 'delete'])->name('delete_deal');
+
     Route::post('/menu/delete_option', [articles_controller::class, 'delete_option'])->name('delete_option');
     Route::post('/deals/add', [deal_controller::class, 'store'])->name('vendor_deals_add');
 
@@ -63,6 +65,7 @@ Route::prefix('vendor')->middleware('vendor')->group(function () {
     Route::post('/save_time', [restaurant_time_controller::class, 'save_time'])->name('save_time');
     Route::post('/save_location', [restaurant_time_controller::class, 'get_location'])->name('save_location');
     Route::post('/save_status', [restaurant_time_controller::class, 'set_status'])->name('set_status');
+    Route::post('/notification', [restaurant_time_controller::class, 'storeToken'])->name('store_token');
 });
 
 
@@ -77,7 +80,7 @@ Route::get('/vendor/register', [restaurants_controller::class, 'index'])->name('
 
 
 Route::get('/', [main_controller::class, 'index'])->name('main');
-Route::get('/test', [main_controller::class, 'test']);
+Route::get('/test', [main_controller::class, 'test'])->name('test');
 
 
 Route::get('/register', [user_controller::class, 'index'])->name('user_register');
@@ -89,7 +92,7 @@ Route::get('/logout', [user_controller::class, 'logout'])->name('user_logout');
 Route::get('/favorite', [favorite_controller::class, 'index'])->name('favorite');
 Route::get('/profile', [profile_controller::class, 'index'])->name('profile');
 
-Route::get('/restaurant/{restaurant_name}/{restaurant_id}', [view_restaurant_controller::class, 'index']);
+Route::get('/restaurant/{restaurant_name}/{restaurant_id}', [view_restaurant_controller::class, 'index'])->name('restaurant');
 Route::get('/deals', [view_deal_controller::class, 'index'])->name('deals');
 Route::get('/filter', [main_controller::class, 'filter_index'])->name('filter');
 

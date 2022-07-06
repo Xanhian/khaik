@@ -26,7 +26,7 @@
                                     <img alt="#" src="{{asset($favorite_restaurant->restaurant_header_photo)}}" alt="askbootstrap" class="mr-3 my-auto menu-image-display rounded-pill ">
                                     <div class="col">
                                         <h6 class="mb-1">
-                                            <a href="restaurant.html" class="text-black">
+                                            <a href="{{route('restaurant',['restaurant_name'=>$favorite_restaurant->restaurant_name, 'restaurant_id'=>$favorite_restaurant->restaurant_id])}}" class="text-black">
                                                 {{$favorite_restaurant->restaurant_name}}
                                             </a>
                                         </h6>

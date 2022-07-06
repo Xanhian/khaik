@@ -21,13 +21,13 @@ class articles_controller extends Controller
 
         $restaurant_id = session()->get('owners_restaurant');
 
-        $article_category = DB::table('tbl_article_categories')->get();
+
 
 
 
         $menu_options = DB::table('tbl_article_options')->where('restaurant_id', $restaurant_id)->get();
 
-        $menu_items = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->get();
+
 
 
         $menu_articles_data = array();
@@ -37,7 +37,7 @@ class articles_controller extends Controller
 
 
         foreach ($menu_options as $menu_option) {
-            $articles = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', $menu_option->option_name)->get();
+            $articles = DB::table('tbl_article_prices')->rightJoin('tbl_articles', 'tbl_articles.id', '=', 'tbl_article_prices.article_id')->where('restaurant_id', $restaurant_id)->where('article_option', $menu_option->id)->get();
             $menu_articles_data[$menu_option->option_name] = $articles;
 
             foreach ($articles as $article) {
@@ -51,7 +51,7 @@ class articles_controller extends Controller
         return view(
             'vendor.menu',
             [
-                'article_category' => $article_category,
+
 
                 'menu_main_options' => $menu_options,
                 'menu_articles' => $menu_articles_data,
@@ -81,6 +81,7 @@ class articles_controller extends Controller
 
     public function store(Request $request)
     {
+
 
 
 
@@ -186,6 +187,12 @@ class articles_controller extends Controller
             $article_photo_path = "storage/" . $request->file('article_photo')->storeAs('articles', $article_photo_name, 'public');
             $article->article_img = $article_photo_path;
         }
+
+        if (isset($request->menu_category)) {
+            if ($article->article_option !== $request->menu_category) {
+                $article->article_option = $request->menu_category;
+            }
+        }
         if ($article_price->article_price_number !==  $request->article_price) {
             $article_price->article_price_number = $request->article_price;
         }
@@ -194,8 +201,6 @@ class articles_controller extends Controller
 
         $article->save();
         $article_price->save();
-        $article_options = tbl_article::where('article_item_relations', $request->article_id)->get();
-
 
         $i = 0;
 
@@ -211,15 +216,26 @@ class articles_controller extends Controller
 
 
                 if (isset($request->article_option_id[$i])) {
-                    $article_options_test = tbl_article::updateOrCreate(
+                    $article_options_edit = tbl_article::updateOrCreate(
                         ['id' => $request->article_option_id[$i]],
-                        ['article_name' => $article_option_test]
+                        [
+                            'article_name' => $article_option_test,
+                            'article_option' => $request->menu_category,
+
+
+
+
+                        ]
                     );
+
+
+
                     $article_options_currency = tbl_article_price::updateOrCreate(
                         ['article_id' => $request->article_option_id[$i]],
                         [
-                            'article_price_number' => $request->article_option_price[$i],
-                            'article_price_currency' => $request->article_option_currency[$i]
+                            'article_price_currency' => $request->article_option_currency[$i],
+
+                            'article_price_number' => $request->article_option_price[$i]
                         ]
                     );
                 } elseif (!isset($request->article_option_id[$i])) {
@@ -233,7 +249,7 @@ class articles_controller extends Controller
                     $article->article_name
                         = $article_option_test;
                     $article->article_description = $request->article_description;
-                    $article->article_img = "oa";
+                    $article->article_img = NULL;
                     $article->article_option = $request->menu_category;
                     $article->article_item_relations =
                         $request->article_id;

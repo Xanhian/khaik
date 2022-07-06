@@ -55,16 +55,16 @@
                                     <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                                         <div class="list-card-image">
 
-                                            <a href="restaurant.html">
-                                                <img alt="#" src="{{asset($result->restaurant_header_photo)}}" class="img-fluid item-img w-100">
+                                            <a href="{{route('restaurant',['restaurant_name'=>$result->restaurant_name, 'restaurant_id'=>$result->restaurant_id])}}">
+                                                <img alt="#" src="{{asset($result->restaurant_header_photo)}}" class="img-fluid search-item-img w-100">
                                             </a>
                                         </div>
                                         <div class="p-3 position-relative">
                                             <div class="list-card-body">
                                                 <h6 class="mb-1">
-                                                    <a href="restaurant.html" class="text-black">{{$result->restaurant_name }} </a>
+                                                    <a href="{{route('restaurant',['restaurant_name'=>$result->restaurant_name, 'restaurant_id'=>$result->restaurant_id])}}" class="text-black">{{$result->restaurant_name }} </a>
                                                 </h6>
-                                                <p class="text-gray mb-1 small">Categories</p>
+                                                <p class="text-gray mb-1 small">{{$result->restaurant_addres}}</p>
                                                 @isset($result->total)
                                                 <p class="text-gray mb-1">Total favorites: {{$result->total}}</p>
                                                 @endisset
@@ -154,6 +154,7 @@
     </div>
     <!-- Bootstrap core JavaScript -->
     @include('layouts.navigation')
-    @include('layouts.scripts')
+</body>
+@include('layouts.scripts')
 
 </html>

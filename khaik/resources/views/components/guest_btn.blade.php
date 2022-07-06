@@ -6,11 +6,11 @@
             <h1 class="font-weight-bold text-dark">Please sgin up or Log in</h1>
             <div class=" mx-auto text-center d-flex flex-row justify-content-center">
                 <div class="col-5">
-                    <button class="btn  btn-white text-dark  btn-block  border border-primary  ">Register</button>
+                    <a href="{{route('user_register')}}" class="btn  btn-white text-dark  btn-block  border border-primary  ">Register</a>
 
                 </div>
                 <div class="col-5">
-                    <button class="btn  btn-primary  btn-block  ">Log in</button>
+                    <a href="{{route('user_login')}}" class="btn  btn-primary  btn-block  ">Log in</a>
 
                 </div>
             </div>

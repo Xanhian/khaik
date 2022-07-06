@@ -12,9 +12,18 @@ const mix = require('laravel-mix');
  */
 
 mix.js(['resources/js/app.js',
- 'resources/js/signupformrestaurant.js'
+ 'resources/js/osahan.js',
+
+
 ], 'public/js')
  
+ 
+   mix.js(['resources/js/vue.js',
+
+
+], 'public/js/vue.js')
+   .vue()
+
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);

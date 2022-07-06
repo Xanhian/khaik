@@ -67,7 +67,7 @@
         <div class="container  p-0">
             <div class="cat-slider mx-auto">
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="#1">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="#6">
                         <div class="cat-item-box">
                             <i class="fa-solid fa-burger fa-2xl mx-auto m-3"></i>
                             <p class="m-0 small">Fast Food</p>
@@ -76,7 +76,7 @@
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="#2">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="#1">
                         <div class="cat-item-box">
                             <i class="fa-solid fa-drumstick-bite   fa-2xl mx-auto m-3"></i>
                             <p class="m-0 small">BBQ</p>
@@ -84,7 +84,7 @@
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="#3">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="#2">
                         <div class="cat-item-box">
                             <i class="fa-solid fa-bowl-rice fa-2xl mx-auto m-3"></i>
                             <p class="m-0 small">Javanese</p>
@@ -108,7 +108,7 @@
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="#6">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="#3">
                         <div class="cat-item-box">
                             <i class="fa-solid fa-bowl-food fa-2xl mx-auto m-3"></i>
                             <p class="m-0 small">House Food</p>

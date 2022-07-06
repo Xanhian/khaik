@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class tbl_restaurant_owner extends Authenticatable
-
+class tbl_admin extends Authenticatable
 {
     protected $fillable = [
-
         'fcm_token',
     ];
     use HasFactory;
-    protected $guard = 'vendors';
+
+    protected $guard = 'admin';
     protected $guarded = ['id'];
 
     public function getAuthPassword()

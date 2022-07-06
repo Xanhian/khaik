@@ -51,12 +51,12 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         {{ method_field('PATCH') }}
                         <div class="form-group">
-                          <p>userename</p>
+                          <p>First name</p>
                           <input type="text" class="form-control" name="name" id="">
                         </div>
 
                         <div class="form-group">
-                          <p>lastname</p>
+                          <p>Last name</p>
                           <input type="text" name="lastname" class="form-control" id="">
                         </div>
 

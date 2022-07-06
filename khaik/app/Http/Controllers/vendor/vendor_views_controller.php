@@ -13,6 +13,7 @@ class vendor_views_controller extends Controller
         $restaurant_id = session()->get('owners_restaurant');
 
         $restaurant_info = DB::table('tbl_restaurants')->where('id', $restaurant_id)->get();
+
         $restaurant_favorite_count = DB::table('tbl_users_favorites')->where('restaurant_id', $restaurant_id)->where('favorite_status_id', 1)->count();
         $articles = DB::table('tbl_articles')->where('restaurant_id', $restaurant_id)->get();
 

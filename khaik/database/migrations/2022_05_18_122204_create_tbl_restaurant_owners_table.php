@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('lastname', 100);
             $table->string('password');
             $table->string('phonenumber', 25);
-            $table->string('email', 100);
+            $table->string('email', 100)->unique();
+            $table->string('firebase_token')->nullable();
+
             $table->timestamps();
         });
     }

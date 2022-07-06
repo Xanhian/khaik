@@ -9,7 +9,7 @@
 
 
 
-                <a href="restaurant.html">
+                <a href="{{route('restaurant',['restaurant_name'=>$discover_restaurant->restaurant_name, 'restaurant_id'=>$discover_restaurant->id])}}">
                     <div class="text-center">
                         <img alt="#" src="{{asset($discover_restaurant->restaurant_header_photo)}}" class="img-fluid rounded mx-auto item-img discover-img">
                         <div class="badge rest_name_place position-absolute bg-primary"><span class=" text-white  "> {{$discover_restaurant->restaurant_name}}</span></div>

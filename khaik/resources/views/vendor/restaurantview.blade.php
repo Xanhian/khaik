@@ -13,7 +13,7 @@
     </div>
 
     <div class="offer-section ">
-        <img alt="#" src="{{asset($restaurant_info[0]->restaurant_header_photo)}}" class="restaurant-header">
+        <img alt="#" src="{{asset($restaurant_info[0]->restaurant_header_photo)}}" class="restaurant-header w-100">
     </div>
 
 
@@ -24,7 +24,8 @@
                     <div class="pl-1 align-self-center text-wrap">
                         <h1 class="font-weight-bold p-0 text-wrap  ">{{$restaurant_info[0]->restaurant_name}}</h1>
                         <p id="restaurant_description" class="text-white text-wrap  pr-2">{{$restaurant_info[0]->restaurant_description}}</p>
-
+                        <input type="hidden" name="restaurant_lat" id="restaurant_lat" value="{{$restaurant_info[0]->restaurant_latitude}}">
+                        <input type="hidden" name="restaurant_lon" id="restaurant_lon" value="{{$restaurant_info[0]->restaurant_longitude }}">
                     </div>
                 </div>
                 <div class="rating-wrap d-flex align-items-center mt-2">
@@ -186,6 +187,8 @@
         </div>
     </div>
 
+    <div id="map"></div>
+
     <div class=" modal fade" id="qr_code" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -196,9 +199,13 @@
     </div>
 
     <div class=" modal fade" id="edit_restaurant" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
         <div class="modal-dialog modal-dialog-centered">
 
+
             <div class="modal-content">
+                <h4 class="text-center p-4">Change restaurant info</h4>
                 <form action="{{route('edit_restaurant')}}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     {{ method_field('PATCH') }}
@@ -232,8 +239,8 @@
 
 
 
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="w">
+                        <div class="form-group text-center">
+                            <input type="submit" class="btn btn-primary" value="Change">
 
                         </div>
 

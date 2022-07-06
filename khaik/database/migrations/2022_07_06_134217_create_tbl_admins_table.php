@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_users', function (Blueprint $table) {
+        Schema::create('tbl_admins', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->string('lastname', 100);
-            $table->string('password');
-            $table->string('phonenumber', 25)->unique();
             $table->string('email', 100)->unique();
+            $table->string('password');
+            $table->integer('auth_level');
             $table->string('firebase_token')->nullable();
-
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_users');
+        Schema::dropIfExists('tbl_admins');
     }
 };

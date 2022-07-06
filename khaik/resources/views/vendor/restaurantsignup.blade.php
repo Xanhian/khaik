@@ -184,8 +184,10 @@
         </div>
     </div>
 
-    @include('layouts.scripts')
 
 </body>
+@include('layouts.scripts')
+
+<script src="{{asset('js/signupformrestaurant.js')}}"></script>
 
 </html>

@@ -45,7 +45,7 @@
                             </div>
 
                             @foreach($menu_articles_option[$menu_item->id] as $option_item)
-                            <div class="media col border-bottom collapse " id="collapse{{$menu_item->id}}">
+                            <div class="media col border-bottom collapse " id="collapse_options{{$menu_item->id}}">
                                 <div class="media-body mt-2">
                                     <h7 class="mb-1 ">{{$option_item->article_name}}</h7>
                                     <p class="text-muted mb-2">
@@ -87,7 +87,7 @@
                     </div>
 
                     <div class=" my-auto mx-auto align-self-center ">
-                        <span><a class=" " data-toggle="collapse" href="#collapse{{$menu_item->id}}" role="button"><i class="fa-solid fa-angle-down fa-2xl"></i></a></span>
+                        <span><a class=" " data-toggle="collapse" href="#collapse_options{{$menu_item->id}}" role="button"><i class="fa-solid fa-angle-down fa-2xl"></i></a></span>
                     </div>
 
                 </div>

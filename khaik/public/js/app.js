@@ -2197,99 +2197,163 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/signupformrestaurant.js":
-/*!**********************************************!*\
-  !*** ./resources/js/signupformrestaurant.js ***!
-  \**********************************************/
+/***/ "./resources/js/osahan.js":
+/*!********************************!*\
+  !*** ./resources/js/osahan.js ***!
+  \********************************/
 /***/ (() => {
 
-var current_fs, next_fs, previous_fs; //fieldsets
+(function ($) {
+  "use strict"; // Start of use strict
+  // Tooltip
 
-var opacity;
-$(".next").click(function () {
-  var name = $("#firstname").val();
-  var element = $("#headtitle");
-  var textToReplace = element.text();
-  var newText = textToReplace.replace("Welcome to khaik", "Hello " + name);
-  element.text(newText);
-  $("#instructions").text("Please fill in the following fields to create your restaurant");
-  current_fs = $(this).parent();
-  next_fs = $(this).parent().next(); //Add Class Active
-
-  $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active"); //show the next fieldset
-
-  next_fs.show(); //hide the current fieldset with style
-
-  console.log(current_fs);
-  current_fs.animate({
-    opacity: 0
-  }, {
-    step: function step(now) {
-      // for making fielset appear animation
-      opacity = 1 - now;
-      current_fs.css({
-        'display': 'none',
-        'position': 'relative'
-      });
-      next_fs.css({
-        'opacity': opacity
-      });
-    },
-    duration: 600
+  $('[data-toggle="tooltip"]').tooltip();
+  $('.offer-slider').slick({
+    //   centerMode: true,
+    //   centerPadding: '30px',
+    slidesToShow: 4,
+    arrows: true,
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        arrows: true,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 2
+      }
+    }, {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 2
+      }
+    }]
   });
-});
-$(".previous").click(function () {
-  current_fs = $(this).parent();
-  previous_fs = $(this).parent().prev(); //Remove class active
+  $('.cat-slider').slick({
+    //   centerMode: true,
+    //   centerPadding: '30px',
+    slidesToShow: 8,
+    arrows: true,
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        arrows: true,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 4
+      }
+    }, {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 4
+      }
+    }]
+  }); // Trending slider
 
-  $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active"); //show the previous fieldset
+  $('.trending-slider').slick({
+    //  centerMode: true,
+    // centerPadding: '30px',
+    slidesToShow: 3,
+    arrows: true,
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    }, {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    }]
+  }); //discover
 
-  previous_fs.show();
-  console.log(current_fs); //hide the current fieldset with style
+  $('.discover-slider').slick({
+    centerMode: true,
+    lazyLoad: 'ondemand',
+    slidesToShow: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    }, {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    }]
+  }); // Most popular slider
 
-  current_fs.animate({
-    opacity: 0
-  }, {
-    step: function step(now) {
-      // for making fielset appear animation
-      opacity = 1 - now;
-      current_fs.css({
-        'display': 'none',
-        'position': 'relative'
-      });
-      previous_fs.css({
-        'opacity': opacity
-      });
-    },
-    duration: 600
+  $('.popular-slider').slick({
+    centerMode: true,
+    centerPadding: '30px',
+    slidesToShow: 1,
+    arrows: false,
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 2
+      }
+    }, {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 1
+      }
+    }]
+  }); // Osahan Slider
+
+  $('.osahan-slider').slick({
+    centerMode: false,
+    slidesToShow: 1,
+    arrows: false,
+    dots: true
+  }); // osahan-slider-map
+
+  $('.osahan-slider-map').slick({
+    //   centerMode: true,
+    //   centerPadding: '30px',
+    autoplay: true,
+    slidesToShow: 5,
+    arrows: true,
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        autoplay: true,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 3
+      }
+    }, {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        autoplay: true,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 3
+      }
+    }]
   });
-});
-$(".current").click(function () {
-  console.log("hello world");
-  current_fs = $("#fs2");
-  previous_fs = $("#fs2").prev(); //Remove class active
-
-  $("#progressbar li").eq($("fieldset").index(current_fs)).addClass("active");
-  console.log(current_fs);
-  console.log(previous_fs);
-  previous_fs.hide(); //   current_fs.animate({opacity: 1}, {
-  //     step: function(now) {
-  //         // for making fielset appear animation
-  //         opacity = 1 - now;
-  //         current_fs.css({
-  //             'display': 'none',
-  //             'position': 'relative'
-  //         });
-  //         next_fs.css({'opacity': opacity});
-  //     }, 
-  //     duration: 600
-  // });
-  //show the previous fieldset
-  //hide the current fieldset with style
-});
-$(".submit").click(function () {
-  return false;
-});
+})(jQuery); // End of use strict
 
 /***/ }),
 
@@ -19874,11 +19938,9 @@ process.umask = function() { return 0; };
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/signupformrestaurant.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/osahan.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;
-
-console.log("helllooooao");

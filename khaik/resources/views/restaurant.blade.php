@@ -18,7 +18,7 @@
 
 
     <div class="container">
-        <div class="p-3 bg-primary rounded position-relative restaurant-profile-container">
+        <div class="p-3 bg-primary rounded position-relative  restaurant-profile-container">
             <div class=" text-white">
                 <div class="row">
                     <div class="pl-1 align-self-center text-wrap">
@@ -154,6 +154,9 @@
                             </div>
                             <p class="text-white font-weight-bold m-0 ">Location</p>
                             <p class="text-white m-0">{{$restaurant_info[0]->restaurant_addres}}, {{$restaurant_info[0]->restaurant_place}} Suriname</p>
+
+                            <input type="hidden" name="restaurant_lat" id="restaurant_lat" value="{{$restaurant_info[0]->restaurant_latitude}}">
+                            <input type="hidden" name="restaurant_lon" id="restaurant_lon" value="{{$restaurant_info[0]->restaurant_longitude }}">
                         </div>
                     </div>
                 </div>
@@ -175,7 +178,7 @@
                     <button type="submit" class="btn p-0 m-0 text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold font-solid  feather-bookmark"></i></button>
                 </form>
                 @endauth
-                <a href="#ratings-and-reviews" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-map-pin"></i></a>
+                <a href="#map" data-toggle="collapse" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-map-pin"></i></a>
 
                 <a data-toggle="modal" data-target="#add_item" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold fa-solid fa-qrcode"></i></a>
 
@@ -183,6 +186,11 @@
             </div>
         </div>
     </div>
+
+
+    <div id='map' class="collapse show"></div>
+
+
 
     <div class=" modal fade" id="add_item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -194,10 +202,10 @@
     </div>
 
 
-    <div class="container">
-        @include('components.menu')
 
-    </div>
+    @include('components.menu')
+
+
 
 
 
@@ -206,7 +214,9 @@
     @include('layouts.navigation')
 
 
-    @include('layouts.scripts')
+
 </body>
+@include('layouts.scripts')
+<script src="{{asset('js/ajax.js')}}"></script>
 
 </html>

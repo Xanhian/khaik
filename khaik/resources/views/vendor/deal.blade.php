@@ -14,10 +14,17 @@
         <button data-toggle="modal" data-target="#add_deal" class="btn btn-primary m-2">Add Deal</button>
         @foreach($deals as $deal)
         <div class="card mb-3 shadow-sm">
+            <div class="card-header d-flex flex-row-reverse align-content-end">
+                <form class="article_delete_form" action="{{route('delete_deal')}}" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="deal_id" value="{{$deal->id}}" />
+                    <button type="submit" class="delete-item-box p-0"> <i class="fa-solid fa-xmark fa-2xl p-3"></i></button>
+                </form>
+            </div>
             <img src="{{asset($deal->deal_photo)}}" alt="">
             <div class="container m-3">
                 <div class="row">
-                    <div class="col-10 container m-0">
+                    <div class="col-9 container m-0">
                         <h1 class="m-0">
                             {{$deal->deal_name}}
                         </h1>
@@ -25,8 +32,19 @@
                             {{$deal->deal_description}}
                         </p>
                     </div>
-                    <div class="col-2 align-content-center my-auto">
+
+                    <div class="col-2 d-flex flex-row mx-auto align-content-center my-auto">
+
+
+
+
+
                         <a data-toggle="modal" data-target="#edit_deal" class="text-decoration-none text-dark mr-3"><i class="p-2 bg-light btn-primary rounded-circle font-weight-bold fa-solid fa-pen"></i></a>
+
+
+
+
+
                     </div>
                 </div>
 
@@ -35,18 +53,24 @@
                 <div class="modal-dialog modal-dialog-centered">
 
                     <div class="modal-content">
-                        <div class="container p-3">
-                            <h1>Edit</h1>
+                        <div class="container mx-auto p-5">
+                            <h2>Edit</h2>
                             <form action="{{route('edit_deal')}}" method="POST">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                 {{ method_field('PATCH') }}
                                 <input type="hidden" name="deal_id" value="{{$deal->id}}">
+                                <div class="form-group">
+                                    <p>Deal Name</p>
+                                    <input type="text" name="edit_deal_name" class="form-control" value="{{$deal->deal_name}}">
+                                </div>
 
-                                <p>Deal Name</p>
-                                <input type="text" name="edit_deal_name" id="" value="{{$deal->deal_name}}">
-                                <p>Deal Description</p>
-                                <input type="text" name="edit_description" id="" value="{{$deal->deal_description}}">
-                                <input type="submit" value="">
+                                <div class="form-group">
+
+                                    <p>Deal Description</p>
+                                    <input type="text" name="edit_description" id="" class="form-control" value="{{$deal->deal_description}}">
+                                </div>
+
+                                <input type="submit" class="text-center btn btn-primary " value="Post">
 
                             </form>
                         </div>

@@ -12,25 +12,28 @@
       <div class="py-5 osahan-profile row">
         <div class="col-md-4 mb-3">
           <div class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
-            <a href="profile.html" class="">
-              <div class="d-flex align-items-center p-3">
 
-                <div class="right">
-                  <h6 class="mb-1 font-weight-bold">
-                    {{Session('owners_name')}} {{Session('owners_lastname')}}
-                    @if(Session('owners_verified_status')==4)
-                    <i class="feather-check-circle text-success"></i>
-                    @endif
-                  </h6>
-                  <p class="text-muted m-0 small">{{Session('owners_email')}}</p>
-                </div>
+            <div class="d-flex align-items-center p-3">
+
+              <div class="right">
+                <h6 class="mb-1 font-weight-bold">
+                  {{Session('owners_name')}} {{Session('owners_lastname')}}
+                  @if(Session('owners_verified_status')==4)
+                  <i class="feather-check-circle text-success"></i>
+                  @endif
+                </h6>
+                <p class="text-muted m-0 small">{{Session('owners_email')}}</p>
               </div>
-            </a>
+              <button onclick="startFCM()" class="ml-5 btn btn-primary text-white"> Allow notification <i class="fa-solid fa-bell"></i></button>
+
+            </div>
+
 
             <!-- profile-details -->
             <div class="bg-white profile-details"></div>
           </div>
         </div>
+
         <div class="col-md-8 mb-3">
           <div class="rounded shadow-sm p-4 bg-white">
             <div class="row justify-content-between">
@@ -50,22 +53,22 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         {{ method_field('PATCH') }}
                         <div class="form-group">
-                          <p>userename</p>
+                          <p>First name</p>
                           <input type="text" class="form-control" name="name" id="">
                         </div>
 
                         <div class="form-group">
-                          <p>lastname</p>
+                          <p>Last name</p>
                           <input type="text" name="lastname" class="form-control" id="">
                         </div>
 
                         <div class="form-group">
-                          <p>mobile number</p>
+                          <p>Mobile Number</p>
                           <input type="text" name="mobilenumber" class="form-control" id="">
 
                         </div>
                         <div class="form-group">
-                          <p>emaill</p>
+                          <p>Emaill</p>
                           <input type="text" class="form-control" name="email" id="">
 
                         </div>
@@ -87,30 +90,31 @@
 
             <div id="edit_profile">
               <div>
-                <form action="my_account.html">
-                  <div class="form-group">
-                    <label for="exampleInputName1">First Name</label>
-                    <p> {{Session('owners_name')}}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputName1">Last Name</label>
-                    <p>{{Session('owners_lastname')}}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputNumber1">Mobile Number</label>
-                    <p>{{Session('owners_phonenumber')}}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
-                    <p>{{Session('owners_email')}}</p>
+
+                <div class="form-group">
+                  <label for="exampleInputName1">First Name</label>
+                  <p> {{Session('owners_name')}}</p>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName1">Last Name</label>
+                  <p>{{Session('owners_lastname')}}</p>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputNumber1">Mobile Number</label>
+                  <p>{{Session('owners_phonenumber')}}</p>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email</label>
+                  <p>{{Session('owners_email')}}</p>
 
 
-                  </div>
+                </div>
 
               </div>
             </div>
           </div>
           <a href="{{route('vendor_logout')}}" class="btn btn-primary text-white btn-block">Logout</a>
+
 
         </div>
 
@@ -119,6 +123,55 @@
       </div>
       @include('vendor.layout.navigation')
       @include('layouts.scripts')
+
 </body>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBDDL44Xnl6QtpCqLmMvxB00GYL276HWfY",
+    authDomain: "test683-430b9.firebaseapp.com",
+    projectId: "test683-430b9",
+    storageBucket: "test683-430b9.appspot.com",
+    messagingSenderId: "353829315143",
+    appId: "1:353829315143:web:8cfe79961d688177c58762",
+    measurementId: "G-VDC6F63M9T"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const messaging = firebase.messaging();
+
+  function startFCM() {
+    messaging
+      .requestPermission()
+      .then(function() {
+        return messaging.getToken()
+      })
+      .then(function(response) {
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        $.ajax({
+          url: '{{ route("store_token") }}',
+          type: 'POST',
+          data: {
+            token: response
+          },
+          dataType: 'JSON',
+          success: function(response) {
+            alert(response.status);
+          },
+          error: function(error) {
+
+          },
+        });
+
+      }).catch(function(error) {
+        alert(error);
+      });
+  }
+</script>
 
 </html>

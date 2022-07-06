@@ -22,13 +22,15 @@
         <div class="row d-flex flex-column">
           <div class="container">
             @foreach($deals as $deal)
+
             <div class="card shadow-sm mb-5">
               <div class="card-header">
-                <div class="row my-auto">
-                  <img src="" alt="">
-                  <p class="m-0">restaurant</p>
-                </div>
-
+                <a href="{{route('restaurant',['restaurant_name'=>$deal->restaurant_name, 'restaurant_id'=>$deal->restaurant_id])}}" class="text-black">
+                  <div class="row my-auto">
+                    <img class="mr-3  menu-image-display rounded-pill " src="{{asset($deal->restaurant_header_photo)}}" alt="">
+                    <h1 class="my-auto">{{$deal->restaurant_name}}</h1>
+                  </div>
+                </a>
               </div>
               <img src="{{asset($deal->deal_photo)}}" alt="">
               <div class="container mt-3">

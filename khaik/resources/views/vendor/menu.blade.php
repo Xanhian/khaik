@@ -84,7 +84,7 @@
                                     </div>
 
                                     @foreach($menu_articles_option[$menu_item->id] as $option_item)
-                                    <div class="media col border-bottom collapse " id="collapse{{$menu_item->id}}">
+                                    <div class="media col border-bottom collapse " id="collapse_option{{$menu_item->id}}">
                                         <div class="media-body mt-2">
                                             <h7 class="mb-1 ">{{$option_item->article_name}}</h7>
                                             <p class="text-muted mb-2">
@@ -96,6 +96,7 @@
 
 
                                 </a>
+
                             </div>
                         </div>
 
@@ -109,7 +110,7 @@
                                 </div>
 
                                 <div class=" my-auto align-self-center ">
-                                    <span><a class=" " data-toggle="collapse" href="#collapse{{$menu_item->id}}" role="button"><i class="fa-solid fa-angle-down fa-2xl"></i></a></span>
+                                    <span><a class=" " data-toggle="collapse" href="#collapse_option{{$menu_item->id}}" role="button"><i class="fa-solid fa-angle-down fa-2xl"></i></a></span>
                                 </div>
                             </div>
                         </div>
@@ -188,8 +189,14 @@
                                                 <div class="form-group">
                                                     <label for="">Menu Category</label>
                                                     <select name="menu_category" class="form-control" id="">
+
                                                         @foreach($menu_main_options as $menu_main_option)
-                                                        <option value="{{$menu_main_option->option_name}}">{{$menu_main_option->option_name}} </option>
+                                                        @if($menu_item->article_option == $menu_main_option->id )
+
+                                                        <option selected value=" {{$menu_main_option->id}}"> {{$menu_main_option->option_name}} </option>
+                                                        @else
+                                                        <option value=" {{$menu_main_option->id}}">{{$menu_main_option->option_name}} </option>
+                                                        @endif
 
                                                         @endforeach
 
@@ -215,14 +222,19 @@
 
                                                         @foreach($menu_articles_option[$menu_item->id] as $option_item)
 
-                                                        <div class="form-group"><label> {{$option_item->article_id}}</label><input type="text" name="article_option_name[]" value="{{$option_item->article_name}}" class="form-control">
+                                                        <div class="form-group"><label> Food name</label><input type="text" name="article_option_name[]" value="{{$option_item->article_name}}" class="form-control">
                                                             <input type="hidden" name="article_option_id[]" value="{{$option_item->article_id}}">
                                                         </div>
                                                         <div class="form-group"><label>Article Price</label>
                                                             <div class="row">
-                                                                <div class="col-5"><select class="form-control" name="article_option_currency[]">
+                                                                <div class="col-5">
+                                                                    <select class="form-control" name="article_option_currency[]">
                                                                         <option value="SRD">SRD</option>
-                                                                    </select></div>
+                                                                        <option value="USD">USD</option>
+
+                                                                    </select>
+                                                                </div>
+
                                                                 <div class="col-7"><input type="number" name="article_option_price[]" placeholder="00.00" value="{{$option_item->article_price_number}}" class="form-control"></div>
                                                             </div>
                                                         </div>
@@ -242,24 +254,6 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
-                                                    <a data-toggle="collapse" href="#category" aria-expanded="false">
-                                                        <label for="exampleInputName1">Food Category</label>
-                                                    </a>
-                                                    <div class="collapse multi-collapse show" id="category">
-                                                        @foreach($article_category as $category)
-                                                        <div class="row p-2">
-                                                            <input type="radio" name="article_category" class="my-auto" value="{{$category->id}}">
-                                                            <p class="pl-2 my-auto">{{$category->category_name}}</p>
-                                                        </div>
-                                                        @endforeach
-
-                                                    </div>
-                                                    @error('article_category')
-                                                    <div class=" alert alert-danger mt-1 mb-1">{{ $message }}
-                                                    </div>
-                                                    @enderror
-                                                </div>
 
                                                 <input type="hidden" name="restaurant_id" value="{{Session::get('owners_restaurant')}}"> <input type="hidden" name="article_id" value="{{$menu_item->id}}">
                                                 <div class=" text-center">
@@ -448,7 +442,7 @@
                                 <label for="">Menu Category</label>
                                 <select name="menu_category" class="form-control" id="">
                                     @foreach($menu_main_options as $menu_main_option)
-                                    <option value="{{$menu_main_option->option_name}}">{{$menu_main_option->option_name}} </option>
+                                    <option value="{{$menu_main_option->id}}">{{$menu_main_option->option_name}} </option>
 
                                     @endforeach
 
@@ -508,11 +502,13 @@
 
 
     @include('vendor.layout.navigation')
-    @include('layouts.scripts')
     </div>
 
 
 </body>
+@include('layouts.scripts')
+
+<script src="{{asset('js/article.js')}}"></script>
 
 
 

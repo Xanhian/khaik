@@ -140,7 +140,7 @@ class restaurant_time_controller extends Controller
 
         $restaurant->save();
 
-        return redirect()->route('vendor_home');
+        return redirect()->route('vendor_home')->with('status', 'Time succesfully set!');
     }
 
     public function get_location(Request $request)
@@ -155,7 +155,7 @@ class restaurant_time_controller extends Controller
         }
 
         $location->save();
-        return redirect()->route('vendor_home');
+        return redirect()->route('vendor_home')->with('status', 'Location succesfully set!');
     }
 
 
@@ -169,6 +169,12 @@ class restaurant_time_controller extends Controller
 
 
 
-        return redirect()->route('vendor_home');
+        return redirect()->route('vendor_home')->with('status', 'Status succesfully set!');
+    }
+
+    public function storeToken(Request $request)
+    {
+        auth('vendors')->user()->update(['fcm_token' => $request->token]);
+        return response()->json(['status' => 'Notification turned on']);
     }
 }
