@@ -1,3 +1,7 @@
+@auth('admins')
+
+@else
+
 <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
 
     <div class="row">
@@ -15,7 +19,7 @@
         </div>
         <div class="col bg-white rounded-circle mt-n4 px-3 py-2">
             <div class="bg-danger rounded-circle mt-n0 shadow">
-                <a href="{{route('test')}}" class="text-white small font-weight-bold text-decoration-none">
+                <a href="{{route('camera')}}" class="text-white small font-weight-bold text-decoration-none">
                     <i class="feather-camera"></i>
                 </a>
             </div>
@@ -34,3 +38,4 @@
         </div>
     </div>
 </div>
+@endauth

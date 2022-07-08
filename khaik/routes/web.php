@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\admin\admin_controller;
 use App\Http\Controllers\vendor\articles_controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\main_controller;
@@ -31,17 +31,9 @@ use App\Http\Controllers\view_deal_controller;
 
 Route::prefix('vendor')->middleware('vendor')->group(function () {
 
-
-
-
-
     Route::get('/menu', [articles_controller::class, 'index'])->name('vendor_menu');
-
-
     Route::get('/profile', [vendor_profile_controller::class, 'index'])->name('vendor_profile');
     Route::get('/logout', [vendor_profile_controller::class, 'logout'])->name('vendor_logout');
-
-
     Route::get('/home', [vendor_views_controller::class, 'home'])->name('vendor_home');
     Route::get('/time', [vendor_views_controller::class, 'restaurant_time'])->name('vendor_restaurant');
     Route::get('/restaurant/{restaurant_id}', [restaurant_view_controller::class, 'index']);
@@ -65,11 +57,25 @@ Route::prefix('vendor')->middleware('vendor')->group(function () {
     Route::post('/save_time', [restaurant_time_controller::class, 'save_time'])->name('save_time');
     Route::post('/save_location', [restaurant_time_controller::class, 'get_location'])->name('save_location');
     Route::post('/save_status', [restaurant_time_controller::class, 'set_status'])->name('set_status');
-    Route::post('/notification', [restaurant_time_controller::class, 'storeToken'])->name('store_token');
+    Route::post('/notification', [restaurant_time_controller::class, 'index_notification'])->name('notification');
 });
 
 
 
+Route::prefix('admin')->middleware('admin')->group(function () {
+    Route::get('/logout', [admin_controller::class, 'destroy'])->name('admin_logout');
+    Route::get('/home', [admin_controller::class, 'home'])->name('admin_home');
+    Route::get('/aprove', [admin_controller::class, 'aprove'])->name('admin_aprove');
+
+    Route::get('/report', [admin_controller::class, 'report_index'])->name('admin_reports');
+    Route::get('/adduser', [admin_controller::class, 'add_user'])->name('admin_adduser');
+    Route::get('/notification', [admin_controller::class, 'index_notification'])->name('admin_notification');
+    Route::post('/aprove/accept', [admin_controller::class, 'aprove_accept'])->name('admin_aprove_accept');
+    Route::post('/aprove/denied', [admin_controller::class, 'denied'])->name('admin_aprove_denied');
+    Route::post('/user/add', [admin_controller::class, 'store'])->name('store_user');
+    Route::post('/user/delete', [admin_controller::class, 'delete_user'])->name('delete_user');
+    Route::post('/report/solved', [admin_controller::class, 'report_solve'])->name('report_solve');
+});
 
 
 
@@ -80,7 +86,7 @@ Route::get('/vendor/register', [restaurants_controller::class, 'index'])->name('
 
 
 Route::get('/', [main_controller::class, 'index'])->name('main');
-Route::get('/test', [main_controller::class, 'test'])->name('test');
+Route::get('/camera', [main_controller::class, 'camera'])->name('camera');
 
 
 Route::get('/register', [user_controller::class, 'index'])->name('user_register');
@@ -95,6 +101,12 @@ Route::get('/profile', [profile_controller::class, 'index'])->name('profile');
 Route::get('/restaurant/{restaurant_name}/{restaurant_id}', [view_restaurant_controller::class, 'index'])->name('restaurant');
 Route::get('/deals', [view_deal_controller::class, 'index'])->name('deals');
 Route::get('/filter', [main_controller::class, 'filter_index'])->name('filter');
+Route::get('/admin', [admin_controller::class, 'index'])->name('admin');
+
+
+
+Route::post('/admin_go', [admin_controller::class, 'login'])->name('login_admin');
+
 
 
 
@@ -116,3 +128,5 @@ Route::post('/favorite/delete', [favorite_controller::class, 'favorite_delete'])
 Route::post('/filter/search', [main_controller::class, 'filter'])->name('filter_search');
 
 Route::patch('/profile/edit', [user_controller::class, 'edit'])->name('user_change');
+
+Route::post('/report', [user_controller::class, 'report'])->name('report');

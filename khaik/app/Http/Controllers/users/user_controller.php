@@ -4,6 +4,7 @@ namespace App\Http\Controllers\users;
 
 use App\Http\Controllers\Controller;
 use App\Models\tbl_article_like;
+use App\Models\tbl_report;
 use App\Models\tbl_user;
 
 use Illuminate\Http\Request;
@@ -172,5 +173,31 @@ class user_controller extends Controller
 
 
         return response()->json(['like_items' => $liked_items]);
+    }
+
+    public function report(Request $request)
+    {
+
+
+        if ($request->report == "other") {
+            $validated = $request->validate([
+                'other' => 'required'
+            ]);
+
+            $report = new tbl_report;
+            $report->restaurant_id = $request->restaurant;
+            $report->user_id = $request->user;
+            $report->reason = $request->other;
+            $report->save();
+
+            return redirect()->back();
+        }
+        $report = new tbl_report;
+        $report->restaurant_id = $request->restaurant;
+        $report->user_id = $request->user;
+        $report->reason = $request->report;
+        $report->save();
+
+        return redirect()->back();
     }
 }
