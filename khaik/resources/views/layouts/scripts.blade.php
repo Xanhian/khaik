@@ -4,6 +4,4 @@
 
 <script type="text/javascript" src="{{asset('vendor_code/slick/slick.min.js')}}"></script>
 
-
-
 <script type="text/javascript" src="{{asset('js/app.js')}}"></script>

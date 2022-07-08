@@ -45,6 +45,10 @@ class login_controller extends Controller
             ]);
 
             switch ($restaurant_id[0]->restaurant_complete_status) {
+                case 0:
+                    $status = "Please check. If you have everything setup correctly";
+
+                    break;
                 case 1:
                     $status = "Please go to Quick change to set up location and opening & closing time to get verified";
 

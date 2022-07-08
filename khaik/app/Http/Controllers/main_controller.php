@@ -251,4 +251,9 @@ class main_controller extends Controller
     {
         return view('test');
     }
+
+    public function camera()
+    {
+        return view('test');
+    }
 }

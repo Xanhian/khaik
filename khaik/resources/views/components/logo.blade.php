@@ -9,6 +9,9 @@
                 @auth('users')
                 <a href="{{route('user_logout')}}" class="text-white "><i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i></a>
                 @endauth
+                @auth('admins')
+                <a href="{{route('admin_logout')}}" class="text-white "><i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i></a>
+                @endauth
 
             </div>
         </div>

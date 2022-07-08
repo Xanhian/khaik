@@ -164,26 +164,32 @@
 
 
 
+            <div class="row">
+                <div class="col-6 d-flex align-items-center">
+
+                    <a target="_blank" href="{{$restaurant_info[0]->restaurant_facebook_link}}" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-facebook"></i></a>
+                    @auth("users")
+                    <form method="POST" action="{{route('favorite_save')}}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="restaurant_id" value="{{ $restaurant_info[0]->id}}" />
+
+                        <button type="submit" class="btn p-0 m-0 text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold font-solid  feather-bookmark"></i></button>
+                    </form>
+                    @endauth
+                    <a href="#map" data-toggle="collapse" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-map-pin"></i></a>
+
+                    <a data-toggle="modal" data-target="#add_item" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold fa-solid fa-qrcode"></i></a>
 
 
+                </div>
+                <div class="col-6 d-flex flex-row justify-content-end">
+                    <a data-toggle="modal" data-target="#report" class="text-decoration-none text-dark "><i class="p-2 bg-light rounded-circle font-weight-bold fa-solid fa-flag"></i></a>
 
-            <div class="col-6 d-flex align-items-center">
-
-                <a target="_blank" href="{{$restaurant_info[0]->restaurant_facebook_link}}" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-facebook"></i></a>
-                @auth("users")
-                <form method="POST" action="{{route('favorite_save')}}">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                    <input type="hidden" name="restaurant_id" value="{{ $restaurant_info[0]->id}}" />
-
-                    <button type="submit" class="btn p-0 m-0 text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold font-solid  feather-bookmark"></i></button>
-                </form>
-                @endauth
-                <a href="#map" data-toggle="collapse" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-map-pin"></i></a>
-
-                <a data-toggle="modal" data-target="#add_item" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold fa-solid fa-qrcode"></i></a>
-
-
+                </div>
             </div>
+
+
+
         </div>
     </div>
 
@@ -196,6 +202,52 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <img src="{{asset($restaurant_info[0]->restaurant_qr)}}" alt="">
+
+            </div>
+        </div>
+    </div>
+
+    <div class=" modal fade" id="report" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="{{route('report')}}" method="POST">
+
+                    <div class="modal-header">
+                        <h4>Report restaurant</h4>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <input type="hidden" name="restaurant" value="{{$restaurant_info[0]->id}}">
+                        @auth('users')
+                        <input type="hidden" name="user" value="{{session('user_id')}}">
+                        @else
+                        <input type="hidden" name="user" value="guest">
+
+                        @endauth
+                        <div class="container">
+                            <div class="form-group align-items-center">
+                                <input type="radio" name="report" value="info" id="abuse">
+                                <label for="abuse">Fake information</label>
+
+                            </div>
+                            <div class="form-group">
+                                <input type="radio" name="report" value="price" id="price">
+                                <label for="price">Impossible prices</label>
+
+                            </div>
+
+                            <div class="form-group m-0">
+                                <input type="radio" name="report" value="other" id="other">
+                                <label for="other">Other</label>
+                            </div>
+                            <textarea name="other" id="" cols="30" class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button class="btn btn-primary rounded" type="submit">Report</button>
+                    </div>
+
+                </form>
 
             </div>
         </div>

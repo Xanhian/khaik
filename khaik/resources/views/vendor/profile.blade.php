@@ -13,7 +13,7 @@
         <div class="col-md-4 mb-3">
           <div class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
 
-            <div class="d-flex align-items-center p-3">
+            <div class="d-flex align-items-center justify-content-between p-3">
 
               <div class="right">
                 <h6 class="mb-1 font-weight-bold">
@@ -24,7 +24,7 @@
                 </h6>
                 <p class="text-muted m-0 small">{{Session('owners_email')}}</p>
               </div>
-              <button onclick="startFCM()" class="ml-5 btn btn-primary text-white"> Allow notification <i class="fa-solid fa-bell"></i></button>
+              <button onclick="startFCM()" class=" btn btn-primary text-white"> Allow <i class="fa-solid fa-bell"></i></button>
 
             </div>
 
