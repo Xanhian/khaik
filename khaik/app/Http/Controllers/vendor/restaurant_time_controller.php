@@ -146,6 +146,7 @@ class restaurant_time_controller extends Controller
     public function get_location(Request $request)
     {
 
+
         $restaurant_id = session("owners_restaurant");
         $location = tbl_restaurant::find($restaurant_id);
         $location->restaurant_longitude = $request->longitude;

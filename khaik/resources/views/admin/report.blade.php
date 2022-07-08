@@ -28,7 +28,10 @@
                 <p class="m-2">Reason: {{$info->reason}}</p>
             </div>
 
-            <div class="col-2 text-center my-auto">
+            <div class="col-2 d-flex flex-row text-center justify-content-between my-auto">
+
+                <a target="blank" href="../restaurant/{{$info->restaurant_name}}/{{$info->id}}"><i class="fa-solid fa-eye"></i></a>
+
                 <form action="{{route('report_solve')}}" method="POST">
                     @csrf
                     <input type="hidden" name="report_id" value="{{$info->id}}">

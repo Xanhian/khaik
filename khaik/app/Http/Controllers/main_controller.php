@@ -47,7 +47,7 @@ class main_controller extends Controller
                         if ($key_day["sunday"] == "closed") {
                             $today_state[$restaurant->id] = "closed";
                         } else {
-                            if ($time_now >= strtotime($key_day["sunday "]) && $time_now <= strtotime($key_day_close["sunday "])) {
+                            if ($time_now >= strtotime($key_day["sunday"]) && $time_now <= strtotime($key_day_close["sunday"])) {
                                 $today_state[$restaurant->id] = "open";
                             } else {
                                 $today_state[$restaurant->id] = "closed";
@@ -134,7 +134,7 @@ class main_controller extends Controller
 
 
         foreach ($categories as $category) {
-            $restaurants = DB::table('tbl_restaurants_connected_categories')->rightJoin('tbl_restaurants', 'tbl_restaurants_connected_categories.restaurant_id', '=', 'tbl_restaurants.id')->where('restaurant_category_id', $category->id)->take(3)->get();
+            $restaurants = DB::table('tbl_restaurants_connected_categories')->rightJoin('tbl_restaurants', 'tbl_restaurants_connected_categories.restaurant_id', '=', 'tbl_restaurants.id')->where('restaurant_category_id', $category->id)->where('restaurant_complete_status', 4)->latest('tbl_restaurants.created_at')->take(3)->get();
             $restaurants_by_category[$category->id] = $restaurants;
         }
 

@@ -25,9 +25,9 @@ class user_controller extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'lastname' => 'required',
-            'phonenumber' => 'required|unique:tbl_users',
+            'phonenumber' => 'required|unique:tbl_users|min:7|max:7',
             'email' => 'required|unique:tbl_users',
-            'password' => 'required',
+            'password' => 'required|min:8',
             'repassword' => 'required|same:password',
         ]);
 

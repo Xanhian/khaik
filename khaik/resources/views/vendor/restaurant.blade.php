@@ -306,5 +306,7 @@
 
 
 </body>
+<script src="{{asset('js/ajax.js')}}"></script>
+
 
 </html>

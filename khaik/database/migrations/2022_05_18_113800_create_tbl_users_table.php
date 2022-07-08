@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phonenumber', 25)->unique();
             $table->string('email', 100)->unique();
-            $table->string('firebase_token')->nullable();
+            $table->string('fcm_token')->nullable();
 
             $table->timestamps();
         });

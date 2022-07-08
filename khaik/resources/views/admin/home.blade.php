@@ -42,7 +42,7 @@
                     <div class="vendor-btn text-center rounded vendor-menu-btn m-2 w-100 d-flex align-items-center">
                         <div class="mx-auto">
                             <p class="vendor-btn-text text-white m-0"><i class="fa-solid fa-plus"></i></p>
-                            <p class="text-white m-0">Add</p>
+                            <p class="text-white m-0">Add user</p>
                         </div>
 
                     </div>

@@ -169,9 +169,9 @@
 
                 <div class="container m-0 p-0 d-flex justify-content-between align-items-center">
 
-                    <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-facebook"></i></a>
+                    <a target="_blank" href="{{$restaurant_info[0]->restaurant_facebook_link}}" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-facebook"></i></a>
                     <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-bookmark"></i></a>
-                    <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold feather-map-pin"></i></a>
+                    <a href="#map" data-toggle="collapse" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold feather-map-pin"></i></a>
                     <a data-toggle="modal" data-target="#qr_code" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold fa-solid fa-qrcode"></i></a>
                 </div>
 
@@ -266,5 +266,7 @@
 
     @include('layouts.scripts')
 </body>
+<script src="{{asset('js/ajax.js')}}"></script>
+
 
 </html>

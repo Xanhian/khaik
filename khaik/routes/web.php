@@ -17,6 +17,7 @@ use App\Http\Controllers\vendor\restaurant_time_controller;
 use App\Http\Controllers\vendor\restaurant_view_controller;
 use App\Http\Controllers\vendor\vendor_profile_controller;
 use App\Http\Controllers\view_deal_controller;
+use LaravelQRCode\Facades\QRCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,7 @@ Route::prefix('vendor')->middleware('vendor')->group(function () {
     Route::post('/save_time', [restaurant_time_controller::class, 'save_time'])->name('save_time');
     Route::post('/save_location', [restaurant_time_controller::class, 'get_location'])->name('save_location');
     Route::post('/save_status', [restaurant_time_controller::class, 'set_status'])->name('set_status');
-    Route::post('/notification', [restaurant_time_controller::class, 'index_notification'])->name('notification');
+    Route::post('/notification', [restaurant_time_controller::class, 'storeToken'])->name('store_token');
 });
 
 
@@ -75,6 +76,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::post('/user/add', [admin_controller::class, 'store'])->name('store_user');
     Route::post('/user/delete', [admin_controller::class, 'delete_user'])->name('delete_user');
     Route::post('/report/solved', [admin_controller::class, 'report_solve'])->name('report_solve');
+    Route::post('/notification/push', [admin_controller::class, 'send_notification'])->name('send_notification');
 });
 
 

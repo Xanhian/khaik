@@ -7,6 +7,7 @@ use App\Models\tbl_admin;
 use App\Models\tbl_report;
 use App\Models\tbl_restaurant;
 use App\Models\tbl_restaurant_owner;
+use App\Models\tbl_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -99,6 +100,55 @@ class admin_controller extends Controller
         $restaurant = tbl_restaurant::find($request->restaurant_id);
         $restaurant->restaurant_complete_status = 4;
         $restaurant->save();
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $FcmToken =
+            tbl_user::whereNotNull('fcm_token')->pluck('fcm_token')->all();
+
+
+
+
+        $serverKey = env('FCM_SERVER_KEY');
+
+
+
+        $data = [
+            "registration_ids" => $FcmToken,
+            "notification" => [
+                "title" => "New Restaurant",
+                "body" => "There are new restaurants available",
+            ]
+        ];
+        $encodedData = json_encode($data);
+
+        $headers = [
+            'Authorization:key=' . $serverKey,
+            'Content-Type: application/json',
+        ];
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        // Disabling SSL Certificate support temporarly
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
+
+        // Execute post
+        $result = curl_exec($ch);
+
+        if ($result === FALSE) {
+            die('Curl failed: ' . curl_error($ch));
+        }
+
+
+        curl_close($ch);
+
+
+
         return redirect()->back();
     }
 
@@ -109,13 +159,19 @@ class admin_controller extends Controller
                 'restaurant_reason' => 'required',
             ]);
         $restaurant = tbl_restaurant::find($request->restaurant_id);
-        $restaurant->restaurant_complete_status = 1;
+
+
+        $restaurant->restaurant_complete_status = 0;
+        $restaurant->restaurant_custom_status = $request->restaurant_reason;
+
 
         $restaurant->save();
 
         $url = 'https://fcm.googleapis.com/fcm/send';
-        $FcmToken =
-            tbl_restaurant_owner::whereNotNull('fcm_token')->pluck('fcm_token')->all();
+        $FcmToken = tbl_restaurant_owner::where('id', $request->owner_id)->pluck('fcm_token');
+
+
+
 
         $serverKey = env('FCM_SERVER_KEY');
 
@@ -156,6 +212,7 @@ class admin_controller extends Controller
 
 
         curl_close($ch);
+
 
 
 
@@ -207,5 +264,118 @@ class admin_controller extends Controller
     public function index_notification()
     {
         return view('admin.notification');
+    }
+
+    public function send_notification(Request $request)
+    {
+        switch ($request->users) {
+            case 'vendor':
+
+                $url = 'https://fcm.googleapis.com/fcm/send';
+                $FcmToken =
+                    tbl_restaurant_owner::whereNotNull('fcm_token')->pluck('fcm_token')->all();
+
+
+
+
+                $serverKey = env('FCM_SERVER_KEY');
+
+
+
+                $data = [
+                    "registration_ids" => $FcmToken,
+                    "notification" => [
+                        "title" => $request->title,
+                        "body" => $request->body,
+                    ]
+                ];
+                $encodedData = json_encode($data);
+
+                $headers = [
+                    'Authorization:key=' . $serverKey,
+                    'Content-Type: application/json',
+                ];
+
+                $ch = curl_init();
+
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+                // Disabling SSL Certificate support temporarly
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
+
+                // Execute post
+                $result = curl_exec($ch);
+
+                if ($result === FALSE) {
+                    die('Curl failed: ' . curl_error($ch));
+                }
+
+
+                curl_close($ch);
+
+
+
+
+                return redirect()->back();
+                break;
+            case 'user':
+                $url = 'https://fcm.googleapis.com/fcm/send';
+                $FcmToken =
+                    tbl_user::whereNotNull('fcm_token')->pluck('fcm_token')->all();
+
+
+
+
+                $serverKey = env('FCM_SERVER_KEY');
+
+
+
+                $data = [
+                    "registration_ids" => $FcmToken,
+                    "notification" => [
+                        "title" => $request->title,
+                        "body" => $request->body,
+                    ]
+                ];
+                $encodedData = json_encode($data);
+
+                $headers = [
+                    'Authorization:key=' . $serverKey,
+                    'Content-Type: application/json',
+                ];
+
+                $ch = curl_init();
+
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+                // Disabling SSL Certificate support temporarly
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
+
+                // Execute post
+                $result = curl_exec($ch);
+
+                if ($result === FALSE) {
+                    die('Curl failed: ' . curl_error($ch));
+                }
+
+
+                curl_close($ch);
+
+
+
+
+                return redirect()->back();
+                break;
+        }
     }
 }
