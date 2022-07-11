@@ -78,18 +78,23 @@
                         @endauth
                         @guest('users')
 
-                        <i id="{{$menu_item->id}}" class="mt-4 fa-solid fa-heart custom-fa fa-2xl"></i>
+                        <a href="#" data-toggle="modal" data-target="#popup"> <i id=" {{$menu_item->id}}" class="mt-4 fa-solid fa-heart custom-fa fa-2xl"></i></a>
 
                         <p class="m-0 pt-2 ">{{$menu_item_likes[$menu_item->id]}}</p>
+
+
+
 
                         @endguest
 
                     </div>
 
+                    @if(count($menu_articles_option[$menu_item->id] ) > 0 )
+
                     <div class=" my-auto mx-auto align-self-center ">
                         <span><a class=" " data-toggle="collapse" href="#collapse_options{{$menu_item->id}}" role="button"><i class="fa-solid fa-angle-down fa-2xl"></i></a></span>
                     </div>
-
+                    @endif
                 </div>
             </div>
             @endif
@@ -138,11 +143,27 @@
             </div>
 
 
+
             @endforeach
             @endforeach
 
 
+            <div class=" modal fade" id="popup" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
 
+
+
+
+
+                    @include('components.guest_btn')
+
+
+
+
+
+
+                </div>
+            </div>
 
 
 

@@ -1,6 +1,5 @@
 
 
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&display=swap');
 html{
@@ -8,7 +7,6 @@ html{
 }
 body {
   
-    font-family: 'FredokaOne',cursive;
     font-family: 'Mulish', sans-serif;
     font-size: 13px;
     color: #ce0f0f;
@@ -16,10 +14,15 @@ body {
 
    
 }
-
+a:focus{
+    color: rgb(255, 123, 130);
+}
+a:hover {
+    color: rgb(255, 123, 130);
+}
 .logo{
-    font-family: 'FredokaOne',cursive;
-    font-size: 3em;
+  width: 9em;
+  height: 4em;
 }
 
 .qr-scan{
@@ -174,8 +177,13 @@ body {
 
     height: 350px;
     width: 100%;
-    background: #000000;
+    background: #e4e4e4;
 
+}
+
+.mapboxgl-canvas{
+    width: 100% !important;
+    height: 100% !important;
 }
 
 
@@ -198,6 +206,8 @@ body {
     width: 100%;
     margin: 0;
     padding-bottom: 20px;
+    height: 500px;
+    background-color: white;
 
     /*stacking fieldsets above each other*/
     position: relative;
@@ -1078,12 +1088,7 @@ p {
 
 /* Login Page */
 
-.login-page video {
-    width: 50%;
-    position: absolute;
-    bottom: 0;
-    right: 50%;
-}
+
 
 .otp input.form-control.form-control-lg {
     text-align: center !important;
@@ -1095,6 +1100,7 @@ p {
 
 .login-page {
     background: #fff;
+    height: 100vh;
 }
 
 .login-page .form-control {

@@ -321,7 +321,7 @@ class admin_controller extends Controller
 
 
 
-                return redirect()->back();
+                return redirect()->back()->with('status', 'Notification send!');
                 break;
             case 'user':
                 $url = 'https://fcm.googleapis.com/fcm/send';
@@ -374,7 +374,7 @@ class admin_controller extends Controller
 
 
 
-                return redirect()->back();
+                return redirect()->back()->with('status', 'Notification send!');
                 break;
         }
     }

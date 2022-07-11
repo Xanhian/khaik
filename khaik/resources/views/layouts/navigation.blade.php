@@ -5,8 +5,8 @@
 <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
 
     <div class="row">
-        <div id="home" data-active="false" class="col">
-            <a href="{{route('main')}}" class="text-dark small font-weight-bold text-decoration-none">
+        <div id="home" data-active="false" class="col ">
+            <a href="{{route('main')}}" class="text-dark small font-weight-bold text-decoration-none ">
                 <p class="h4 m-0"><i class="feather-home "></i></p>
                 Home
             </a>
@@ -24,9 +24,9 @@
                 </a>
             </div>
         </div>
-        <div id="favorite" class="col">
+        <div id="favorite" class="col ">
             <a href="{{route('favorite')}}" class="text-dark small font-weight-bold text-decoration-none">
-                <p class="h4 m-0"><i class="feather-heart"></i></p>
+                <p class="h4 m-0"><i class="fa-regular fa-star"></i></p>
                 Favorites
             </a>
         </div>

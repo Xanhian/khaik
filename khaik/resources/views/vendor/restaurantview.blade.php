@@ -229,11 +229,33 @@
                         <div class="form-group">
                             <p>Place</p>
 
-                            <input type="text" class="form-control" name="edit_restaurant_place" value=" {{$restaurant_info[0]->restaurant_place}}">
+                            <select name="edit_restaurant_place" class="form-control">
+                                <option value="{{$restaurant_info[0]->restaurant_place}}" disabled selected hidden>{{$restaurant_info[0]->restaurant_place}}</option>
+                                <option value="Nickerie">Nickerie</option>
+                                <option value="Coronie">Coronie</option>
+                                <option value="Saramacca">Saramacca</option>
+                                <option value="Wanica">Wanica</option>
+                                <option value="Paramaribo">Paramaribo</option>
+                                <option value="Commewijne">Commewijne</option>
+                                <option value="Marowijne">Marowijne</option>
+                                <option value="Para">Para</option>
+                                <option value="Sipaliwini">Sipaliwini</option>
+                                <option value="Brokopondo">Brokopondo</option>
+
+
+                            </select>
+
                         </div>
                         <div class="form-group">
                             <p>Country</p>
-                            <input type="text" class="form-control" name="edit_restaurant_country">
+
+
+                            <select name="edit_restaurant_country" class="form-control">
+                                <option value="{{$restaurant_info[0]->restaurant_country}}" disabled selected hidden>{{$restaurant_info[0]->restaurant_country}}</option>
+                                <option value="suriname">Suriname</option>
+
+                            </select>
+
 
                         </div>
 

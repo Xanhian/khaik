@@ -25,29 +25,39 @@
                     </div>
                 </form>
                 <ul class="nav nav-tabs d-flex flex-row justify-content-between border-0" id="myTab" role="tablist">
+
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active border-0 bg-light text-dark rounded" id="restaurant-tab" data-toggle="tab" href="#restaurant" role="tab" aria-controls="home" aria-selected="true"><i class="feather-home mr-2"></i>Restaurants</a>
+                        <a class="nav-link active border-primary bg-light text-dark rounded" id="restaurant-tab" data-toggle="tab" href="#restaurant" role="tab" aria-controls="home" aria-selected="true"><i class="feather-home mr-2"></i>Restaurants</a>
+
+                    </li>
+                    <li class="nav-item ml-n5" role="presentation">
+                        <a class="nav-link border-primary bg-light text-dark rounded" id="restaurant-tab" data-toggle="tab" href="#food" role="tab" aria-controls="home" aria-selected="true"><i class="fa-solid fa-bowl-food mr-2"></i>Food</a>
                     </li>
 
 
+
+
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link border-0 bg-light text-dark rounded ml-3" data-toggle="modal" data-target="#filters" role="tab" aria-controls="profile" aria-selected="false">Filter</a>
+                        <a class="nav-link  bg-light text-dark rounded ml-3 border-primary" data-toggle="modal" data-target="#filters" role="tab" aria-controls="profile" aria-selected="false">Filter</a>
                     </li>
                 </ul>
 
 
-                <div class="tab-content">
+                <div class="tab-content" id="myTab" id="myTabContent">
                     <div class="tab-pane fade show active" id="restaurant" role="tabpanel" aria-labelledby="restaurant-tab">
+
                         @isset($results)
                         @if($results == 'nothing')
-                        <div class="text-center py-5">
-                            <p class="h4 mb-4"><i class="feather-search bg-primary text-white rounded p-2"></i></p>
-                            <p class="font-weight-bold text-dark h5">Nothing found</p>
-                            <p>we could not find anything that would match your search request, please try again.</p>
+                        <div class="py-5">
+                            <div class="text-center py-5">
+                                <p class="h4 mt-5 mb-4"><i class="feather-search bg-primary text-white rounded p-2"></i></p>
+                                <p class="font-weight-bold text-dark h5">Nothing found</p>
+                                <p>we could not find anything that would match your search request, please try again.</p>
+                            </div>
                         </div>
                         @else
                         @foreach($results as $result)
-
+                        @if($result->restaurant_name !== null || $result->restaurant_id !==null)
                         <div class="container mt-4 mb-4 p-0">
 
                             <div class="row">
@@ -84,20 +94,87 @@
 
                             </div>
                         </div>
+                        @endif
                         @endforeach
                         @endif
                         @else
-                        <div class="text-center py-5">
-                            <p class="h4 mb-4"><i class="feather-search bg-primary text-white rounded p-2"></i></p>
-                            <p class="font-weight-bold text-dark h5">Nothing found</p>
-                            <p>we could not find anything that would match your search request, please try again.</p>
+                        <div class="py-5">
+                            <div class="text-center py-5">
+                                <p class="h4 mt-5 mb-4"><i class="feather-search bg-primary text-white rounded p-2"></i></p>
+                                <p class="font-weight-bold text-dark h5">Nothing found</p>
+                                <p>we could not find anything that would match your search request, please try again.</p>
+                            </div>
                         </div>
+
                         @endisset
 
 
                     </div>
 
+                    <div class="tab-pane fade" id="food" role="tabpanel" aria-labelledby="profile-tab">
+                        @isset($results)
+                        @if($results == 'nothing')
+                        <div class="py-5">
+                            <div class="text-center py-5">
+                                <p class="h4 mt-5 mb-4"><i class="feather-search bg-primary text-white rounded p-2"></i></p>
+                                <p class="font-weight-bold text-dark h5">Nothing found</p>
+                                <p>we could not find anything that would match your search request, please try again.</p>
+                            </div>
+                        </div>
+                        @else
+                        @foreach($results as $result)
+                        @if($result->restaurant_name !== null || $result->restaurant_id !==null)
+
+                        <div class="container mt-4 mb-4 p-0">
+
+                            <div class="row">
+                                <div class="col-md-3 pb-3">
+                                    <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+                                        <div class="list-card-image">
+
+                                            <a href="{{route('restaurant',['restaurant_name'=>$result->restaurant_name, 'restaurant_id'=>$result->restaurant_id])}}">
+                                                <img alt="#" src="{{asset($result->article_img)}}" class="img-fluid search-item-img w-100">
+                                            </a>
+                                        </div>
+                                        <div class="p-3 position-relative">
+                                            <div class="list-card-body">
+                                                <h6 class="mb-1">
+                                                    <a href="{{route('restaurant',['restaurant_name'=>$result->restaurant_name, 'restaurant_id'=>$result->restaurant_id])}}" class="text-black">{{$result-> article_name }} </a>
+                                                </h6>
+                                                <p class="text-gray mb-1 small">{{$result->restaurant_name}}</p>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
+                        @endif
+                        @else
+                        <div class="py-5">
+                            <div class="text-center py-5">
+                                <p class="h4 mt-5 mb-4"><i class="feather-search bg-primary text-white rounded p-2"></i></p>
+                                <p class="font-weight-bold text-dark h5">Nothing found</p>
+                                <p>we could not find anything that would match your search request, please try again.</p>
+                            </div>
+                        </div>
+
+                        @endisset
+
+                    </div>
+
                 </div>
+
+
+
+
 
             </div>
         </div>

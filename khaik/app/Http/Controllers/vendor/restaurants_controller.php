@@ -164,7 +164,8 @@ class restaurants_controller extends Controller
         if ($edit_restaurant->restaurant_addres !== $request->edit_restaurant_addres) {
             $edit_restaurant->restaurant_addres = $request->edit_restaurant_addres;
         }
-        if ($edit_restaurant->restaurant_place !== $request->edit_restaurant_place) {
+
+        if ($edit_restaurant->restaurant_place !== $request->edit_restaurant_place && $request->edit_restaurant_place !== null) {
             $edit_restaurant->restaurant_place = $request->edit_restaurant_place;
         }
 
@@ -179,5 +180,7 @@ class restaurants_controller extends Controller
 
 
         $edit_restaurant->save();
+
+        return redirect()->back();
     }
 }

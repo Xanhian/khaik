@@ -19,9 +19,21 @@
             <h4 class="my-3">Notification</h4>
 
         </div>
+        @if(session('status'))
+        <div class="alert alert-success" role="alert">
+            <p>
+                {{session('status')}}
 
+            </p>
+        </div>
+        @endif
 
         <div class="mt-3 row bg-white border rounded">
+            <div class="container">
+                <div class="row">
+
+                </div>
+            </div>
             <div class="container pb-3">
                 <h4 class="py-2">Send Notification</h4>
                 <form action="{{route('send_notification')}}" method="post">

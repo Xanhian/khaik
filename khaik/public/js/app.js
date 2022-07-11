@@ -2197,6 +2197,75 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/nav.js":
+/*!*****************************!*\
+  !*** ./resources/js/nav.js ***!
+  \*****************************/
+/***/ (() => {
+
+$(document).ready(function () {
+  var page = sessionStorage.getItem("someVarKey");
+
+  switch (page) {
+    case "home":
+      $("#home").addClass("selected");
+      break;
+
+    case "deal":
+      $("#deals").addClass("selected");
+      break;
+
+    case "favorite":
+      $("#favorite").addClass("selected");
+      break;
+
+    case "profile":
+      $("#profile").addClass("selected");
+      break;
+
+    default:
+      break;
+  }
+
+  sessionStorage.setItem("someVarKey", null);
+  $("#home").click(function () {
+    var someVarName = "home";
+    sessionStorage.setItem("someVarKey", someVarName);
+  });
+  $("#deals").click(function () {
+    var someVarName = "deal";
+    sessionStorage.setItem("someVarKey", someVarName);
+  });
+  $("#favorite").click(function () {
+    var someVarName = "favorite";
+    sessionStorage.setItem("someVarKey", someVarName);
+  });
+  $("#profile").click(function () {
+    var someVarName = "profile";
+    sessionStorage.setItem("someVarKey", someVarName);
+  });
+  var x = $("#lat");
+  var y = $("#lon");
+  getLocation();
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+
+  function showPosition(position) {
+    x.val(position.coords.latitude);
+    y.val(position.coords.longitude);
+  }
+
+  ;
+});
+
+/***/ }),
+
 /***/ "./resources/js/osahan.js":
 /*!********************************!*\
   !*** ./resources/js/osahan.js ***!
@@ -2232,15 +2301,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     }]
   });
   $('.cat-slider').slick({
-    //   centerMode: true,
+    centerMode: false,
     //   centerPadding: '30px',
     slidesToShow: 8,
-    arrows: true,
     responsive: [{
       breakpoint: 768,
       settings: {
-        arrows: true,
-        centerMode: true,
+        arrows: false,
         centerPadding: '40px',
         slidesToShow: 4
       }
@@ -2249,7 +2316,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
       settings: {
         arrows: false,
         centerMode: true,
-        centerPadding: '40px',
+        touchThreshold: 1000,
         slidesToShow: 4
       }
     }]
@@ -2276,9 +2343,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   }); //discover
 
   $('.discover-slider').slick({
-    centerMode: true,
+    centerMode: false,
     lazyLoad: 'ondemand',
-    slidesToShow: 1,
+    slidesToShow: 2,
     autoplay: true,
     autoplaySpeed: 3000,
     responsive: [{
@@ -19939,6 +20006,7 @@ process.umask = function() { return 0; };
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/osahan.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/nav.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	

@@ -130,5 +130,6 @@ Route::post('/favorite/delete', [favorite_controller::class, 'favorite_delete'])
 Route::post('/filter/search', [main_controller::class, 'filter'])->name('filter_search');
 
 Route::patch('/profile/edit', [user_controller::class, 'edit'])->name('user_change');
+Route::post('/notify', [user_controller::class, 'storeToken'])->name('store_token_user');
 
 Route::post('/report', [user_controller::class, 'report'])->name('report');

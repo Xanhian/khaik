@@ -13,12 +13,27 @@
     @endguest
     <div class="container position-relative">
       @auth('users')
+      <div class="container w-100">
+        <div class="toast w-100 mx-auto mt-3" id="show_notify" role="status" aria-live="polite" aria-atomic="false" data-autohide="true" data-delay="2000">
+          <div class="toast-header">
+
+            <strong class="mr-auto">Notification</strong>
+
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            Notification turned on!
+          </div>
+        </div>
+      </div>
 
       <div class="py-5 osahan-profile row">
         <div class="col-md-4 mb-3">
           <div class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
 
-            <div class="d-flex align-items-center p-3">
+            <div class="d-flex align-items-center justify-content-between p-3">
 
               <div class="right">
                 <h6 class="mb-1 font-weight-bold">
@@ -27,6 +42,8 @@
                 </h6>
                 <p class="text-muted m-0 small">{{Session('user_email')}}</p>
               </div>
+              <button onclick="startFCM()" class=" btn btn-primary text-white"> Allow <i class="fa-solid fa-bell"></i></button>
+
             </div>
 
 
@@ -113,5 +130,68 @@
       @include('layouts.navigation')
       @include('layouts.scripts')
 </body>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#show_notify').hide();
+    $('#show_notify').toast('hide');
+
+  });
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyBDDL44Xnl6QtpCqLmMvxB00GYL276HWfY",
+    authDomain: "test683-430b9.firebaseapp.com",
+    projectId: "test683-430b9",
+    storageBucket: "test683-430b9.appspot.com",
+    messagingSenderId: "353829315143",
+    appId: "1:353829315143:web:8cfe79961d688177c58762",
+    measurementId: "G-VDC6F63M9T"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const messaging = firebase.messaging();
+
+  function startFCM() {
+    messaging
+      .requestPermission()
+      .then(function() {
+        return messaging.getToken()
+      })
+      .then(function(response) {
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        $.ajax({
+          url: '{{ route("store_token_user") }}',
+          type: 'POST',
+          data: {
+            token: response
+          },
+          dataType: 'JSON',
+          success: function(response) {
+
+            $('#show_notify').show();
+
+
+            $('#show_notify').toast('show');
+            setTimeout(function() {
+              $('#show_notify').hide();
+
+            }, 2000);
+
+          },
+          error: function(error) {
+
+          },
+        });
+
+      }).catch(function(error) {
+        alert(error);
+      });
+  }
+</script>
 
 </html>
