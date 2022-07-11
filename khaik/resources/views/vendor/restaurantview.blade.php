@@ -169,9 +169,9 @@
 
                 <div class="container m-0 p-0 d-flex justify-content-between align-items-center">
 
-                    <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-facebook"></i></a>
+                    <a target="_blank" href="{{$restaurant_info[0]->restaurant_facebook_link}}" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-facebook"></i></a>
                     <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-bookmark"></i></a>
-                    <a href="#ratings-and-reviews" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold feather-map-pin"></i></a>
+                    <a href="#map" data-toggle="collapse" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold feather-map-pin"></i></a>
                     <a data-toggle="modal" data-target="#qr_code" class="text-decoration-none text-dark"><i class="p-2 bg-light rounded-circle font-weight-bold fa-solid fa-qrcode"></i></a>
                 </div>
 
@@ -229,11 +229,33 @@
                         <div class="form-group">
                             <p>Place</p>
 
-                            <input type="text" class="form-control" name="edit_restaurant_place" value=" {{$restaurant_info[0]->restaurant_place}}">
+                            <select name="edit_restaurant_place" class="form-control">
+                                <option value="{{$restaurant_info[0]->restaurant_place}}" disabled selected hidden>{{$restaurant_info[0]->restaurant_place}}</option>
+                                <option value="Nickerie">Nickerie</option>
+                                <option value="Coronie">Coronie</option>
+                                <option value="Saramacca">Saramacca</option>
+                                <option value="Wanica">Wanica</option>
+                                <option value="Paramaribo">Paramaribo</option>
+                                <option value="Commewijne">Commewijne</option>
+                                <option value="Marowijne">Marowijne</option>
+                                <option value="Para">Para</option>
+                                <option value="Sipaliwini">Sipaliwini</option>
+                                <option value="Brokopondo">Brokopondo</option>
+
+
+                            </select>
+
                         </div>
                         <div class="form-group">
                             <p>Country</p>
-                            <input type="text" class="form-control" name="edit_restaurant_country">
+
+
+                            <select name="edit_restaurant_country" class="form-control">
+                                <option value="{{$restaurant_info[0]->restaurant_country}}" disabled selected hidden>{{$restaurant_info[0]->restaurant_country}}</option>
+                                <option value="suriname">Suriname</option>
+
+                            </select>
+
 
                         </div>
 
@@ -266,5 +288,7 @@
 
     @include('layouts.scripts')
 </body>
+<script src="{{asset('js/ajax.js')}}"></script>
+
 
 </html>

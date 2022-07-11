@@ -98,7 +98,7 @@
                         <div class="container p-5 mx-auto">
                             <form action="{{route('vendor_deals_add')}}" enctype='multipart/form-data' method="post">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                <input type="hidden" name="deal_id" value="{{}}">
+
                                 <div class="form-group">
                                     <input type="file" name="deal_img" id="deal_img" class="form-control" accept="image/*" multiple />
 
@@ -133,5 +133,6 @@
     @include('vendor.layout.navigation')
     @include('layouts.scripts')
 </body>
+<script src="{{asset('js/article.js')}}"></script>
 
 </html>

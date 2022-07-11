@@ -3,9 +3,9 @@
 @include('layouts.head')
 
 <body>
-    <div class="login-page vh-100">
+    <div class="login-page bg-white">
 
-        <div class="d-flex flex-column align-items-center  vh-100">
+        <div class="d-flex flex-column align-items-center  bg-white">
             <img src="{{asset('img/register-bg.png')}}" alt="" srcset="" class="w-100 mx-auto" />
 
             <div class="px-5 col-md-6 ml-auto">

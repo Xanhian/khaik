@@ -11,7 +11,7 @@ class tbl_user extends Authenticatable
     use HasFactory;
 
     protected $fillable = [
-        'name', 'lastname', 'password', 'phonenumber', 'email'
+        'name', 'lastname', 'password', 'phonenumber', 'email', 'fcm_token'
     ];
     protected $guard = 'users';
     public function getAuthPassword()

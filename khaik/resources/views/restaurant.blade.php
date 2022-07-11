@@ -173,7 +173,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="restaurant_id" value="{{ $restaurant_info[0]->id}}" />
 
-                        <button type="submit" class="btn p-0 m-0 text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold font-solid  feather-bookmark"></i></button>
+                        <button type="submit" class="btn p-0 m-0 text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle  fa-regular fa-star"></i></button>
                     </form>
                     @endauth
                     <a href="#map" data-toggle="collapse" class="text-decoration-none text-dark mx-1"><i class="p-2 bg-light rounded-circle font-weight-bold  feather-map-pin"></i></a>
@@ -193,8 +193,10 @@
         </div>
     </div>
 
+    <div class="text-center">
+        <div id='map' class="collapse mx-auto text-center"></div>
 
-    <div id='map' class="collapse show"></div>
+    </div>
 
 
 
@@ -269,6 +271,7 @@
 
 </body>
 @include('layouts.scripts')
+
 <script src="{{asset('js/ajax.js')}}"></script>
 
 </html>

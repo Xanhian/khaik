@@ -65,7 +65,7 @@
                     </form>
                 </div>
                 <div class="new-acc d-flex align-items-center justify-content-center">
-                    <a href="login.html">
+                    <a href="{{route('user_login')}}">
                         <p class="text-center m-0">Already an account? Sign in</p>
                     </a>
                 </div>

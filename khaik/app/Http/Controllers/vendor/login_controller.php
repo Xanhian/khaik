@@ -42,6 +42,7 @@ class login_controller extends Controller
                 'owners_restaurant' => $restaurant_id[0]->id,
                 'owners_restaurant_name' => $restaurant_id[0]->restaurant_name,
                 'owners_verified_status' => $restaurant_id[0]->restaurant_complete_status,
+                'owners_custom_status' => $restaurant_id[0]->restaurant_custom_status,
             ]);
 
             switch ($restaurant_id[0]->restaurant_complete_status) {

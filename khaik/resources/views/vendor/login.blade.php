@@ -3,12 +3,12 @@
 @include('layouts.head')
 
 <body>
-    <div class="login-page vh-100">
+    <div class="login-page bg-white ">
 
-        <div class="d-flex flex-column align-items-center  vh-100">
+        <div class="d-flex flex-column align-items-center bg-white  ">
             <img src="{{asset('img/register-bg.png')}}" alt="" srcset="" class="w-100 mx-auto" />
 
-            <div class="px-5 col-md-6 ml-auto">
+            <div class="px-5 col-md-6 ml-auto ">
                 <div class="px-5 col-10 mx-auto">
 
 
@@ -42,9 +42,7 @@
 
 
                     </form>
-                    <a href="forgot_password.html" class="text-decoration-none">
-                        <p class="text-center">Forgot your password?</p>
-                    </a>
+
                     <div class="d-flex align-items-center justify-content-center">
                         <a href="{{route('register_vendor')}}">
                             <p class="text-center m-0">Don't have an account? Sign up</p>

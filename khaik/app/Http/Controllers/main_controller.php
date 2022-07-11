@@ -47,7 +47,7 @@ class main_controller extends Controller
                         if ($key_day["sunday"] == "closed") {
                             $today_state[$restaurant->id] = "closed";
                         } else {
-                            if ($time_now >= strtotime($key_day["sunday "]) && $time_now <= strtotime($key_day_close["sunday "])) {
+                            if ($time_now >= strtotime($key_day["sunday"]) && $time_now <= strtotime($key_day_close["sunday"])) {
                                 $today_state[$restaurant->id] = "open";
                             } else {
                                 $today_state[$restaurant->id] = "closed";
@@ -134,7 +134,7 @@ class main_controller extends Controller
 
 
         foreach ($categories as $category) {
-            $restaurants = DB::table('tbl_restaurants_connected_categories')->rightJoin('tbl_restaurants', 'tbl_restaurants_connected_categories.restaurant_id', '=', 'tbl_restaurants.id')->where('restaurant_category_id', $category->id)->take(3)->get();
+            $restaurants = DB::table('tbl_restaurants_connected_categories')->rightJoin('tbl_restaurants', 'tbl_restaurants_connected_categories.restaurant_id', '=', 'tbl_restaurants.id')->where('restaurant_category_id', $category->id)->where('restaurant_complete_status', 4)->latest('tbl_restaurants.created_at')->take(3)->get();
             $restaurants_by_category[$category->id] = $restaurants;
         }
 
@@ -164,6 +164,13 @@ class main_controller extends Controller
                 $lat = $request->lat;
                 $lon = $request->lon;
 
+                if (empty($lat) || empty($lon)) {
+                    return view('search', [
+                        'results' => 'nothing',
+
+                        'status' => 'Please allow notification access to search for restaurants',
+                    ]);
+                }
 
                 $data = DB::table("tbl_restaurants")
                     ->select(
@@ -225,7 +232,7 @@ class main_controller extends Controller
                 break;
         }
         if ($request->search !== null) {
-            $restaurants = DB::table('tbl_restaurants_connected_categories')->rightJoin('tbl_restaurants', 'tbl_restaurants_connected_categories.restaurant_id', '=', 'tbl_restaurants.id')->rightJoin('tbl_restaurants_categories', 'tbl_restaurants_connected_categories.restaurant_category_id', '=', 'tbl_restaurants_categories.id')->groupBy('restaurant_id')->where('restaurant_name', 'LIKE', '%' . $request->search . '%')->orWhere('restaurant_category_name', 'LIKE', '%' . $request->search . '%')->get();
+            $restaurants = DB::table('tbl_restaurants_connected_categories')->rightJoin('tbl_restaurants', 'tbl_restaurants_connected_categories.restaurant_id', '=', 'tbl_restaurants.id')->rightJoin('tbl_restaurants_categories', 'tbl_restaurants_connected_categories.restaurant_category_id', '=', 'tbl_restaurants_categories.id')->rightJoin('tbl_articles', 'tbl_restaurants.id', '=', 'tbl_articles.restaurant_id')->rightJoin('tbl_article_options', 'tbl_articles.article_option', '=', 'tbl_article_options.id')->groupBy('tbl_restaurants_connected_categories.restaurant_id')->where('restaurant_name', 'LIKE', '%' . $request->search . '%')->orWhere('restaurant_category_name', 'LIKE', '%' . $request->search . '%')->orWhere('article_name', 'LIKE', '%' . $request->search . '%')->orWhere('option_name', 'LIKE', '%' . $request->search . '%')->get(['restaurant_name', 'tbl_restaurants_connected_categories.restaurant_id', 'restaurant_addres', 'restaurant_header_photo', 'article_name', 'article_img']);
 
 
 

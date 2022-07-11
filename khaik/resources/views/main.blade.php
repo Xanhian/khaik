@@ -13,7 +13,11 @@
             <div class="text-white">
                 <div class="title d-flex justify-content-between align-items-center">
 
-                    <h4 class="font-weight-bold logo m-0 ">Khaik</h4>
+
+                    <a href="{{route('main')}}">
+                        <img src="{{asset('vendor_code/background/logo.png')}}" class="logo" alt="" srcset="">
+
+                    </a>
 
 
 
@@ -122,6 +126,10 @@
 
         <div class="container">
 
+            <div class="row">
+
+
+            </div>
 
 
 

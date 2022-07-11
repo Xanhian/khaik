@@ -25,9 +25,9 @@ class user_controller extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'lastname' => 'required',
-            'phonenumber' => 'required|unique:tbl_users',
+            'phonenumber' => 'required|unique:tbl_users|min:7|max:7',
             'email' => 'required|unique:tbl_users',
-            'password' => 'required',
+            'password' => 'required|min:8',
             'repassword' => 'required|same:password',
         ]);
 
@@ -129,6 +129,14 @@ class user_controller extends Controller
         }
 
         $edit_user->save();
+        session([
+            'user_id' => $edit_user->id,
+            'user_name' => $edit_user->name,
+            'user_lastname' => $edit_user->lastname,
+            'user_phonenumber' => $edit_user->phonenumber,
+            'user_email' => $edit_user->email,
+
+        ]);
         return redirect()->route('profile');
     }
 
@@ -199,5 +207,14 @@ class user_controller extends Controller
         $report->save();
 
         return redirect()->back();
+    }
+
+    public function storeToken(Request $request)
+    {
+        auth('users')->user()->update(['fcm_token' => $request->token]);
+
+        $user =
+            auth('users')->user();
+        return response()->json(['status' => $user]);
     }
 }

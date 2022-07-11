@@ -30,8 +30,8 @@
                                                 {{$favorite_restaurant->restaurant_name}}
                                             </a>
                                         </h6>
-                                        <p class="text-gray m-0 ">Addres</p>
-                                        <p class="text-gray m-0">Cattegories</p>
+                                        <p class="text-gray m-0 ">Addres: {{$favorite_restaurant->restaurant_addres}} </p>
+
                                     </div>
                                     <div class="col-2 mx-auto my-auto">
                                         <form class="article_delete_form" action="{{route('favorite_delete')}}" method="post">

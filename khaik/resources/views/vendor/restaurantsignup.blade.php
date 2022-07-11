@@ -158,11 +158,22 @@
                                         @enderror
 
                                         <select name="restaurant_place">
-                                            <option value="paramaribo">Paramaribo</option>
+                                            <option value="Nickerie">Nickerie</option>
+                                            <option value="Coronie">Coronie</option>
+                                            <option value="Saramacca">Saramacca</option>
+                                            <option value="Wanica">Wanica</option>
+                                            <option value="Paramaribo">Paramaribo</option>
+                                            <option value="Commewijne">Commewijne</option>
+                                            <option value="Marowijne">Marowijne</option>
+                                            <option value="Para">Para</option>
+                                            <option value="Sipaliwini">Sipaliwini</option>
+                                            <option value="Brokopondo">Brokopondo</option>
+
+
                                         </select>
 
                                         <select name="restaurant_country">
-                                            <option value="paramaribo">Suriname</option>
+                                            <option value="suriname">Suriname</option>
                                         </select>
                                         <br />
                                         <input type="button" name="previous" class="previous action-button-previous" value="Previous" />

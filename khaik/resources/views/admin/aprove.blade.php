@@ -36,7 +36,6 @@
                 </button>
             </div>
 
-
             <div class="col-1 text-center my-auto ">
                 <form action="{{route('admin_aprove_accept')}}" method="POST">
                     @csrf
@@ -54,6 +53,8 @@
                         <h4 class="border-bottom">Disaprove Form </h4>
                         <form action="{{route('admin_aprove_denied')}}" method="post">
                             @csrf
+                            <input type="hidden" name="owner_id" value="{{$info->owner_id}}">
+
                             <div class="form-group">
                                 <div class="col">
                                     <label>Restaurant ID</label>

@@ -8,7 +8,24 @@
     @include('components.logo')
 
     <!-- profile -->
+
+
     <div class="container position-relative">
+      <div class="toast mt-3" id="show_notify" role="status" aria-live="polite" aria-atomic="false" data-autohide="true" data-delay="2000">
+        <div class="toast-header">
+
+          <strong class="mr-auto">Notification</strong>
+
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          Notification turned on!
+        </div>
+      </div>
+
+
       <div class="py-5 osahan-profile row">
         <div class="col-md-4 mb-3">
           <div class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
@@ -118,6 +135,9 @@
 
         </div>
 
+
+
+
         <!-- Footer -->
 
       </div>
@@ -128,6 +148,12 @@
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
 
 <script>
+  $(document).ready(function() {
+    $('#show_notify').hide();
+    $('#show_notify').toast('hide');
+
+  });
+
   var firebaseConfig = {
     apiKey: "AIzaSyBDDL44Xnl6QtpCqLmMvxB00GYL276HWfY",
     authDomain: "test683-430b9.firebaseapp.com",
@@ -161,7 +187,15 @@
           },
           dataType: 'JSON',
           success: function(response) {
-            alert(response.status);
+            $('#show_notify').show();
+
+
+            $('#show_notify').toast('show');
+            setTimeout(function() {
+              $('#show_notify').hide();
+
+            }, 2000);
+
           },
           error: function(error) {
 
