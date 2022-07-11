@@ -51,7 +51,7 @@
                 breakpoint: 480,
                 settings: {
                  arrows: false,
-             centerMode:true,
+             
 
                 touchThreshold: 1000,
         
