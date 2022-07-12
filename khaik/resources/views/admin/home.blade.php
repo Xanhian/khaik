@@ -47,6 +47,14 @@
 
                     </div>
                 </a>
+                <a href="{{route('admin_restaurants')}}">
+                    <div class="vendor-btn text-center rounded  vendor-menu-btn m-2 w-100 d-flex align-items-center">
+                        <div class="mx-auto">
+                            <p class="vendor-btn-text text-white m-0"><i class="fa-solid fa-eye"></i></p>
+                            <p class="text-white m-0">View all restaurant</p>
+                        </div>
+                    </div>
+                </a>
 
             </div>
             <div class="col-6 p-1 ">
@@ -66,6 +74,7 @@
                         </div>
                     </div>
                 </a>
+
 
 
             </div>

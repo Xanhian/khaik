@@ -18,7 +18,13 @@
 
     <div class="container position-relative">
       <div class="py-5 osahan-profile row">
+
         <div class="col-md-8 mb-3">
+          @if(session('status'))
+          <div class="alert alert-success">
+            {{ session('status') }}
+          </div>
+          @endif
           <div class="rounded shadow-sm p-4 bg-white">
             <a data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="option1 option2 option3">
               <h5 class="mb-4">Status</h5>

@@ -22,6 +22,15 @@ class admin_controller extends Controller
         return view('admin.login');
     }
 
+    public function view_restaurants()
+    {
+        $data = DB::table('tbl_restaurants')->where('restaurant_complete_status', 4)->get();
+
+        return view('admin.restaurants', [
+            'data' => $data,
+        ]);
+    }
+
 
 
     public function store(Request $request)

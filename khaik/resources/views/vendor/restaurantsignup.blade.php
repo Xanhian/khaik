@@ -3,7 +3,7 @@
 
 @include('layouts.head')
 
-<body>
+<body class="bg-white">
 
     <div class="container p-0 login-page">
         <div class="d-flex align-items-center justify-content-center flex-column">
@@ -54,20 +54,20 @@
                                     <fieldset id="fs1">
 
                                         <h3 class="text-dark my-3">Account Information</h3>
-                                        <input type="text" name="firstname" id="firstname" placeholder="First Name" />
+                                        <input type="text" name="firstname" id="firstname" placeholder="First Name" value="{{old('firstname')}}" />
                                         @error('firstname')
                                         <div class="mt-n3 mb-1">*{{ $message }}</div>
                                         @enderror
-                                        <input type="text" name="lastname" placeholder="Last Name" />
+                                        <input type="text" name="lastname" placeholder="Last Name" value="{{old('lastname')}}" />
 
                                         @error('lastname')
                                         <div class="mt-n3 mb-1">*{{ $message }}</div>
                                         @enderror
-                                        <input type="number" name="phonenumber" placeholder="1234567" />
+                                        <input type="number" name="phonenumber" placeholder="1234567" value="{{old('phonenumber')}}" />
                                         @error('phonenumber')
                                         <div class="mt-n3 mb-1">*{{ $message }}</div>
                                         @enderror
-                                        <input type="email" name="email" placeholder="Email" />
+                                        <input type="email" name="email" placeholder="Email" value="{{old('email')}}" />
                                         @error('email')
                                         <div class="mt-n3 mb-1">*{{ $message }}</div>
                                         @enderror
@@ -88,11 +88,11 @@
 
                                     <fieldset id="fs2">
                                         <h3 class="text-dark my-4">Restaurant Information</h3>
-                                        <input type="text" name="restaurant_name" placeholder="Restaurant name" />
+                                        <input type="text" name="restaurant_name" placeholder="Restaurant name" value="{{old('restaurant_name')}}" />
                                         @error('restaurant_name')
                                         <div class="mt-n3 mb-1">*{{ $message }}</div>
                                         @enderror
-                                        <input type="text" name="restaurant_description" placeholder="Restaurant description" />
+                                        <input type="text" name="restaurant_description" placeholder="Restaurant description" value="{{old('restaurant_description')}}" />
                                         @error('restaurant_description')
                                         <div class="mt-n3 mb-1">*{{ $message }}</div>
                                         @enderror
@@ -114,12 +114,12 @@
                                         <div class="mt-n3 mb-1">*{{ $message }}</div>
                                         @enderror
 
-                                        <input type="number" name="restaurant_phonenumber" placeholder="Restaurant phonenumber" />
+                                        <input type="number" name="restaurant_phonenumber" placeholder="Restaurant phonenumber" value="{{old('restaurant_phonenumber')}}" />
                                         @error('restaurant_phonenumber')
                                         <div class="mt-n3 mb-1">*{{ $message }}</div>
                                         @enderror
 
-                                        <input type="text" name="facebook_link" placeholder="Restaurant facebook link" />
+                                        <input type="text" name="facebook_link" placeholder="Restaurant facebook link" value="{{old('facebook_link')}}" />
                                         @error('facebook_link')
                                         <div class="mt-n3 mb-1">*{{ $message }}</div>
                                         @enderror
@@ -152,7 +152,7 @@
                                     <fieldset id="fs4">
                                         <h3 class="text-dark my-4">Location</h3>
 
-                                        <input type="text" name="restaurant_addres" placeholder="Restaurant addres" />
+                                        <input type="text" name="restaurant_addres" placeholder="Restaurant addres" value="{{old('restaurant_addres')}}" />
                                         @error('restaurant_addres')
                                         <div class="mt-n3 mb-1">*{{ $message }}</div>
                                         @enderror

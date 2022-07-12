@@ -67,6 +67,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/logout', [admin_controller::class, 'destroy'])->name('admin_logout');
     Route::get('/home', [admin_controller::class, 'home'])->name('admin_home');
     Route::get('/aprove', [admin_controller::class, 'aprove'])->name('admin_aprove');
+    Route::get('/restaurants', [admin_controller::class, 'view_restaurants'])->name('admin_restaurants');
 
     Route::get('/report', [admin_controller::class, 'report_index'])->name('admin_reports');
     Route::get('/adduser', [admin_controller::class, 'add_user'])->name('admin_adduser');

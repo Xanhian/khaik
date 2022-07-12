@@ -34,9 +34,12 @@
 
 
     $('.cat-slider').slick({
-         centerMode: false,
+      
         //   centerPadding: '30px',
         slidesToShow: 8,
+           autoplay: true,
+    autoplaySpeed: 6000,
+
      
         responsive: [{
                 breakpoint: 768,
@@ -51,20 +54,25 @@
                 breakpoint: 480,
                 settings: {
                  arrows: false,
+            
              
-
-                touchThreshold: 1000,
+                touchThreshold: 20,
         
-    
+   
   
              
   
+                      slidesToScroll: 4,
                 
-                    slidesToShow: 4
+                    slidesToShow: 4,
                 }
             }
         ]
     });
+
+ 
+
+
 
     // Trending slider
 

@@ -168,7 +168,13 @@ class main_controller extends Controller
                     return view('search', [
                         'results' => 'nothing',
 
-                        'status' => 'Please allow notification access to search for restaurants',
+                        'status' => 'Please allow location access to search for restaurants',
+                    ]);
+
+                    return redirect()->back()->with([
+                        'results' => 'nothing',
+
+                        'status' => 'Please allow location access to search for restaurants',
                     ]);
                 }
 

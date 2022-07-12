@@ -68,7 +68,7 @@
 
 
 
-        <div class="container  p-0">
+        <div class="container p-0">
             <div class="cat-slider mx-auto">
                 <div class="cat-item px-1 py-3">
                     <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="#6">
