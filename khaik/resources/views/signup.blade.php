@@ -72,6 +72,7 @@
             </div>
         </div>
     </div>
+    @include('components.desktop')
 
     <!-- Bootstrap core JavaScript -->
     @include('layouts.scripts')

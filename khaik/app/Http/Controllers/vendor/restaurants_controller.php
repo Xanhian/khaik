@@ -35,7 +35,7 @@ class restaurants_controller extends Controller
         $validated = $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
-            'phonenumber' => 'required|min:7',
+            'phonenumber' => 'required|unique:tbl_restaurant_owners|min:7',
             'email' => 'required|unique:tbl_restaurant_owners',
             'password' => 'required|min:8',
             'repassword' => 'required|same:password',

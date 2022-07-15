@@ -120,24 +120,20 @@
 
                                 </div>
                             </div>
-                        </div>
-                        <div class="row text-center">
-                            <div class="col">
-                                <h1>{{$menu_item->article_name}}</h1>
+                            <div class="row text-center">
+                                <div class="col">
+                                    <h1>{{$menu_item->article_name}}</h1>
 
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col">
+                                    {{$menu_item->article_description}}
+                                </div>
                             </div>
                         </div>
-                        <div class="row text-center">
-                            <div class="col">
-                                {{$menu_item->article_description}}
-                            </div>
-                        </div>
 
-                        <div class="modal-footer p-0 border-0">
 
-                            <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
-
-                        </div>
                     </div>
                 </div>
             </div>

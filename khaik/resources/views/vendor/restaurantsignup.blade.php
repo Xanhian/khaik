@@ -138,7 +138,9 @@
 
 
 
-
+                                            @error('restaurant_category')
+                                            <div class="mt-n3 mb-1 mx-auto">*{{ $message }}</div>
+                                            @enderror
 
 
                                         </div>
@@ -195,6 +197,7 @@
         </div>
     </div>
 
+    @include('components.desktop')
 
 </body>
 @include('layouts.scripts')

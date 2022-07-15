@@ -4,12 +4,12 @@
 
 <body class="fixed-bottom-bar">
 
-    <div class="d-none">
-        @include('components.logo')
-
-    </div>
 
     <div class="osahan-popular">
+        <div class="d-none">
+            @include('components.logo')
+
+        </div>
 
         <div class="container">
             <div class="search py-5">
@@ -126,7 +126,7 @@
                             </div>
                         </div>
                         @else
-                        @foreach($results as $result)
+                        @foreach($articles as $result)
                         @if($result->restaurant_name !== null || $result->restaurant_id !==null)
 
                         <div class="container mt-4 mb-4 p-0">
@@ -183,8 +183,10 @@
             </div>
         </div>
 
+        @include('layouts.navigation')
 
     </div>
+    @include('components.desktop')
 
     <div class="modal fade" id="filters" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -234,7 +236,6 @@
         </div>
     </div>
     <!-- Bootstrap core JavaScript -->
-    @include('layouts.navigation')
 </body>
 @include('layouts.scripts')
 

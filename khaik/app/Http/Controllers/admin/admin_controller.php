@@ -123,8 +123,9 @@ class admin_controller extends Controller
         $data = [
             "registration_ids" => $FcmToken,
             "notification" => [
-                "title" => "New Restaurant",
-                "body" => "There are new restaurants available",
+                "title" => "New Restaurant added",
+                "body" => "Welcome "
+                    . $restaurant->restaurant_name . " to the khaik family",
             ]
         ];
         $encodedData = json_encode($data);

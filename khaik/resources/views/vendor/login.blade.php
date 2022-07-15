@@ -52,6 +52,7 @@
             </div>
         </div>
     </div>
+    @include('components.desktop')
 
     @include('layouts.scripts')
 </body>

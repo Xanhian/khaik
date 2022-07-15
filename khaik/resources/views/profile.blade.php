@@ -14,7 +14,7 @@
     <div class="container position-relative">
       @auth('users')
       <div class="container w-100">
-        <div class="toast w-100 mx-auto mt-3" id="show_notify" role="status" aria-live="polite" aria-atomic="false" data-autohide="true" data-delay="2000">
+        <div class="toast mx-auto shadow-none border-0 mt-3" id="show_notify" role="status" aria-live="polite" aria-atomic="false" data-autohide="true" data-delay="2000">
           <div class="toast-header">
 
             <strong class="mr-auto">Notification</strong>
@@ -128,7 +128,10 @@
 
 
       @include('layouts.navigation')
-      @include('layouts.scripts')
+    </div>
+    @include('components.desktop')
+
+    @include('layouts.scripts')
 </body>
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
 

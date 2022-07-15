@@ -1,5 +1,5 @@
 @foreach($categories as $category)
-
+@if(count($restaurants_info[$category->id])!==0)
 <div class="container w-100 mx-auto py-3 title d-flex flex-row justify-content-between align-items-center">
     <h5 id="{{$category->id}}" class="m-0">{{$category->restaurant_category_name}}</h5>
     <form action="{{route('filter_search')}}" method="post">
@@ -10,6 +10,7 @@
 
     </form>
 </div>
+@endif
 
 
 

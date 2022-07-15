@@ -4,10 +4,13 @@
 @include('layouts.head')
 
 
+
+
 <body class="fixed-bottom-bar">
 
 
     <div class="osahan-home-page">
+
 
         <div class="bg-primary p-3 d-none n">
             <div class="text-white">
@@ -144,10 +147,12 @@
 
 
         </div>
-
-
         @include('layouts.navigation')
-        @include('layouts.scripts')
+
+    </div>
+    @include('components.desktop')
+
+    @include('layouts.scripts')
 </body>
 
 </html>

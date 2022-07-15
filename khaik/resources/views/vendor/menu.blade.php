@@ -62,7 +62,7 @@
                     @foreach($menu_articles[$menu_main_option->option_name] as $menu_item)
 
                     @if($menu_item->article_item_relations == NULL)
-                    <div class="row border-bottom px-0 collapse  show" id="collapse{{$menu_main_option->id}}">
+                    <div class="row border-bottom px-0 collapse  show" id="collapse{{$menu_item->article_option}}">
                         <div class="col-2 align-self-center mx-auto text-center ">
                             <form class="article_delete_form" action="{{route('delete_article')}}" method="post">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -109,9 +109,12 @@
                                     <span><a data-toggle="modal" data-target="#edit{{$menu_item->id}}" role="button" class="m-3"><i class="fa-solid fa-pen fa-xl "></i></a></span>
                                 </div>
 
-                                <div class=" my-auto align-self-center ">
+                                @if(count($menu_articles_option[$menu_item->id] ) > 0 )
+
+                                <div class=" my-auto mx-auto align-self-center ">
                                     <span><a class=" " data-toggle="collapse" href="#collapse_option{{$menu_item->id}}" role="button"><i class="fa-solid fa-angle-down fa-2xl"></i></a></span>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -311,11 +314,7 @@
                                     </div>
                                 </div>
 
-                                <div class="modal-footer p-0 border-0">
 
-                                    <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
-
-                                </div>
                             </div>
                         </div>
                     </div>

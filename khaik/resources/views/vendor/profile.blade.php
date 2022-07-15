@@ -11,7 +11,7 @@
 
 
     <div class="container position-relative">
-      <div class="toast mt-3" id="show_notify" role="status" aria-live="polite" aria-atomic="false" data-autohide="true" data-delay="2000">
+      <div class="toast mx-auto shadow-none border-0 mt-3" id="show_notify" role="status" aria-atomic="false" data-autohide="true" data-delay="2000">
         <div class="toast-header">
 
           <strong class="mr-auto">Notification</strong>
