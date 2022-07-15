@@ -57,11 +57,13 @@
                 @endforeach
             </div>
             @endauth
+            @include('layouts.navigation')
 
         </div>
 
     </div>
-    @include('layouts.navigation')
+    @include('components.desktop')
+
     @include('layouts.scripts')
 </body>
 

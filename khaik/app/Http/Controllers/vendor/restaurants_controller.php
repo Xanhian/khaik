@@ -35,7 +35,7 @@ class restaurants_controller extends Controller
         $validated = $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
-            'phonenumber' => 'required|min:7',
+            'phonenumber' => 'required|unique:tbl_restaurant_owners|min:7',
             'email' => 'required|unique:tbl_restaurant_owners',
             'password' => 'required|min:8',
             'repassword' => 'required|same:password',
@@ -134,8 +134,23 @@ class restaurants_controller extends Controller
         $restaurant_qr = QRCode::url($url . '/restaurant/' .  $restaurant_link . '/' .   $restaurant_id)->setSize(10)->setMargin(2)->setErrorCorrectionLevel('H')->setOutfile($restaurant_qr_path)->png();
 
 
+        $new_owner = Auth::guard('vendors')->user();
+
+        $restaurant_id = DB::table('tbl_restaurants')->where('owner_id', $new_owner->id)->get();
+        session([
+            'owners_id' => $new_owner->id,
+            'owners_name' => $new_owner->name,
+            'owners_lastname' => $new_owner->lastname,
+            'owners_phonenumber' => $new_owner->phonenumber,
+            'owners_email' => $new_owner->email,
+            'owners_restaurant' => $restaurant_id[0]->id,
+            'owners_restaurant_name' => $restaurant_id[0]->restaurant_name,
+            'owners_verified_status' => $restaurant_id[0]->restaurant_complete_status,
+            'owners_custom_status' => $restaurant_id[0]->restaurant_custom_status,
+        ]);
         auth('vendors')->login($owner);
-        return redirect()->route('vendor_home')->with('status', 'Your restaurant is almost done! Please go to quick change to set up location and opening time');
+
+        return redirect()->route('vendor_home')->with('status', 'Your restaurant is almost done! Please go to quick change to set up location and your restaurant opening and closing time');
     }
 
     public function edit(Request $request)

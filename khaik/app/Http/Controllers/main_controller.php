@@ -168,24 +168,47 @@ class main_controller extends Controller
                     return view('search', [
                         'results' => 'nothing',
 
-                        'status' => 'Please allow notification access to search for restaurants',
+                        'status' => 'Please allow location access to search for restaurants',
+                    ]);
+
+                    return redirect()->back()->with([
+                        'results' => 'nothing',
+
+                        'status' => 'Please allow location access to search for restaurants',
                     ]);
                 }
 
-                $data = DB::table("tbl_restaurants")
+                $data = DB::table("tbl_restaurants")->rightJoin('tbl_articles', 'tbl_restaurants.id', '=', 'tbl_articles.restaurant_id')
                     ->select(
-                        'id',
+                        'tbl_restaurants.id',
                         'restaurant_name',
                         'restaurant_header_photo',
                         'restaurant_addres',
                         'total_views',
-                        DB::raw("id as restaurant_id, 6371 * acos(cos(radians(" . $lat . ")) 
+                        'article_name',
+                        'article_img',
+                        DB::raw("tbl_restaurants.id as restaurant_id, 6371 * acos(cos(radians(" . $lat . ")) 
                 * cos(radians(tbl_restaurants.restaurant_latitude)) 
                 * cos(radians(tbl_restaurants.restaurant_longitude) - radians(" . $lon . ")) 
                 + sin(radians(" . $lat . ")) 
                 * sin(radians(tbl_restaurants.restaurant_latitude))) AS distance")
-                    )->get();
+                    )->groupBy('restaurant_id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres')->where('restaurant_complete_status', 4)->orderBy('distance', 'asc')->get();
 
+                $articles = DB::table("tbl_restaurants")->rightJoin('tbl_articles', 'tbl_restaurants.id', '=', 'tbl_articles.restaurant_id')
+                    ->select(
+                        'tbl_restaurants.id',
+                        'restaurant_name',
+                        'restaurant_header_photo',
+                        'restaurant_addres',
+                        'total_views',
+                        'article_name',
+                        'article_img',
+                        DB::raw("tbl_restaurants.id as restaurant_id, 6371 * acos(cos(radians(" . $lat . ")) 
+                * cos(radians(tbl_restaurants.restaurant_latitude)) 
+                * cos(radians(tbl_restaurants.restaurant_longitude) - radians(" . $lon . ")) 
+                + sin(radians(" . $lat . ")) 
+                * sin(radians(tbl_restaurants.restaurant_latitude))) AS distance")
+                    )->groupBy('tbl_articles.id')->get();
                 $distance = array();
                 foreach ($data as $date) {
                     if ($date->distance !== null) {
@@ -200,17 +223,26 @@ class main_controller extends Controller
                     }
                 }
 
+
+
                 return view('search', [
                     'results' => $data,
+                    'articles' => $articles,
                     'distance' => $distance
                 ]);
                 break;
 
             case 'favorite':
-                $data = DB::table('tbl_users_favorites')->rightJoin('tbl_restaurants', 'tbl_users_favorites.restaurant_id', '=', 'tbl_restaurants.id')->select('restaurant_id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres', DB::raw('count(*) as total'))->where('favorite_status_id', 1)->groupBy('restaurant_id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres')->get();
+                $data = DB::table('tbl_users_favorites')->rightJoin('tbl_restaurants', 'tbl_users_favorites.restaurant_id', '=', 'tbl_restaurants.id')->rightJoin('tbl_articles', 'tbl_restaurants.id', '=', 'tbl_articles.restaurant_id')->select('tbl_users_favorites.restaurant_id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres', 'article_name', 'article_img', DB::raw('count(*) as total'))->where('restaurant_complete_status', 4)->where('favorite_status_id', 1)->groupBy('restaurant_id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres')->orderBy('total', 'desc')->get();
+
+
+                $articles =
+                    DB::table('tbl_users_favorites')->rightJoin('tbl_restaurants', 'tbl_users_favorites.restaurant_id', '=', 'tbl_restaurants.id')->rightJoin('tbl_articles', 'tbl_restaurants.id', '=', 'tbl_articles.restaurant_id')->select('tbl_users_favorites.restaurant_id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres', 'article_name', 'article_img', DB::raw('count(*) as total'))->where('restaurant_complete_status', 4)->where('favorite_status_id', 1)->groupBy('tbl_articles.id')->orderBy('total', 'desc')->get();
+
 
                 return view('search', [
                     'results' => $data,
+                    'articles' => $articles
 
                 ]);
 
@@ -219,12 +251,16 @@ class main_controller extends Controller
 
 
             case 'visited':
-                $data = DB::table('tbl_restaurants')->orderBy('total_views', 'desc')->select('id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres', 'total_views', DB::raw('id as restaurant_id'))->get(['*']);
+                $data = DB::table('tbl_restaurants')->rightJoin('tbl_articles', 'tbl_restaurants.id', '=', 'tbl_articles.restaurant_id')->orderBy('total_views', 'desc')->where('restaurant_complete_status', 4)->select('tbl_restaurants.id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres', 'total_views', 'article_name', 'article_img', DB::raw('tbl_restaurants.id as restaurant_id'))->groupBy('restaurant_id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres')->get(['*']);
+
+                $articles = DB::table('tbl_restaurants')->rightJoin('tbl_articles', 'tbl_restaurants.id', '=', 'tbl_articles.restaurant_id')->orderBy('total_views', 'desc')->select('tbl_restaurants.id', 'restaurant_name', 'restaurant_header_photo', 'restaurant_addres', 'total_views', 'article_name', 'article_img', DB::raw('tbl_restaurants.id as restaurant_id'))->where('restaurant_complete_status', 4)->groupBy('tbl_articles.id')->get(['*']);
+
 
 
 
                 return view('search', [
                     'results' => $data,
+                    'articles' => $articles,
                     'filter' => 'visit'
 
                 ]);
@@ -232,7 +268,35 @@ class main_controller extends Controller
                 break;
         }
         if ($request->search !== null) {
-            $restaurants = DB::table('tbl_restaurants_connected_categories')->rightJoin('tbl_restaurants', 'tbl_restaurants_connected_categories.restaurant_id', '=', 'tbl_restaurants.id')->rightJoin('tbl_restaurants_categories', 'tbl_restaurants_connected_categories.restaurant_category_id', '=', 'tbl_restaurants_categories.id')->rightJoin('tbl_articles', 'tbl_restaurants.id', '=', 'tbl_articles.restaurant_id')->rightJoin('tbl_article_options', 'tbl_articles.article_option', '=', 'tbl_article_options.id')->groupBy('tbl_restaurants_connected_categories.restaurant_id')->where('restaurant_name', 'LIKE', '%' . $request->search . '%')->orWhere('restaurant_category_name', 'LIKE', '%' . $request->search . '%')->orWhere('article_name', 'LIKE', '%' . $request->search . '%')->orWhere('option_name', 'LIKE', '%' . $request->search . '%')->get(['restaurant_name', 'tbl_restaurants_connected_categories.restaurant_id', 'restaurant_addres', 'restaurant_header_photo', 'article_name', 'article_img']);
+            $restaurants = DB::table(
+                'tbl_restaurants_connected_categories'
+            )->rightJoin('tbl_restaurants', 'tbl_restaurants_connected_categories.restaurant_id', '=', 'tbl_restaurants.id')
+                ->rightJoin('tbl_restaurants_categories', 'tbl_restaurants_connected_categories.restaurant_category_id', '=', 'tbl_restaurants_categories.id')->rightJoin('tbl_articles', 'tbl_restaurants.id', '=', 'tbl_articles.restaurant_id')->rightJoin('tbl_article_options', 'tbl_articles.article_option', '=', 'tbl_article_options.id')
+                ->groupBy('tbl_restaurants_connected_categories.restaurant_id')
+                ->where('restaurant_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('restaurant_category_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('article_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('option_name', 'LIKE', '%' . $request->search . '%')
+                ->where('restaurant_complete_status', 4)
+                ->get(['restaurant_name', 'tbl_restaurants_connected_categories.restaurant_id', 'restaurant_addres', 'restaurant_header_photo', 'article_name', 'article_img']);
+
+            $articles =
+                DB::table('tbl_restaurants_connected_categories')
+                ->rightJoin('tbl_restaurants', 'tbl_restaurants_connected_categories.restaurant_id', '=', 'tbl_restaurants.id')->rightJoin('tbl_restaurants_categories', 'tbl_restaurants_connected_categories.restaurant_category_id', '=', 'tbl_restaurants_categories.id')
+                ->rightJoin('tbl_articles', 'tbl_restaurants.id', '=', 'tbl_articles.restaurant_id')
+                ->rightJoin('tbl_article_options', 'tbl_articles.article_option', '=', 'tbl_article_options.id')
+                ->where('restaurant_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere(
+                    'restaurant_category_name',
+                    'LIKE',
+                    '%' . $request->search . '%'
+                )->orWhere('article_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('option_name', 'LIKE', '%' . $request->search . '%')
+                ->where('restaurant_complete_status', 4)
+                ->groupBy('tbl_articles.id')
+
+                ->get(['restaurant_name', 'tbl_restaurants_connected_categories.restaurant_id', 'restaurant_addres', 'restaurant_header_photo', 'article_name', 'article_img']);
+
 
 
 
@@ -242,7 +306,8 @@ class main_controller extends Controller
 
 
             return view('search', [
-                'results' => $restaurants
+                'results' => $restaurants,
+                'articles' => $articles
             ]);
         } else {
 

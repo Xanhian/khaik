@@ -3,7 +3,6 @@
 @include('layouts.head')
 
 <body class="fixed-bottom-bar">
-
   <div class="osahan-popular">
     <div class="d-none">
       @include('components.logo')
@@ -54,7 +53,12 @@
 
     </div>
     @include('layouts.navigation')
-    @include('layouts.scripts')
+
+  </div>
+  @include('components.desktop')
+
+  @include('layouts.scripts')
+
 </body>
 
 </html>

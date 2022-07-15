@@ -14,8 +14,9 @@ body {
 
    
 }
+
 a:focus{
-    color: rgb(255, 123, 130);
+    color: rgb(255, 123, 130)   !important;
 }
 a:hover {
     color: rgb(255, 123, 130);
@@ -23,6 +24,28 @@ a:hover {
 .logo{
   width: 9em;
   height: 4em;
+}
+
+.responsive-design {
+    display: none;;
+
+    opacity: 0;
+
+}
+
+.phone1{
+    display: none;
+    opacity: 0;
+}
+
+.phone2 {
+    display: none;
+    opacity: 0;
+}
+
+.desktop-logo{
+    display: none;
+        opacity: 0;
 }
 
 .qr-scan{
@@ -60,20 +83,6 @@ a:hover {
     background-color: #0091bc;
 }
 
-#splashscreen { 
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    height: 120vh;
-    width: 100%;
-    z-index: 10;
-    background-color: white;
-}
-
-.splash-img{
-    width: 65%;
-}
 
 .menu-image-display{
     height: 4em;
@@ -114,11 +123,12 @@ a:hover {
 }
 
 .box-day-value{
-    width: 47px;
+  
+    width: 45px;
     background: white;
     font-weight: 900;
     border-radius: 5px;
-
+margin-left: -13.5px !important;
     opacity: 0;
 }
 
@@ -161,6 +171,7 @@ a:hover {
 }
 
 .discover-img {
+    object-fit: cover;
     height: 17em;
     width: 20em;
     z-index: -1;
@@ -426,6 +437,7 @@ a {
 }
 
 .restaurant-img {
+    object-fit: cover;
     height: 20em;
 
 }
@@ -1677,16 +1689,165 @@ footer .text-muted {
 
 
 
-
 /* Mobile Media */
 
 @media (min-width: 576px) {
 
-    body{
+    
+.responsive-design {
+        display: block;
+        height: 100vh;
+        z-index: 10000;
+        margin-bottom: -100px;
+        opacity: 1;
+     
+    }
+
+    .responsive-design .circle-big {
+   
+background-color: rgb(253, 241, 243)!important;
+        background-size: contain;
+        width: 100em;
+        height: 100vh;
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        overflow: hidden;
+        -webkit-animation: morph 3s linear infinite;
+        animation: morph 3s linear infinite;
+    }
+
+    .responsive-design .phone1 {
+        display: block;
+        opacity: 1;
+        -o-object-fit: contain;
+        object-fit: contain;
+        width: 85%;
+        transition: 0.5s ease;
+    }
+
+         .responsive-design .phone1:hover {
+          
+             width: 100%;
+         }
+
+    .responsive-design .phone2 {
+        display: block;
+            opacity: 1;
+        -o-object-fit: contain;
+        object-fit: contain;
+        width: 65%;
+        transition: 0.5s ease;
+    }
+
+          .responsive-design .phone2:hover {
+    
+              width: 80%;
+          }
+
+    .responsive-design .circle {
+ 
+        width: 25em;
+        height: 23em;
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        overflow: hidden;
+        -webkit-animation: morph 3s linear infinite;
+        animation: morph 3s linear infinite;
+    }
+
+    .responsive-design .circle .desktop-logo {
+        display: block;
+            opacity: 1;
+        width: 80%;
+    }
+
+         .desktop-link {
+           
+           color: white;
+         }
+
+    @-webkit-keyframes morph {
+
+        0%,
+        100% {
+            border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+        }
+
+        34% {
+            border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+        }
+
+        67% {
+            border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+        }
+    }
+
+    @keyframes morph {
+
+        0%,
+        100% {
+            border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+        }
+
+        34% {
+            border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+        }
+
+        67% {
+            border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+        }
+    }
+
+    @keyframes morph {
+
+        0%,
+        100% {
+            border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+        }
+
+        34% {
+            border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+        }
+
+        67% {
+            border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+        }
+    }
+
+    .desktop {
+        display: block;
+    }
+
+    .osahan-home-page {
         display: none;
     }
 
-    .container{
+    .osahan-popular {
+        display: none;
+    }
+
+    .osahan-profile {
+        display: none;
+    }
+
+    .osahan-favorites {
+        display: none;
+    }
+
+    .oshan-restaurant {
+        display: none;
+    }
+    .login-page{
+        display: none;
+    }
+
+    .error-page{
+        display: none;
+    }
+
+    .container-fluid {
+        display: none;
+    }
+
+    .container {
         display: none;
     }
 
@@ -1778,7 +1939,9 @@ footer .text-muted {
 
     .responsive-design{
         display: none;
+        opacity: 0;
     }
+  
 
     h1{
         font-size: 15px;

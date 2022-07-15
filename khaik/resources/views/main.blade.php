@@ -4,10 +4,13 @@
 @include('layouts.head')
 
 
+
+
 <body class="fixed-bottom-bar">
 
 
     <div class="osahan-home-page">
+
 
         <div class="bg-primary p-3 d-none n">
             <div class="text-white">
@@ -68,7 +71,7 @@
 
 
 
-        <div class="container  p-0">
+        <div class="container p-0">
             <div class="cat-slider mx-auto">
                 <div class="cat-item px-1 py-3">
                     <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="#6">
@@ -144,10 +147,12 @@
 
 
         </div>
-
-
         @include('layouts.navigation')
-        @include('layouts.scripts')
+
+    </div>
+    @include('components.desktop')
+
+    @include('layouts.scripts')
 </body>
 
 </html>

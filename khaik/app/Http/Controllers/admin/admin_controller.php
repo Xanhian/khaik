@@ -22,6 +22,15 @@ class admin_controller extends Controller
         return view('admin.login');
     }
 
+    public function view_restaurants()
+    {
+        $data = DB::table('tbl_restaurants')->where('restaurant_complete_status', 4)->get();
+
+        return view('admin.restaurants', [
+            'data' => $data,
+        ]);
+    }
+
 
 
     public function store(Request $request)
@@ -114,8 +123,9 @@ class admin_controller extends Controller
         $data = [
             "registration_ids" => $FcmToken,
             "notification" => [
-                "title" => "New Restaurant",
-                "body" => "There are new restaurants available",
+                "title" => "New Restaurant added",
+                "body" => "Welcome "
+                    . $restaurant->restaurant_name . " to the khaik family",
             ]
         ];
         $encodedData = json_encode($data);

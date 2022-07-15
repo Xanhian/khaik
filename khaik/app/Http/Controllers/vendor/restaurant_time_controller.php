@@ -140,7 +140,7 @@ class restaurant_time_controller extends Controller
 
         $restaurant->save();
 
-        return redirect()->route('vendor_home')->with('status', 'Time succesfully set!');
+        return redirect()->back()->with('status', 'Time succesfully set!');
     }
 
     public function get_location(Request $request)
@@ -156,7 +156,7 @@ class restaurant_time_controller extends Controller
         }
 
         $location->save();
-        return redirect()->route('vendor_home')->with('status', 'Location succesfully set!');
+        return redirect()->back()->with('status', 'Location succesfully set!');
     }
 
 
