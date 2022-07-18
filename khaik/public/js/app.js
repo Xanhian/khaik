@@ -2214,7 +2214,7 @@ $(document).ready(function () {
     $(".responsive-design").remove();
   }
 
-  var page = sessionStorage.getItem("someVarKey");
+  var page = localStorage.getItem("someVarKey");
 
   switch (page) {
     case "home":
@@ -2238,22 +2238,21 @@ $(document).ready(function () {
       break;
   }
 
-  sessionStorage.setItem("someVarKey", null);
   $("#home").click(function () {
     var someVarName = "home";
-    sessionStorage.setItem("someVarKey", someVarName);
+    localStorage.setItem("someVarKey", someVarName);
   });
   $("#deals").click(function () {
     var someVarName = "deal";
-    sessionStorage.setItem("someVarKey", someVarName);
+    localStorage.setItem("someVarKey", someVarName);
   });
   $("#favorite").click(function () {
     var someVarName = "favorite";
-    sessionStorage.setItem("someVarKey", someVarName);
+    localStorage.setItem("someVarKey", someVarName);
   });
   $("#profile").click(function () {
     var someVarName = "profile";
-    sessionStorage.setItem("someVarKey", someVarName);
+    localStorage.setItem("someVarKey", someVarName);
   });
   var x = $("#lat");
   var y = $("#lon");

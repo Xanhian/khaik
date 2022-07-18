@@ -51,6 +51,47 @@
                             <h6>{{$menu_main_option->option_name}} </h6>
                         </a>
                         <div class=" align-self-center ">
+
+
+                            <a href="#" data-toggle="modal" data-target="#edit{{$menu_main_option->id}}" class=" delete-item-box"> <i class="fa-solid fa-pen fa-xl p-3"></i></a>
+
+                        </div>
+                        <div class=" modal fade" id="edit{{$menu_main_option->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="row">
+                                            <h4 class="m-0">
+                                                Edit option name
+                                            </h4>
+
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form class="article_delete_form" action="{{route('edit_option')}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="option_id" value="{{$menu_main_option->id}}">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" value="{{$menu_main_option->option_name}}" name="option_name">
+                                            </div>
+
+                                            <button class="btn btn-primary" type="submit" class="delete-item-box">Save</button>
+                                        </form>
+
+                                    </div>
+
+
+                                    <div class="modal-footer p-0 border-0">
+                                        <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=" align-self-center ">
                             <form class="article_delete_form" action="{{route('delete_option')}}" method="post">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                 <input type="hidden" name="option_id" value="{{$menu_main_option->id}}" />

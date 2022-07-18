@@ -30,7 +30,7 @@
 
             <div class="col-2 d-flex flex-row text-center justify-content-between my-auto">
 
-                <a target="blank" href="../restaurant/{{$info->restaurant_name}}/{{$info->id}}"><i class="fa-solid fa-eye"></i></a>
+                <a target="blank" href="{{route('restaurant',['restaurant_name' => $info->restaurant_name, 'restaurant_id'   => $info->id ])}}}"><i class="fa-solid fa-eye"></i></a>
 
                 <form action="{{route('report_solve')}}" method="POST">
                     @csrf

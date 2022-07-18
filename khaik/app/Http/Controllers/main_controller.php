@@ -213,10 +213,10 @@ class main_controller extends Controller
                 foreach ($data as $date) {
                     if ($date->distance !== null) {
                         if ($date->distance <= 20) {
-                            $distance[$date->id] = ["state" => "nearby", "distance" => $date->distance];
+                            $distance[$date->id] = ["state" => "nearby", "distance" => ceil($date->distance)];
                         } else {
                             $distance[$date->id] =
-                                ["state" => "far", "distance" => $date->distance];
+                                ["state" => "far", "distance" => ceil($date->distance)];
                         }
                     } else {
                         $distance[$date->id] = "error";
@@ -225,10 +225,14 @@ class main_controller extends Controller
 
 
 
+
+
                 return view('search', [
                     'results' => $data,
                     'articles' => $articles,
-                    'distance' => $distance
+                    'distance' => $distance,
+                    'filter' => 'distance'
+
                 ]);
                 break;
 
@@ -242,7 +246,9 @@ class main_controller extends Controller
 
                 return view('search', [
                     'results' => $data,
-                    'articles' => $articles
+                    'articles' => $articles,
+                    'filter' => 'favorite'
+
 
                 ]);
 
@@ -277,6 +283,12 @@ class main_controller extends Controller
                 ->orWhere('restaurant_category_name', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('article_name', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('option_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('restaurant_place', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('restaurant_country', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('restaurant_addres', 'LIKE', '%' . $request->search . '%')
+
+
+
                 ->where('restaurant_complete_status', 4)
                 ->get(['restaurant_name', 'tbl_restaurants_connected_categories.restaurant_id', 'restaurant_addres', 'restaurant_header_photo', 'article_name', 'article_img']);
 
@@ -293,6 +305,9 @@ class main_controller extends Controller
                 )->orWhere('article_name', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('option_name', 'LIKE', '%' . $request->search . '%')
                 ->where('restaurant_complete_status', 4)
+                ->orWhere('restaurant_place', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('restaurant_country', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('restaurant_addres', 'LIKE', '%' . $request->search . '%')
                 ->groupBy('tbl_articles.id')
 
                 ->get(['restaurant_name', 'tbl_restaurants_connected_categories.restaurant_id', 'restaurant_addres', 'restaurant_header_photo', 'article_name', 'article_img']);

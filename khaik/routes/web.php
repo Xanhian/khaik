@@ -59,6 +59,8 @@ Route::prefix('vendor')->middleware('vendor')->group(function () {
     Route::post('/save_location', [restaurant_time_controller::class, 'get_location'])->name('save_location');
     Route::post('/save_status', [restaurant_time_controller::class, 'set_status'])->name('set_status');
     Route::post('/notification', [restaurant_time_controller::class, 'storeToken'])->name('store_token');
+    Route::post('/seen', [vendor_views_controller::class, 'message_seen'])->name('seen');
+    Route::post('/option/edit', [articles_controller::class, 'option_edit'])->name('edit_option');
 });
 
 

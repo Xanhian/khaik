@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('tbl_restaurants_messages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('restaurant_id');
-            $table->unsignedBigInteger('sender_id');
-            $table->string('message_title', 128);
-            $table->string('message_body', 255);
+            $table->unsignedBigInteger('restaurant_id')->nullable();
+            $table->unsignedBigInteger('sender_id')->nullable();
+            $table->string('message_title', 128)->nullable();
+            $table->string('message_body', 255)->nullable();
+            $table->unsignedBigInteger('message_seen')->nullable();
             $table->timestamps();
         });
 

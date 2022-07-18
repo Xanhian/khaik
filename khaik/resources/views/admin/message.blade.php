@@ -45,10 +45,11 @@
 
             </div>
 
-            <div class="col-2 d-flex flex-row text-center  my-auto">
+            <div class="col d-flex flex-row text-center justify-content-end my-auto">
 
-                <a target="blank" href="../restaurant/{{$info->restaurant_name}}/{{$info->id}}"><i class="fa-solid fa-eye"></i></a>
-                <a data-toggle="modal" data-target="#modal{{$info->id}}" class="mx-3"><i class="fa-solid fa-square-arrow-up-right"></i></a>
+                <a target="blank" class="my-auto" href="{{route('restaurant',['restaurant_name' => $info->restaurant_name, 'restaurant_id'   => $info->id ])}}"><i class="my-auto fa-solid fa-eye"></i></a>
+                <a data-toggle="modal" data-target="#modal{{$info->id}}" class="btn btn-primary text-white mx-2">Send Message</a>
+
 
 
             </div>

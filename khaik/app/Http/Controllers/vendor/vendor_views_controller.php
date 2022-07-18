@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\tbl_restaurants_message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +20,8 @@ class vendor_views_controller extends Controller
 
         $article_like_count = array();
 
-        $message = DB::table('tbl_restaurants_messages')->where('restaurant_id', $restaurant_id)->latest()->get();
+        $message = DB::table('tbl_restaurants_messages')->where('restaurant_id', $restaurant_id)->latest()->where('message_seen', null)->take(3)->get();
+
 
 
         foreach ($articles as $article) {
@@ -53,6 +55,17 @@ class vendor_views_controller extends Controller
             'messages' => $message,
 
         ]);
+    }
+
+
+    public function message_seen(Request $request)
+    {
+        $message = tbl_restaurants_message::find($request->msg_id);
+
+        $message->message_seen = 1;
+        $message->save();
+
+        return redirect()->back();
     }
 
     public function restaurant_time()

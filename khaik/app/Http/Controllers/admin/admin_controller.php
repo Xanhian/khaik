@@ -25,7 +25,7 @@ class admin_controller extends Controller
 
     public function view_restaurants()
     {
-        $data = DB::table('tbl_restaurants')->where('restaurant_complete_status', 4)->get();
+        $data = DB::table('tbl_restaurants')->where('restaurant_complete_status', 4)->rightJoin('tbl_restaurant_owners', 'tbl_restaurants.owner_id', 'tbl_restaurant_owners.id')->get(['tbl_restaurants.id', 'owner_id', 'name', 'lastname', 'email', 'restaurant_name', 'restaurant_addres']);
 
         return view('admin.restaurants', [
             'data' => $data,
@@ -96,7 +96,7 @@ class admin_controller extends Controller
 
     public function aprove()
     {
-        $data = DB::table('tbl_restaurants')->where('restaurant_complete_status', 3)->get();
+        $data = DB::table('tbl_restaurants')->where('restaurant_complete_status', 3)->rightJoin('tbl_restaurant_owners', 'tbl_restaurants.owner_id', 'tbl_restaurant_owners.id')->get();
 
         return view('admin.aprove', [
             'data' => $data,
@@ -470,8 +470,8 @@ class admin_controller extends Controller
         $data = [
             "registration_ids" => $FcmToken,
             "notification" => [
-                "title" =>  $request->title,
-                "body" => $request->restaurant_reason,
+                "title" => "New Message",
+                "body" => "There are new messages in your app",
             ]
         ];
         $encodedData = json_encode($data);

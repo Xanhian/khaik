@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('tbl_restaurants_deals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('restaurant_id');
-            $table->text('deal_name');
-            $table->text('deal_photo');
-            $table->text('deal_description');
+            $table->text('deal_name')->nullable();
+            $table->text('deal_photo')->nullable();
+            $table->text('deal_description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

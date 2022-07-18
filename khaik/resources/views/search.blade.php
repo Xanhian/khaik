@@ -79,12 +79,21 @@
                                                     <a href="{{route('restaurant',['restaurant_name'=>$result->restaurant_name, 'restaurant_id'=>$result->restaurant_id])}}" class="text-black">{{$result->restaurant_name }} </a>
                                                 </h6>
                                                 <p class="text-gray mb-1 small">{{$result->restaurant_addres}}</p>
-                                                @isset($result->total)
-                                                <p class="text-gray mb-1">Total favorites: {{$result->total}}</p>
-                                                @endisset
+
+
                                                 @isset($filter)
                                                 @if($filter=='visit')
                                                 <p class="text-gray mb-1">Total views: {{$result->total_views}}</p>
+                                                @endif
+
+                                                @if($filter=='favorite')
+                                                <p class="text-gray mb-1">Total favorites: {{$result->total}}</p>
+
+                                                @endif
+
+                                                @if($filter=='distance')
+                                                <p class="text-gray mb-1">distance: {{$distance[$result->id]['state']}} </p>
+
                                                 @endif
                                                 @endisset
 

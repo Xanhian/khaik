@@ -289,4 +289,13 @@ class articles_controller extends Controller
 
         return redirect()->route('vendor_menu')->with('status', 'Option deleted succesfully!');
     }
+
+    public function option_edit(Request $request)
+    {
+        $option = tbl_article_option::find($request->option_id);
+        $option->option_name = $request->option_name;
+        $option->save();
+
+        return redirect()->back()->with('status', 'Option name changed succesfully');
+    }
 }

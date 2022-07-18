@@ -9,7 +9,7 @@ $( ".osahan-home-page" ).remove();
 $( ".responsive-design" ).remove();
 
 }
-var page = sessionStorage.getItem("someVarKey")
+var page = localStorage.getItem("someVarKey")
 
 
 switch (page) {
@@ -31,32 +31,32 @@ switch (page) {
  $("#home").addClass("selected");
         break;
 }
-sessionStorage.setItem("someVarKey", null);
+
 
 
 
 
   $("#home").click(function(){
   var someVarName = "home";
-sessionStorage.setItem("someVarKey", someVarName);
+localStorage.setItem("someVarKey", someVarName);
 
 
   });
   $("#deals").click(function(){
   var someVarName = "deal";
-sessionStorage.setItem("someVarKey", someVarName);
+localStorage.setItem("someVarKey", someVarName);
 
 
   });
   $("#favorite").click(function(){
   var someVarName = "favorite";
-sessionStorage.setItem("someVarKey", someVarName);
+localStorage.setItem("someVarKey", someVarName);
 
 
   });
   $("#profile").click(function(){
   var someVarName = "profile";
-sessionStorage.setItem("someVarKey", someVarName);
+localStorage.setItem("someVarKey", someVarName);
 
 
   });

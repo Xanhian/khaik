@@ -32,11 +32,18 @@
                     <h1 class="font-weight-bold">Messages</h1>
                     @foreach($messages as $msg)
                     <div class="row d-flex justify-content-between m-2">
+                        <div class="row">
+                            <form action="{{route('seen')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="msg_id" value="{{$msg->id}}">
+                                <button class="delete-item-box" type="submit"><i class="fa-solid fa-check fa-xl"></i></button>
+                            </form>
+                            <a data-toggle="modal" data-target="#modal{{$msg->id}}">
+                                <h1>{{$msg->message_title}}</h1>
 
-                        <a data-toggle="modal" data-target="#modal{{$msg->id}}">
-                            <h1>{{$msg->message_title}}</h1>
+                            </a>
+                        </div>
 
-                        </a>
 
                         <h1>{{$msg->created_at}}</h1>
 

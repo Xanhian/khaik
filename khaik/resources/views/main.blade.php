@@ -29,6 +29,11 @@
                     @endauth
                     @auth('users')
                     <a href="{{route('user_logout')}}" class="text-white "><i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i></a>
+                    @else
+                    <a href="{{route('user_login')}}" class="btn bg-white ">
+
+                        Login
+                    </a>
                     @endauth
 
 
