@@ -7,6 +7,7 @@ use App\Models\tbl_admin;
 use App\Models\tbl_report;
 use App\Models\tbl_restaurant;
 use App\Models\tbl_restaurant_owner;
+use App\Models\tbl_restaurants_message;
 use App\Models\tbl_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -241,9 +242,39 @@ class admin_controller extends Controller
     public function report_solve(Request $request)
     {
 
+
         $user = tbl_report::find($request->report_id);
         $user->status = 1;
         $user->save();
+
+        $msg = new tbl_restaurants_message;
+        $msg->restaurant_id = $request->restaurant_id;
+        $msg->sender_id = session('admin_id');
+
+
+
+        switch ($request->reason) {
+            case 'price':
+                $msg->message_title = $request->reason;
+                $msg->message_body = "Please check your prices";
+
+
+                break;
+            case 'info':
+                $msg->message_title = $request->reason;
+                $msg->message_body = "Some information of the restaurants is false or incorrect";
+
+                break;
+
+            default:
+                $msg->message_title = "Other";
+                $msg->message_body = $request->reason;
+                break;
+        }
+        $msg->save();
+
+
+
 
         return redirect()->back();
     }
@@ -387,5 +418,93 @@ class admin_controller extends Controller
                 return redirect()->back()->with('status', 'Notification send!');
                 break;
         }
+    }
+
+    public function msg_index()
+    {
+
+        return view('admin.message');
+    }
+
+
+    public function msg_search_index(Request $request)
+    {
+        $restaurants = DB::table(
+            'tbl_restaurants'
+        )->groupBy('id')
+            ->where('restaurant_name', 'LIKE', '%' . $request->restaurant . '%')
+            ->orWhere('id', 'LIKE', '%' . $request->restaurant . '%')
+            ->get(['restaurant_name', 'id', 'owner_id']);
+
+
+
+        return view('admin.message', [
+
+            'data' => $restaurants
+        ]);
+    }
+
+    public function msg_send(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+        $message = new tbl_restaurants_message;
+        $message->restaurant_id = $request->restaurant_id;
+        $message->sender_id = session('admin_id');
+        $message->message_title = $request->title;
+        $message->message_body = $request->body;
+        $message->save();
+
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $FcmToken = tbl_restaurant_owner::where('id', $request->owner_id)->pluck('fcm_token');
+
+
+
+
+        $serverKey = env('FCM_SERVER_KEY');
+
+
+
+        $data = [
+            "registration_ids" => $FcmToken,
+            "notification" => [
+                "title" =>  $request->title,
+                "body" => $request->restaurant_reason,
+            ]
+        ];
+        $encodedData = json_encode($data);
+
+        $headers = [
+            'Authorization:key=' . $serverKey,
+            'Content-Type: application/json',
+        ];
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        // Disabling SSL Certificate support temporarly
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
+
+        // Execute post
+        $result = curl_exec($ch);
+
+        if ($result === FALSE) {
+            die('Curl failed: ' . curl_error($ch));
+        }
+
+
+        curl_close($ch);
+
+
+
+        return view('admin.message');
     }
 }

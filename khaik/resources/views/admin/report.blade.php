@@ -22,7 +22,7 @@
         @foreach($data as $info)
 
         <div class="mt-3 row bg-white border rounded">
-            <img src="" alt="">
+
             <div class="col  ">
                 <h1 class="m-2"> {{$info->restaurant_name}} </h1>
                 <p class="m-2">Reason: {{$info->reason}}</p>
@@ -35,6 +35,8 @@
                 <form action="{{route('report_solve')}}" method="POST">
                     @csrf
                     <input type="hidden" name="report_id" value="{{$info->id}}">
+                    <input type="hidden" name="restaurant_id" value="{{$info->restaurant_id}}">
+                    <input type="hidden" name="reason" value="{{$info->reason}}">
                     <button class="delete-item-box " type="submit">
                         <i class="fa-solid fa-xmark fa-xl"></i>
                     </button>

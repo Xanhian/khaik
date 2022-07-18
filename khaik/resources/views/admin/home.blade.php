@@ -74,6 +74,14 @@
                         </div>
                     </div>
                 </a>
+                <a href="{{route('admin_message')}}">
+                    <div class="vendor-btn text-center rounded  vendor-menu-btn m-2 w-100 d-flex align-items-center">
+                        <div class="mx-auto">
+                            <p class="vendor-btn-text text-white m-0"><i class="fa-solid fa-envelope"></i></p>
+                            <p class="text-white m-0">Send message</p>
+                        </div>
+                    </div>
+                </a>
 
 
 

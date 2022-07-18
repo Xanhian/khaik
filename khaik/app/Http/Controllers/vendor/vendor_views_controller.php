@@ -19,6 +19,9 @@ class vendor_views_controller extends Controller
 
         $article_like_count = array();
 
+        $message = DB::table('tbl_restaurants_messages')->where('restaurant_id', $restaurant_id)->latest()->get();
+
+
         foreach ($articles as $article) {
             $like_count = DB::table('tbl_article_likes')->where('article_id', $article->id)->where('like_status', 1)->count();
             $article_like_count[$article->id] = $like_count;
@@ -34,7 +37,8 @@ class vendor_views_controller extends Controller
             return view('vendor.home', [
                 'restaurant_info' => $restaurant_info,
                 'favorite_count' => $restaurant_favorite_count,
-                'like_article' => $most_liked_article
+                'like_article' => $most_liked_article,
+                'messages' => $message,
             ]);
         }
 
@@ -45,7 +49,9 @@ class vendor_views_controller extends Controller
         return view('vendor.home', [
             'restaurant_info' => $restaurant_info,
             'favorite_count' => $restaurant_favorite_count,
-            'like_article' => $most_liked_article
+            'like_article' => $most_liked_article,
+            'messages' => $message,
+
         ]);
     }
 

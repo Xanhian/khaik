@@ -72,12 +72,17 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/report', [admin_controller::class, 'report_index'])->name('admin_reports');
     Route::get('/adduser', [admin_controller::class, 'add_user'])->name('admin_adduser');
     Route::get('/notification', [admin_controller::class, 'index_notification'])->name('admin_notification');
+    Route::get('/message', [admin_controller::class, 'msg_index'])->name('admin_message');
+    Route::get('/message/search', [admin_controller::class, 'msg_search_index'])->name('admin_message_search');
+
     Route::post('/aprove/accept', [admin_controller::class, 'aprove_accept'])->name('admin_aprove_accept');
     Route::post('/aprove/denied', [admin_controller::class, 'denied'])->name('admin_aprove_denied');
     Route::post('/user/add', [admin_controller::class, 'store'])->name('store_user');
     Route::post('/user/delete', [admin_controller::class, 'delete_user'])->name('delete_user');
     Route::post('/report/solved', [admin_controller::class, 'report_solve'])->name('report_solve');
+    Route::get('/message', [admin_controller::class, 'msg_index'])->name('admin_message');
     Route::post('/notification/push', [admin_controller::class, 'send_notification'])->name('send_notification');
+    Route::post('/message/send', [admin_controller::class, 'msg_send'])->name('admin_send_message');
 });
 
 
